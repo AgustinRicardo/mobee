@@ -1,0 +1,72 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id                   String            @id @default(cuid())
+  username             String
+  email                String            @unique
+  profile_picture_path String
+  created_at           DateTime
+  user_reviews         Review[]
+  film_status          FilmWatchStatus[]
+}
+
+model Film {
+  id             String            @id @default(cuid())
+  tmdb_id        Int
+  film_reviews   Review[]
+  average_rating Float
+  lists          FilmsOnLists[]
+  film_status    FilmWatchStatus[]
+}
+
+model List {
+  id      String         @id @default(cuid())
+  user_id String
+  title   String
+  films   FilmsOnLists[]
+}
+
+model FilmsOnLists {
+  list    List   @relation(fields: [list_id], references: [id])
+  list_id String
+  film    Film   @relation(fields: [film_id], references: [id])
+  film_id String
+
+  @@id([list_id, film_id])
+}
+
+model FilmWatchStatus {
+  user    User   @relation(fields: [user_id], references: [id])
+  user_id String
+  film    Film   @relation(fields: [film_id], references: [id])
+  film_id String
+  status  Status
+
+  @@id([user_id, film_id])
+}
+
+enum Status {
+  watched
+  to_watch
+}
+
+model Review {
+  id                 String   @id @default(cuid())
+  user               User     @relation(fields: [user_id], references: [id])
+  user_id            String
+  Film               Film     @relation(fields: [film_id], references: [id])
+  film_id            String
+  rating             Float
+  reveiw_description String
+  watched_at         DateTime
+}
