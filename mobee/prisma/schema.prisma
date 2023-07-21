@@ -14,7 +14,7 @@ model User {
   id                   String            @id @default(cuid())
   username             String
   email                String            @unique
-  profile_picture_path String
+  profile_picture_path String?
   created_at           DateTime
   user_reviews         Review[]
   film_status          FilmWatchStatus[]
@@ -24,7 +24,7 @@ model Film {
   id             String            @id @default(cuid())
   tmdb_id        Int
   film_reviews   Review[]
-  average_rating Float
+  average_rating Float             @default(0)
   lists          FilmsOnLists[]
   film_status    FilmWatchStatus[]
 }
@@ -46,27 +46,24 @@ model FilmsOnLists {
 }
 
 model FilmWatchStatus {
-  user    User   @relation(fields: [user_id], references: [id])
-  user_id String
-  film    Film   @relation(fields: [film_id], references: [id])
-  film_id String
-  status  Status
+  user          User    @relation(fields: [user_id], references: [id])
+  user_id       String
+  film          Film    @relation(fields: [film_id], references: [id])
+  film_id       String
+  to_watch      Boolean
+  watched       Boolean
+  times_watched Int
 
   @@id([user_id, film_id])
 }
 
-enum Status {
-  watched
-  to_watch
-}
-
 model Review {
-  id                 String   @id @default(cuid())
-  user               User     @relation(fields: [user_id], references: [id])
+  id                 String    @id @default(cuid())
+  user               User      @relation(fields: [user_id], references: [id])
   user_id            String
-  Film               Film     @relation(fields: [film_id], references: [id])
+  film               Film      @relation(fields: [film_id], references: [id])
   film_id            String
   rating             Float
-  reveiw_description String
-  watched_at         DateTime
+  reveiw_description String?
+  watched_at         DateTime?
 }
