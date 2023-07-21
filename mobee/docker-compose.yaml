@@ -3,15 +3,15 @@ version: '3'
 services:
   practicadb:
     image: postgres
-    container_name: x
+    container_name: mobee_db
     restart: always
     environment:
-      POSTGRES_USER=x
-      POSTGRES_PASSWORD=x
-      POSTGRES_DB=x
+      - POSTGRES_USER=x
+      - POSTGRES_PASSWORD=x
+      - POSTGRES_DB=x
     ports:
-       5432:5432
+      - 5432:5432
     volumes:
-      dbdata:/var/lib/postgresql/data
+      - dbdata:/var/lib/postgresql/data
 volumes:
   dbdata:
