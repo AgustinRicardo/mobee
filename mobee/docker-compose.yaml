@@ -6,9 +6,9 @@ services:
     container_name: mobee_db
     restart: always
     environment:
-      - POSTGRES_USER=x
-      - POSTGRES_PASSWORD=x
-      - POSTGRES_DB=x
+      - POSTGRES_USER=user_dev
+      - POSTGRES_PASSWORD=qwer
+      - POSTGRES_DB=mobee_db
     ports:
       - 5432:5432
     volumes:

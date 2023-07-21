@@ -1,10 +1,15 @@
+import React from "react";
 import Login from "./login/page";
 
-export default function RegisterLayout() {
+type Props = {
+  children: React.ReactNode;
+};
+
+export default function RegisterLayout({ children }: Props) {
   return (
     <main>
       <img src="#" alt="imagen" />
-      <Login />
+      {children}
     </main>
   );
 }
