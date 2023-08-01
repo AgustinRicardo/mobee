@@ -11,7 +11,7 @@ generator client {
 }
 
 model User {
-  id                   String            @id @default(cuid())
+  id                   String            @id @default(uuid())
   username             String
   email                String            @unique
   profile_picture_path String?
@@ -21,7 +21,7 @@ model User {
 }
 
 model Film {
-  id             String            @id @default(cuid())
+  id             String            @id @default(uuid())
   tmdb_id        Int
   film_reviews   Review[]
   average_rating Float             @default(0)
@@ -30,7 +30,7 @@ model Film {
 }
 
 model List {
-  id      String         @id @default(cuid())
+  id      String         @id @default(uuid())
   user_id String
   title   String
   films   FilmsOnLists[]
@@ -58,7 +58,7 @@ model FilmWatchStatus {
 }
 
 model Review {
-  id                 String    @id @default(cuid())
+  id                 String    @id @default(uuid())
   user               User      @relation(fields: [user_id], references: [id])
   user_id            String
   film               Film      @relation(fields: [film_id], references: [id])

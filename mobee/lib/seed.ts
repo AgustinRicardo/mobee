@@ -9,7 +9,7 @@ const deleteDb = async () => {
   await prismaClient.user.deleteMany();
 };
 
-deleteDb()
+await deleteDb()
   .catch((e) => {
     throw e;
   })
@@ -18,11 +18,16 @@ deleteDb()
     await prismaClient.$disconnect();
   });
 
+const user1 = await prismaClient.user.create({
+  data: {
+    email: "user@example.com",
+    username: "myUser",
+  },
+});
+
 const film1 = await prismaClient.film.createMany({
   data: [
-    {
-      tmdb_id: 667538,
-    },
+    { tmdb_id: 667538 },
     { tmdb_id: 447365 },
     { tmdb_id: 298618 },
     { tmdb_id: 346698 },
@@ -30,11 +35,4 @@ const film1 = await prismaClient.film.createMany({
     { tmdb_id: 385687 },
     { tmdb_id: 455476 },
   ],
-});
-
-const user1 = await prismaClient.user.create({
-  data: {
-    email: "user@example.com",
-    username: "myUser",
-  },
 });
