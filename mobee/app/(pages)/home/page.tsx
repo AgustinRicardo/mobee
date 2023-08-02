@@ -4,9 +4,7 @@ import UserProfile from "@/components/UserProfile";
 export default function Home() {
   return (
     <>
-      <MainHeader>
-        <UserProfile />
-      </MainHeader>
+      <span>Home</span>
     </>
   );
 }

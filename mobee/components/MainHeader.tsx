@@ -21,6 +21,7 @@ export default function MainHeader({
       <header className="flex flex-row px-80 gap-12">
         <img src="#" alt="logo" className="mr-auto justify-start" />
         <nav className="flex flex-row gap-10">
+          <Link href="/home">Home</Link>
           <Link href="/films">Films</Link>
           <Link href="/lists">Lists</Link>
           <Link href="/members">Members</Link>
