@@ -32,7 +32,7 @@ export default async function UserProfile() {
   }
 
   return (
-    <div>
+    <div className="flex flex-row gap-2">
       <img src="#" alt="user image" />
       <span>{username}</span>
     </div>

@@ -7,8 +7,8 @@ type Props = {
 
 export default function RegisterLayout({ children }: Props) {
   return (
-    <main>
-      <img src="#" alt="imagen" />
+    <main className="flex flex-row">
+      <img src="#" alt="imagen" className="h-full w-[85vw]" />
       {children}
     </main>
   );

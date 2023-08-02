@@ -39,29 +39,33 @@ export default function Login() {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <label>Email</label>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-        />
-        <label>Password</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-        />
-        <button type="submit">Log in</button>
-      </form>
-      <span>
-        Don't have an account?
-        <Link href="/signup">Sign up</Link>
-      </span>
+      <div className="flex flex-col justify-center h-screen px-32 w-max">
+        <form onSubmit={handleSubmit} className="flex flex-col">
+          <label>Email</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+          />
+          <label>Password</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
+          <button type="submit">Log in</button>
+        </form>
+        <span className="text-center block w-max">
+          Don't have an account?
+          <Link href="/signup" className="pl-2">
+            Sign up
+          </Link>
+        </span>
+      </div>
       <Toaster />
     </>
   );

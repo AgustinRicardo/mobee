@@ -18,7 +18,7 @@ export default function MainHeader({
 
   return (
     <>
-      <header className="flex flex-row px-80 gap-12">
+      <header className="flex flex-row items-center px-80 gap-12 bg-beeBrownHeader h-16">
         <img src="#" alt="logo" className="mr-auto justify-start" />
         <nav className="flex flex-row gap-10">
           <Link href="/home">Home</Link>

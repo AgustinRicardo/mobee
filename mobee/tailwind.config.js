@@ -17,6 +17,13 @@ module.exports = {
     },
     extend: {
       colors: {
+        beeRed: "#BE5C5B",
+        beeKaki: "#D9BE6C",
+        beeYellow: "#F2C53D",
+        beeBeig: "#F6EAC4",
+        beeBrownLight: "#7A6D6A",
+        beeBrownBackground: "#2E2928",
+        beeBrownHeader: "#252120",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
