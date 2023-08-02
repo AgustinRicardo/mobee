@@ -1,22 +1,15 @@
 "use client";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 
-export default function MainHeader() {
+export default function MainHeader({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const supabase = createClientComponentClient();
-  const [username, setUsername] = useState("");
   const router = useRouter();
-
-  const getUser = async () => {
-    const data = await fetch("/api/user");
-    const { username } = await data.json();
-    setUsername(username);
-  };
-
-  useEffect(() => {
-    getUser();
-  }, []);
 
   const signOut = async () => {
     await supabase.auth.signOut();
@@ -25,14 +18,22 @@ export default function MainHeader() {
 
   return (
     <>
-      <span>{username}</span>
-      <button
-        onClick={() => {
-          signOut();
-        }}
-      >
-        Sign out
-      </button>
+      <header className="flex flex-row px-80 gap-12">
+        <img src="#" alt="logo" className="mr-auto justify-start" />
+        <nav className="flex flex-row gap-10">
+          <Link href="/films">Films</Link>
+          <Link href="/lists">Lists</Link>
+          <Link href="/members">Members</Link>
+        </nav>
+        {children}
+        <button
+          onClick={() => {
+            signOut();
+          }}
+        >
+          Sign out
+        </button>
+      </header>
     </>
   );
 }
