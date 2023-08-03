@@ -16,6 +16,10 @@ module.exports = {
       },
     },
     extend: {
+      fontFamily: {
+        switzer: ["Switzer", "sans-serif"],
+        lora: ["Lora", "serif"],
+      },
       colors: {
         beeRed: "#BE5C5B",
         beeKaki: "#D9BE6C",

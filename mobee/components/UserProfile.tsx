@@ -1,11 +1,11 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import prismaClient from "../lib/prisma-client";
 import { cookies } from "next/headers";
+import photo from "../assets/profile_photo.jpg";
 
 export const revalidate = 1000;
 
 export default async function UserProfile() {
-  console.log(":)");
   let username: string | undefined;
 
   const getUserAuth = async () => {
@@ -32,9 +32,13 @@ export default async function UserProfile() {
   }
 
   return (
-    <div className="flex flex-row gap-2">
-      <img src="#" alt="user image" />
-      <span>{username}</span>
+    <div className="flex flex-row gap-2 items-center ">
+      <img
+        src="/profile_photo.jpg"
+        alt="user image"
+        className="w-8 h-8 rounded-full"
+      />
+      <span className="">{username}</span>
     </div>
   );
 }
