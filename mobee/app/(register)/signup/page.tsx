@@ -22,79 +22,90 @@ export default function SignUp() {
         title: "Error",
         description: "Passwords do not match",
       });
+    } else {
+      const userData = {
+        username,
+        email,
+        password,
+      };
+      try {
+        await fetch("/api/signup", {
+          method: "POST",
+          body: JSON.stringify(userData),
+        });
+      } catch (e) {
+        throw e;
+      }
+      router.replace("/login");
     }
-    const userData = {
-      username,
-      email,
-      password,
-    };
-    try {
-      await fetch("/api/signup", {
-        method: "POST",
-        body: JSON.stringify(userData),
-      });
-    } catch (e) {
-      throw e;
-    }
-    router.replace("/login");
   };
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Username
-          <input
-            type="text"
-            name="username"
-            value={username}
-            onChange={(e) => {
-              setUsername(e.target.value);
-            }}
-          />
-        </label>
+      <div className="flex flex-col h-screen w-max justify-center px-32 items-center gap-2">
+        <form onSubmit={handleSubmit} className="flex flex-col w-52 gap-2">
+          <label className="flex flex-col">
+            Username
+            <input
+              className="rounded-sm h-8 text-beeBrownHeader p-2 bg-beeBeig"
+              type="text"
+              name="username"
+              value={username}
+              onChange={(e) => {
+                setUsername(e.target.value);
+              }}
+            />
+          </label>
 
-        <label>
-          Email
-          <input
-            type="email"
-            name="email"
-            value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-          />
-        </label>
+          <label className="flex flex-col">
+            Email
+            <input
+              className="rounded-sm h-8 text-beeBrownHeader p-2 bg-beeBeig"
+              type="email"
+              name="email"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            />
+          </label>
 
-        <label>
-          Password
-          <input
-            type="password"
-            name="password"
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-          />
-        </label>
+          <label className="flex flex-col">
+            Password
+            <input
+              className="rounded-sm h-8 text-beeBrownHeader p-2 bg-beeBeig"
+              type="password"
+              name="password"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+            />
+          </label>
 
-        <label>
-          Confirm password
-          <input
-            type="password"
-            name="passwordConfirm"
-            value={passwordConfirm}
-            onChange={(e) => {
-              setPasswordConfirm(e.target.value);
-            }}
-          />
-        </label>
-
-        <button type="submit">Sign up</button>
-      </form>
-      <span>
-        Already have an account? <Link href="/login">Log in</Link>
-      </span>
+          <label className="flex flex-col">
+            Confirm password
+            <input
+              className="rounded-sm h-8 text-beeBrownHeader p-2 bg-beeBeig"
+              type="password"
+              name="passwordConfirm"
+              value={passwordConfirm}
+              onChange={(e) => {
+                setPasswordConfirm(e.target.value);
+              }}
+            />
+          </label>
+          <button
+            className="flex w-20 bg-beeYellow h-8 text-beeBrownBackground rounded-sm self-center items-center justify-center mt-2"
+            type="submit"
+          >
+            Sign up
+          </button>
+        </form>
+        <span className="text-center w-max">
+          Already have an account? <Link href="/login">Log in</Link>
+        </span>
+      </div>
       <Toaster />
     </>
   );

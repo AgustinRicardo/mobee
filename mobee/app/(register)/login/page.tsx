@@ -39,27 +39,38 @@ export default function Login() {
 
   return (
     <>
-      <div className="flex flex-col justify-center h-screen px-32 w-max">
-        <form onSubmit={handleSubmit} className="flex flex-col">
-          <label>Email</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-          />
-          <label>Password</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-          />
-          <button type="submit">Log in</button>
+      <div className="flex flex-col justify-center items-center h-screen px-32 w-max gap-2">
+        <form onSubmit={handleSubmit} className="flex flex-col w-52 gap-2">
+          <label className="flex flex-col">
+            Email
+            <input
+              className="rounded-sm h-8 text-beeBrownHeader p-2 bg-beeBeig"
+              type="email"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            />
+          </label>
+          <label className="flex flex-col">
+            Password
+            <input
+              className="rounded-sm h-8 text-beeBrownHeader p-2 bg-beeBeig"
+              type="password"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+            />
+          </label>
+          <button
+            className="flex w-20 bg-beeYellow h-8 text-beeBrownBackground rounded-sm self-center items-center justify-center mt-2"
+            type="submit"
+          >
+            Log in
+          </button>
         </form>
-        <span className="text-center block w-max">
+        <span className="text-center w-max">
           Don't have an account?
           <Link href="/signup" className="pl-2">
             Sign up
