@@ -16,6 +16,7 @@ module.exports = {
       },
     },
     extend: {
+      display: ["group-hover"],
       fontFamily: {
         switzer: ["Switzer", "sans-serif"],
         lora: ["Lora", "serif"],
