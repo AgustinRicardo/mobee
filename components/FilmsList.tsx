@@ -7,6 +7,7 @@ interface Props {
 interface Film {
   poster_path: string;
   title: string;
+  id: string;
 }
 
 export default async function FilmList({ url }: Props) {
@@ -32,6 +33,7 @@ export default async function FilmList({ url }: Props) {
         <FilmPoster
           src={`https://image.tmdb.org/t/p/w500/${film.poster_path}`}
           alt={film.title}
+          id={film.id}
         />
       </li>
     );

@@ -12,7 +12,8 @@ export default function PagesLayout({
       <MainHeader>
         <UserProfile />
       </MainHeader>
-      {children}
+      <main className="text-beeBeig px-[16%]">{children}</main>
+      <footer className="h-12 bg-beeBrownHeader"></footer>
     </>
   );
 }
