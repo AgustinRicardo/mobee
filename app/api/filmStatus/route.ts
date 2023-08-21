@@ -2,7 +2,40 @@ import prismaClient from "@/lib/prisma-client";
 import { getOrAddFilmToDB } from "@/lib/functions";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function updateFilmStatus(filmId: string, userId: string) {
+export async function updateToWatchStatus(filmId: string, userId: string) {
+  try {
+    const filmWatchStatus = await prismaClient.filmWatchStatus.findUnique({
+      where: {
+        user_id_film_id: {
+          user_id: userId,
+          film_id: filmId,
+        },
+      },
+    });
+    if (filmWatchStatus) {
+      const data = await prismaClient.filmWatchStatus.update({
+        where: {
+          user_id_film_id: {
+            user_id: userId,
+            film_id: filmId,
+          },
+        },
+        data: {
+          to_watch: !filmWatchStatus.to_watch,
+        },
+      });
+    } else {
+      const data = await prismaClient.filmWatchStatus.create({
+        data: {
+          film_id: filmId,
+          user_id: userId,
+          to_watch: true,
+        },
+      });
+    }
+  } catch (e) {}
+}
+export async function updateWatchedStatus(filmId: string, userId: string) {
   try {
     const filmWatchStatus = await prismaClient.filmWatchStatus.findUnique({
       where: {
@@ -55,13 +88,20 @@ const getFilmInfoFromUser = async (userId: string, filmId: string) => {
 };
 
 export async function POST(request: NextRequest) {
-  const { apiId, userId } = await request.json();
-
+  const { apiId, userId, isWatched, toWatch } = await request.json();
+  let statusToUpdate;
+  console.log(isWatched, toWatch, apiId);
   try {
     if (apiId) {
       const filmId = await getOrAddFilmToDB(apiId);
       if (filmId) {
-        await updateFilmStatus(filmId, userId);
+        console.log(filmId);
+        if (isWatched !== undefined) {
+          await updateWatchedStatus(filmId, userId);
+        } else if (toWatch !== undefined) {
+          statusToUpdate = "toWatch";
+          await updateToWatchStatus(filmId, userId);
+        }
       }
     }
     return NextResponse.json({ msg: "Successful", status: 200 });

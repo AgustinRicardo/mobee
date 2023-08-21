@@ -1,3 +1,4 @@
+import { getUser } from "@/lib/functions";
 import FilmPoster from "./FilmPoster";
 
 interface Props {
@@ -11,6 +12,7 @@ interface Film {
 }
 
 export default async function FilmList({ url }: Props) {
+  const user = await getUser();
   async function fetchData() {
     const options = {
       method: "GET",
@@ -31,6 +33,7 @@ export default async function FilmList({ url }: Props) {
     return (
       <li key={index}>
         <FilmPoster
+          userId={user?.id!}
           src={`https://image.tmdb.org/t/p/w500/${film.poster_path}`}
           alt={film.title}
           id={film.id}

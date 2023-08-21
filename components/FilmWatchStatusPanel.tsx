@@ -11,6 +11,7 @@ interface Props {
 }
 export default function FilmWatchStatusPanel({ apiId, userId }: Props) {
   const [isWatched, setIsWatched] = useState<boolean>(false);
+  const [toWatch, setToWatch] = useState<boolean>(false);
 
   useEffect(() => {
     fetch(
@@ -19,7 +20,10 @@ export default function FilmWatchStatusPanel({ apiId, userId }: Props) {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        setIsWatched(data.watchStatus.watched);
+        if (data.watchStatus) {
+          setIsWatched(data.watchStatus.watched);
+          setToWatch(data.watchStatus.to_watch);
+        }
       });
   }, []);
 
@@ -30,7 +34,7 @@ export default function FilmWatchStatusPanel({ apiId, userId }: Props) {
         onClick={() => {
           fetch("/api/filmStatus", {
             method: "POST",
-            body: JSON.stringify({ apiId, userId }),
+            body: JSON.stringify({ apiId, userId, isWatched }),
           });
           setIsWatched(!isWatched);
         }}
@@ -42,9 +46,22 @@ export default function FilmWatchStatusPanel({ apiId, userId }: Props) {
         />
         <span>{isWatched ? "Watched" : "Not watched"}</span>
       </button>
-      <button className="flex flex-row">
-        <ToWatchIcon className="text-beeBrownBackground hover:cursor-pointer w-8" />
-        <span>Add to watchilist</span>
+      <button
+        className="flex flex-row"
+        onClick={() => {
+          fetch("/api/filmStatus", {
+            method: "POST",
+            body: JSON.stringify({ apiId, userId, toWatch }),
+          });
+          setToWatch(!toWatch);
+        }}
+      >
+        <ToWatchIcon
+          className={`${
+            toWatch ? "text-beeYellow" : "text-beeBrownBackground"
+          } hover:cursor-pointer w-8`}
+        />
+        <span>{toWatch ? "Added to watchlist" : "Add to watchlist"}</span>
       </button>
       <button className="flex flex-row">
         <AddToListIcon className="text-beeBrownBackground hover:cursor-pointer w-8" />
