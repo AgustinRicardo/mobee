@@ -32,10 +32,10 @@ export default function PopularFilms() {
   return (
     <>
       {popularFilms && (
-        <div className="grid grid-cols-3 gap-6 py-5">
+        <ul className="grid grid-cols-3 gap-6 py-5">
           {popularFilms.slice(0, 6).map((film) => {
             return (
-              <div className="flex flex-row gap-3 ">
+              <li className="flex flex-row gap-3" key={film.id}>
                 <img
                   src={`https://image.tmdb.org/t/p/w500/${film.poster_path}`}
                   alt={film.title}
@@ -47,10 +47,10 @@ export default function PopularFilms() {
                     {film.release_date.slice(0, 4)}
                   </span>
                 </div>
-              </div>
+              </li>
             );
           })}
-        </div>
+        </ul>
       )}
     </>
   );

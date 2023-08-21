@@ -12,3 +12,18 @@ export interface Film {
     crew: [{ job: string; name: string }];
   };
 }
+
+export interface User {
+  id: string;
+  username: string;
+  email: string;
+  profile_picture_path: string | null;
+  created_at: Date;
+}
+
+export interface WatchStatus {
+  user_id: string;
+  film_id: string;
+  to_watch: boolean;
+  watched: boolean;
+}

@@ -1,10 +1,10 @@
-import AddToListIcon from "@/components/icons/AddToListIcon";
-import AdditionalOptionsIcon from "@/components/icons/AdditionalOptionsIcon";
-import ToWatchIcon from "@/components/icons/ToWatchIcon";
-import WatchedIcon from "@/components/icons/WatchedIcon";
-import { Film } from "@/lib/interfaces";
+import FilmWatchStatusPanel from "@/components/FilmWatchStatusPanel";
+import { Film, WatchStatus } from "@/lib/interfaces";
+import { getUser } from "@/lib/functions";
 
 export default async function Page({ params }: { params: { id: string } }) {
+  const user = await getUser();
+
   const getFilmAndCrewDetails = async () => {
     const url = `https://api.themoviedb.org/3/movie/${params.id}?language=en-US&append_to_response=credits`;
     const options = {
@@ -21,7 +21,6 @@ export default async function Page({ params }: { params: { id: string } }) {
   };
 
   const film: Film = await getFilmAndCrewDetails();
-  console.log(film);
 
   return (
     <>
@@ -51,12 +50,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           <p>{film.overview}</p>
         </div>
 
-        <div className="user-input h-56 w-56 bg-beeBrownLight">
-          <WatchedIcon className="text-beeBrownBackground hover:cursor-pointer w-6" />
-          <ToWatchIcon className="text-beeBrownBackground hover:cursor-pointer w-6" />
-          <AddToListIcon className="text-beeBrownBackground hover:cursor-pointer w-6" />
-          <AdditionalOptionsIcon className="text-beeBrownBackground hover:cursor-pointer w-6" />
-        </div>
+        <FilmWatchStatusPanel apiId={Number(params.id)} userId={user?.id!} />
       </div>
     </>
   );

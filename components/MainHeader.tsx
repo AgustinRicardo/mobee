@@ -19,10 +19,8 @@ export default function MainHeader({
   return (
     <>
       <header
-        className={`flex relative flex-row items-center px-[16%] gap-12  h-16 mb-8 font-switzer font-medium text-sm z-10 ${
-          pathname.includes("/film_details")
-            ? "bg-transparent"
-            : "bg-beeBrownHeader"
+        className={`flex relative flex-row items-center px-[16%] bg-beeBrownHeader gap-12  h-16  font-switzer font-medium text-sm${
+          pathname.includes("/film_details") ? "" : "mb-8"
         }`}
       >
         <img
@@ -31,9 +29,24 @@ export default function MainHeader({
           className="mr-auto justify-start w-24"
         />
         <nav className="flex flex-row gap-10 uppercase">
-          <Link href="/home">Home</Link>
-          <Link href="/films">Films</Link>
-          <Link href="/lists">Lists</Link>
+          <Link
+            href="/home"
+            className={pathname === "/home" ? "" : "opacity-50"}
+          >
+            Home
+          </Link>
+          <Link
+            href="/films"
+            className={pathname === "/films" ? "" : "opacity-50"}
+          >
+            Films
+          </Link>
+          <Link
+            href="/lists"
+            className={pathname === "/lists" ? "" : "opacity-50"}
+          >
+            Lists
+          </Link>
         </nav>
         <form id="search-bar" className="relative flex flex-row items-center">
           <input

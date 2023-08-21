@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import prismaClient from "../../../lib/prisma-client";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 
 interface UserDBInfo {
   username: string;
@@ -48,6 +47,7 @@ export async function POST(request: NextRequest) {
       await createSupabaseUser({ email, password });
       await createDBUser({ username, email });
     }
+    return NextResponse.json({ msg: "Successful", status: 200 });
   } catch (e) {
     return NextResponse.error();
   }

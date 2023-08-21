@@ -22,7 +22,7 @@ model User {
 
 model Film {
   id             String            @id @default(uuid())
-  tmdb_id        Int
+  tmdb_id        Int               @unique
   film_reviews   Review[]
   average_rating Float             @default(0)
   lists          FilmsOnLists[]
@@ -46,13 +46,12 @@ model FilmsOnLists {
 }
 
 model FilmWatchStatus {
-  user          User    @relation(fields: [user_id], references: [id])
-  user_id       String
-  film          Film    @relation(fields: [film_id], references: [id])
-  film_id       String
-  to_watch      Boolean
-  watched       Boolean
-  times_watched Int
+  user     User    @relation(fields: [user_id], references: [id])
+  user_id  String
+  film     Film    @relation(fields: [film_id], references: [id])
+  film_id  String
+  to_watch Boolean @default(false)
+  watched  Boolean @default(false)
 
   @@id([user_id, film_id])
 }

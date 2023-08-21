@@ -1,34 +1,56 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Mobee
 
-## Getting Started
+## Pre-requisitos
 
-First, run the development server:
+1. Necesitarás tener Node.js y npm instalados en tu máquina. Puedes descargarlos desde [aquí](https://nodejs.org/es/).
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+2. También debes tener instalado Prisma. Para instalarlo, utiliza el siguiente comando en tu terminal:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`npm install @prisma/cli -g`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Necesitarás tener Docker instalado en tu máquina. Puedes descargarlo desde [aquí](https://www.docker.com/products/docker-desktop).
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Instalación Local
 
-## Learn More
+1. Clona el repositorio en tu máquina local utilizando `git clone`.
 
-To learn more about Next.js, take a look at the following resources:
+2. Entra en el directorio del proyecto:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+`cd mobee`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+3. Instala las dependencias del proyecto:
 
-## Deploy on Vercel
+`npm install`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. Inicia el servicio de la base de datos con Docker Compose:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+`npm docker-compose up -d`
+
+5. Conectar con la base de datos de prisma y generar cliente
+
+`npx prisma db push`
+
+`npm prisma generate`
+
+6. Generar migración schema.prisma
+
+`npx prisma migrate dev`
+
+7. Ejecutar seed.ts para rellenar la bbdd
+
+`npx prisma db seed`
+
+8. Iniciar el Servidor y mostrar el Proyecto en el navegador:
+
+`npm run dev`
+
+Visitar [http://localhost:3000](http://localhost:3000) con tu navegador para ver el resultado
+
+9. Es posible iniciar sesion con un usuario de prueba con los siguientes credenciales:
+
+- Email: user@example.com
+- Password: qwer
+
+10. [EXTRA] Visualizar las tablas de la base de datos desde prisma studio:
+
+`npx prisma studio`

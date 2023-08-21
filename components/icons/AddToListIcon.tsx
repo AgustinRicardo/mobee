@@ -4,7 +4,7 @@ interface Props {
 export default function ToWatchIcon({ className }: Props) {
   return (
     <svg
-      className="text-beeBrownBackground hover:cursor-pointer w-6"
+      className={className}
       xmlns="http://www.w3.org/2000/svg"
       width="32"
       height="32"
