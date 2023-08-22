@@ -21,6 +21,7 @@ export default async function FilmList({ url }: Props) {
         Authorization: `Bearer ${process.env.NEXT_PUBLIC_TMDB_API_KEY}`,
       },
     };
+
     const res = await fetch(url, options);
     const { results } = await res.json();
 
@@ -43,10 +44,8 @@ export default async function FilmList({ url }: Props) {
   };
 
   return (
-    <ul className="flex flex-row gap-2 overflow-x-hidden py-6">
-      {filmList
-        .splice(0, 6)
-        .map((film: Film, index: number) => renderFilm(film, index))}
+    <ul className="grid grid-cols-5 gap-6 overflow-x-hidden py-6">
+      {filmList.map((film: Film, index: number) => renderFilm(film, index))}
     </ul>
   );
 }

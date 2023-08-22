@@ -45,7 +45,7 @@ export default function FilmPoster({ src, alt, id, userId }: Props) {
         <div className="hidden flex-col justify-around px-2 py-8 gap-0.5 h-1/5 group-hover:flex absolute group-hover:bg-beeBrownLight/90 rounded-tl-md rounded-br-md border-beeBrownLight border-t border-l ">
           <TooltipProvider>
             <Tooltip>
-              <TooltipTrigger>
+              <TooltipTrigger asChild>
                 <button
                   onClick={() => {
                     console.log(id);
@@ -68,7 +68,7 @@ export default function FilmPoster({ src, alt, id, userId }: Props) {
               </TooltipContent>
             </Tooltip>
             <Tooltip>
-              <TooltipTrigger>
+              <TooltipTrigger asChild>
                 <button
                   onClick={() => {
                     fetch("/api/filmStatus", {
@@ -103,7 +103,7 @@ export default function FilmPoster({ src, alt, id, userId }: Props) {
           onClick={() => {
             router.push(`/film_details/${id}`);
           }}
-          className="rounded-md border-2 border-beeBrownLight min-w-full"
+          className="rounded-md border-2 border-beeBrownLight min-w-full shadow-md"
           src={src}
           alt={alt}
         />
