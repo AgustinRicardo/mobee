@@ -50,7 +50,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           <p>{film.overview}</p>
         </div>
 
-        <FilmWatchStatusPanel apiId={Number(params.id)} userId={user?.id!} />
+        <FilmWatchStatusPanel apiId={Number(params.id)} userId={user?.id!} film={film} />
       </div>
     </>
   );
