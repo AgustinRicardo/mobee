@@ -2,6 +2,7 @@
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
+import React from "react";
 
 export default function MainHeader({
   children,
