@@ -1,6 +1,9 @@
 import PopularFilms from "@/components/PopularFilms";
+import { getUser } from "@/lib/functions";
 
-export default function Home() {
+export default async function Home() {
+  const user = await getUser();
+
   return (
     <>
       <section>

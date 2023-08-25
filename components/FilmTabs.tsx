@@ -22,7 +22,7 @@ export default function FilmTabs({
             className="data-[state=active]:bg-beeYellow data-[state=active]:text-beeBrownBackground"
             value="popular"
           >
-            Popular this week
+            Popular
           </TabsTrigger>
           <TabsTrigger
             className="data-[state=active]:bg-beeYellow data-[state=active]:text-beeBrownBackground"

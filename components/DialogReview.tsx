@@ -9,9 +9,8 @@ import AddReviewIcon from "./icons/AddReviewIcon";
 import { Film } from "@/lib/interfaces";
 import { Checkbox } from "./ui/checkbox";
 import { CalendarForm } from "./CalendarForm";
-import { FormEvent, FormEventHandler, useState } from "react";
+import { FormEventHandler, useState } from "react";
 import RatingPicker from "./RatingPicker";
-import { format } from "date-fns";
 import { DialogClose } from "@radix-ui/react-dialog";
 
 interface Props {
@@ -24,12 +23,12 @@ export function DialogReview({ film, userId, filmId }: Props) {
   const [checkedDateWatched, setCheckDateWatched] = useState<boolean>(false);
   const [ratingValue, setRatingValue] = useState<number | null>(null);
   const [date, setDate] = useState<Date>();
-  const [review, setReview] = useState<string>();
+  const [review, setReview] = useState<string>("");
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     console.log("hola");
     e.preventDefault();
-    if (ratingValue === null && review === null) {
+    if (ratingValue === null && review === "") {
     } else {
       const reviewData = {
         userId,
@@ -50,15 +49,22 @@ export function DialogReview({ film, userId, filmId }: Props) {
   };
 
   return (
-    <Dialog>
+    <Dialog
+      onOpenChange={() => {
+        setCheckDateWatched(false);
+        setDate(undefined);
+        setRatingValue(null);
+        setReview("");
+      }}
+    >
       <DialogTrigger asChild>
         <button className="flex flex-row">
           <AddReviewIcon className="text-beeBrownBackground hover:cursor-pointer w-8" />
           <span>Add review</span>
         </button>
       </DialogTrigger>
-      <DialogContent className="max-w-[800px] h-96 border-none">
-        <div className="flex flex-row">
+      <DialogContent className="max-w-2xl max-h-fit border-none">
+        <div className="flex flex-row font-switzer font-light">
           <div className="flex flex-col">
             <img
               className="my-5 rounded-md border-2 border-beeBrownLight w-36 h-fit shadow-md "
@@ -68,24 +74,20 @@ export function DialogReview({ film, userId, filmId }: Props) {
           </div>
           <div className="flex flex-col p-5 w-full gap-3">
             <div className="flex flex-col">
-              <p className="font-switzer text-sm text-beeBrownLight">
-                I watched
-              </p>
+              <p className="text-sm text-beeBrownLight">I watched</p>
 
-              <div className="flex flex-row items-baseline">
-                <h1 className="pr-3 font-lora font-bold text-2xl">
-                  {film.title}
-                </h1>
-                <p className="font-switzer font-light text-s text-beeBrownLight ">
+              <h1 className="pr-3 font-lora font-bold text-2xl">
+                {film.title}
+                <span className="pl-2 font-switzer font-light text-sm text-beeBrownLight ">
                   {film.release_date.slice(0, 4)}
-                </p>
-              </div>
+                </span>
+              </h1>
             </div>
             <form onSubmit={handleSubmit}>
-              <div className="flex flex-row gap-2 items-center h-10">
+              <div className="flex flex-row gap-1 items-center h-10">
                 <Checkbox
                   id="watchedOn"
-                  className="bg-beeBeig"
+                  className="bg-beeBeig data-[state=checked]:text-beeBrownBackground"
                   onCheckedChange={() => {
                     setCheckDateWatched(!checkedDateWatched);
                   }}
@@ -99,7 +101,6 @@ export function DialogReview({ film, userId, filmId }: Props) {
                 {checkedDateWatched && (
                   <CalendarForm date={date} setDate={setDate} />
                 )}
-                <span>{date && format(date, "PPP")}</span>
               </div>
               <div>
                 <textarea
@@ -112,8 +113,8 @@ export function DialogReview({ film, userId, filmId }: Props) {
                 ></textarea>
               </div>
               <div className="flex flex-row items-end">
-                <div className="flex flex-col gap-2">
-                  <span>Rating {ratingValue}</span>
+                <div className="flex flex-col">
+                  <span>Rating</span>
                   <RatingPicker setRatingValue={setRatingValue} />
                 </div>
                 <DialogClose asChild>

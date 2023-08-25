@@ -54,10 +54,16 @@ export function CalendarForm({ date, setDate }: Props) {
         align="start"
       >
         <Calendar
-          styles={{ head_cell: { color: "#F6EAC4" } }}
+          styles={{
+            head_cell: { color: "#2E2928" },
+            caption: { color: "#2E2928" },
+            nav_button_next: { border: "none" },
+            nav_button_previous: { border: "none" },
+          }}
           modifiersStyles={{
             outside: { color: "#F6EAC4", opacity: "50%" },
             disabled: { color: "#F6EAC4", opacity: "50%" },
+            selected: { color: "#F6EAC4", backgroundColor: "#2E2928" },
           }}
           mode="single"
           selected={date}

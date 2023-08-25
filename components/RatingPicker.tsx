@@ -1,11 +1,12 @@
 import { Rating } from "@mui/material";
-import { Hexagon, HexagonOutlined } from "@mui/icons-material";
 import { Dispatch, SetStateAction } from "react";
+import HexagonIcon from "./icons/HexagonIcon";
 
 interface Props {
   setRatingValue: Dispatch<SetStateAction<number | null>>;
 }
 export default function RatingPicker({ setRatingValue }: Props) {
+  const size = "2.5rem";
   return (
     <>
       <Rating
@@ -15,13 +16,16 @@ export default function RatingPicker({ setRatingValue }: Props) {
           }
         }}
         precision={0.5}
-        icon={<Hexagon className="rotate-90 " style={{ color: "#F2C53D" }} />}
+        icon={
+          <HexagonIcon
+            style={{ width: size, height: size }}
+            className="text-beeYellow"
+          />
+        }
         emptyIcon={
-          <HexagonOutlined
-            className="rotate-90"
-            style={{
-              color: "#F2C53D",
-            }}
+          <HexagonIcon
+            style={{ width: size, height: size }}
+            className="text-beeBrownLight"
           />
         }
         max={5}
