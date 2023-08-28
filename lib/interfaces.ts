@@ -1,4 +1,5 @@
 export interface Film {
+  id: number;
   title: string;
   backdrop_path: string;
   genres: [{ name: string }];

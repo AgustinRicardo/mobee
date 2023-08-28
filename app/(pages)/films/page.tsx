@@ -1,5 +1,6 @@
 import FilmTabs from "@/components/FilmTabs";
 import FilmList from "@/components/FilmsList";
+import FilterOptions from "@/components/FilterOptions";
 
 export default function FilmsPage() {
   return (
@@ -16,6 +17,11 @@ export default function FilmsPage() {
             <FilmList url="https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1" />
           }
           recentReviews={<></>}
+          filter={
+            <>
+              <FilterOptions />
+            </>
+          }
         ></FilmTabs>
       </section>
     </>

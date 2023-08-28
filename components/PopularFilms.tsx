@@ -37,10 +37,10 @@ export default function PopularFilms({ userId }: Props) {
   return (
     <>
       {popularFilms && (
-        <ul className="grid grid-cols-3 gap-6 py-5">
+        <ul className="grid grid-cols-3 py-5">
           {popularFilms.slice(0, 6).map((film) => {
             return (
-              <li className="flex flex-row gap-3" key={film.id}>
+              <li className="flex flex-row gap-3 " key={film.id}>
                 {/* {<img
                   src={`https://image.tmdb.org/t/p/w500/${film.poster_path}`}
                   alt={film.title}
@@ -49,7 +49,7 @@ export default function PopularFilms({ userId }: Props) {
                 <FilmPoster
                   alt={film.title}
                   src={`https://image.tmdb.org/t/p/w500/${film.poster_path}`}
-                  className="w-28 h-auto rounded-md border-beeBeig border hover:cursor-pointer"
+                  className="w-28 rounded-md border-beeBeig border hover:cursor-pointer basis-auto"
                   userId={userId}
                   id={film.id}
                 />
