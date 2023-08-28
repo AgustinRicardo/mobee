@@ -3,6 +3,7 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import React from "react";
+import SearchIcon from "./icons/SearchIcon";
 
 export default function MainHeader({
   children,
@@ -20,7 +21,7 @@ export default function MainHeader({
   return (
     <>
       <header
-        className={`flex relative flex-row items-center px-[16%] bg-beeBrownHeader gap-12  h-16  font-switzer font-medium text-sm${
+        className={`flex relative flex-row items-center px-[16%] bg-beeBrownHeader gap-12 h-16 font-switzer font-medium text-sm ${
           pathname.includes("/film_details") ? "" : "mb-8"
         }`}
       >
@@ -55,18 +56,7 @@ export default function MainHeader({
             className="h-7 rounded-sm text-beeBrownBackground bg-beeBeig placeholder:text-beeBrownBackground pl-2 placeholder:opacity-50"
             placeholder="Search"
           />
-          <svg
-            className="absolute right-2 w-4 h-4 text-beeBrownHeader "
-            xmlns="http://www.w3.org/2000/svg"
-            width="32"
-            height="32"
-            viewBox="0 0 24 24"
-          >
-            <path
-              fill="currentColor"
-              d="m18.031 16.617l4.283 4.282l-1.415 1.415l-4.282-4.283A8.96 8.96 0 0 1 11 20c-4.968 0-9-4.032-9-9s4.032-9 9-9s9 4.032 9 9a8.96 8.96 0 0 1-1.969 5.617Zm-2.006-.742A6.977 6.977 0 0 0 18 11c0-3.867-3.133-7-7-7s-7 3.133-7 7s3.133 7 7 7a6.977 6.977 0 0 0 4.875-1.975l.15-.15Z"
-            />
-          </svg>
+          <SearchIcon />
         </form>
         {children}
         <button

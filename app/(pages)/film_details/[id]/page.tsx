@@ -1,6 +1,7 @@
 import FilmWatchStatusPanel from "@/components/FilmWatchStatusPanel";
 import { Film, WatchStatus } from "@/lib/interfaces";
 import { getUser } from "@/lib/functions";
+import { Toaster } from "@/components/ui/toaster";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const user = await getUser();
@@ -50,7 +51,11 @@ export default async function Page({ params }: { params: { id: string } }) {
           <p>{film.overview}</p>
         </div>
 
-        <FilmWatchStatusPanel apiId={Number(params.id)} userId={user?.id!} film={film} />
+        <FilmWatchStatusPanel
+          apiId={Number(params.id)}
+          userId={user?.id!}
+          film={film}
+        />
       </div>
     </>
   );

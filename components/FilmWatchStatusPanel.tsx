@@ -68,7 +68,7 @@ export default function FilmWatchStatusPanel({ apiId, userId, film }: Props) {
         />
         <span>{toWatch ? "Added to watchlist" : "Add to watchlist"}</span>
       </button>
-      <DialogReview film={film} userId={userId} filmId={filmId} />
+      <DialogReview film={film} userId={userId} apiId={apiId} />
       <button className="flex flex-row">
         <AddToListIcon className="text-beeBrownBackground hover:cursor-pointer w-8" />
         <span>Add to list</span>
