@@ -1,3 +1,5 @@
+import { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu";
+
 export interface Film {
   id: number;
   title: string;
@@ -27,4 +29,19 @@ export interface WatchStatus {
   film_id: string;
   to_watch: boolean;
   watched: boolean;
+}
+
+export type Checked = DropdownMenuCheckboxItemProps["checked"];
+export interface Genre {
+  id: number;
+  name: string;
+  checked: Checked;
+}
+
+export interface Year {
+  name: string;
+  id: number;
+  year_lte: string;
+  year_gte: string;
+  checked: boolean;
 }

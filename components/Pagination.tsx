@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import FilmList from "./FilmsList";
+import FilmList from "./FilmList";
 
 interface Props {
   children: React.ReactNode;

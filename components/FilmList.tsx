@@ -1,19 +1,17 @@
-import { getUser } from "@/lib/functions";
+"use client";
+import { useEffect, useState } from "react";
 import FilmPoster from "./FilmPoster";
+import { Film } from "@/lib/interfaces";
 
 interface Props {
   url: string;
+  userId: string;
 }
 
-interface Film {
-  poster_path: string;
-  title: string;
-  id: string;
-}
+export default function FilmList({ url, userId }: Props) {
+  const [filmList, setFilmList] = useState<Film[]>([]);
 
-export default async function FilmList({ url }: Props) {
-  const user = await getUser();
-  async function fetchData() {
+  useEffect(() => {
     const options = {
       method: "GET",
       headers: {
@@ -21,23 +19,24 @@ export default async function FilmList({ url }: Props) {
         Authorization: `Bearer ${process.env.NEXT_PUBLIC_TMDB_API_KEY}`,
       },
     };
+    console.log(url);
+    fetch(url, options)
+      .then((res) => res.json())
+      .then(({ results }) => {
+        setFilmList(results);
+      });
+  }, [url]);
 
-    const res = await fetch(url, options);
-    const { results } = await res.json();
-
-    return results;
-  }
-
-  const filmList = await fetchData();
+  filmList.forEach((film) => console.log(film));
 
   const renderFilm = (film: Film, index: number) => {
     return (
       <li key={index}>
         <FilmPoster
-          userId={user?.id!}
+          userId={userId}
           src={`https://image.tmdb.org/t/p/w500/${film.poster_path}`}
           alt={film.title}
-          id={film.id}
+          id={String(film.id)}
           className="rounded-md border-2 border-beeBrownLight min-w-full shadow-md hover:cursor-pointer"
         />
       </li>

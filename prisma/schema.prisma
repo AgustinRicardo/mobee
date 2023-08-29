@@ -63,6 +63,6 @@ model Review {
   film               Film      @relation(fields: [film_id], references: [id])
   film_id            String
   rating             Float?
-  reveiw_description String?
+  review_description String?
   watched_at         DateTime?
 }

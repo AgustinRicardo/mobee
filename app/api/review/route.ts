@@ -15,9 +15,28 @@ export async function POST(request: NextRequest) {
           film_id: film.id,
           user_id: userId,
           rating: ratingValue,
-          reveiw_description: review,
+          review_description: review,
           watched_at: date ? date : null,
         },
+      });
+
+      const allReviews = await prismaClient.review.findMany({
+        where: {
+          film_id: film.id,
+        },
+      });
+      let totalRating = 0;
+      let numberOfReviews = 0;
+      allReviews.forEach((review) => {
+        if (review.rating) {
+          totalRating += review.rating;
+          numberOfReviews++;
+        }
+      });
+
+      await prismaClient.film.update({
+        where: { id: film.id },
+        data: { average_rating: totalRating / numberOfReviews },
       });
     }
 
