@@ -4,14 +4,18 @@ import ToWatchIcon from "./icons/ToWatchIcon";
 import AdditionalOptionsIcon from "./icons/AdditionalOptionsIcon";
 import WatchedIcon from "./icons/WatchedIcon";
 import { useEffect, useState } from "react";
+import { DialogReview } from "./DialogReview";
+import { Film } from "@/lib/interfaces";
 
 interface Props {
   apiId: number;
   userId: string;
+  film: Film;
 }
-export default function FilmWatchStatusPanel({ apiId, userId }: Props) {
+export default function FilmWatchStatusPanel({ apiId, userId, film }: Props) {
   const [isWatched, setIsWatched] = useState<boolean>(false);
   const [toWatch, setToWatch] = useState<boolean>(false);
+  const [filmId, setFilmId] = useState<string>("");
 
   useEffect(() => {
     fetch(
@@ -23,6 +27,7 @@ export default function FilmWatchStatusPanel({ apiId, userId }: Props) {
         if (data.watchStatus) {
           setIsWatched(data.watchStatus.watched);
           setToWatch(data.watchStatus.to_watch);
+          setFilmId(data.watchStatus.film_id);
         }
       });
   }, []);
@@ -63,6 +68,7 @@ export default function FilmWatchStatusPanel({ apiId, userId }: Props) {
         />
         <span>{toWatch ? "Added to watchlist" : "Add to watchlist"}</span>
       </button>
+      <DialogReview film={film} userId={userId} apiId={apiId} />
       <button className="flex flex-row">
         <AddToListIcon className="text-beeBrownBackground hover:cursor-pointer w-8" />
         <span>Add to list</span>

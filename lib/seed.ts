@@ -1,10 +1,10 @@
 import prismaClient from "./prisma-client.js";
 
 const deleteDb = async () => {
-  await prismaClient.film.deleteMany();
   await prismaClient.review.deleteMany();
   await prismaClient.filmWatchStatus.deleteMany();
   await prismaClient.filmsOnLists.deleteMany();
+  await prismaClient.film.deleteMany();
   await prismaClient.list.deleteMany();
   await prismaClient.user.deleteMany();
 };

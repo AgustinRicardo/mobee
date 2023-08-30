@@ -1,12 +1,16 @@
 import PopularFilms from "@/components/PopularFilms";
+import { Toaster } from "@/components/ui/toaster";
+import { getUser } from "@/lib/functions";
 
-export default function Home() {
+export default async function Home() {
+  const user = await getUser();
+
   return (
     <>
       <section>
         <h1 className="text-beeYellow">Popular Films</h1>
         <hr className="border-beeYellow" />
-        <PopularFilms />
+        <PopularFilms userId={user?.id!} />
       </section>
       <section>
         <h1 className="text-beeYellow">Recent Reviews</h1>
