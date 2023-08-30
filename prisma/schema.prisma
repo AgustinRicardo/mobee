@@ -30,10 +30,11 @@ model Film {
 }
 
 model List {
-  id      String         @id @default(uuid())
-  user_id String
-  title   String
-  films   FilmsOnLists[]
+  id          String         @id @default(uuid())
+  user_id     String
+  title       String
+  description String?
+  films       FilmsOnLists[]
 }
 
 model FilmsOnLists {

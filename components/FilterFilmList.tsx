@@ -37,8 +37,6 @@ export default function FilterFilmList({ userId }: Props) {
     url += `&primary_release_date.gte=${checkedYear[0].year_gte}&primary_release_date.lte=${checkedYear[0].year_lte}`;
   }
 
-  console.log(url);
-
   return (
     <>
       <FilterOptions

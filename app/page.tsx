@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 export default async function Home() {
   const supabase = createServerComponentClient({ cookies });
   const { data } = await supabase.auth.getUser();
-  console.log(data.user);
+
   if (!data.user) {
     redirect("/login");
   }

@@ -90,12 +90,11 @@ const getFilmInfoFromUser = async (userId: string, filmId: string) => {
 export async function POST(request: NextRequest) {
   const { apiId, userId, isWatched, toWatch } = await request.json();
   let statusToUpdate;
-  console.log(isWatched, toWatch, apiId);
+
   try {
     if (apiId) {
       const filmId = await getOrAddFilmToDB(apiId);
       if (filmId) {
-        console.log(filmId);
         if (isWatched !== undefined) {
           await updateWatchedStatus(filmId, userId);
         } else if (toWatch !== undefined) {
@@ -119,7 +118,7 @@ export async function GET(request: NextRequest) {
       const filmId = await getOrAddFilmToDB(apiId);
       if (filmId) {
         const watchStatus = await getFilmInfoFromUser(userId, filmId);
-        console.log(watchStatus);
+
         return NextResponse.json({ watchStatus }, { status: 200 });
       }
     }

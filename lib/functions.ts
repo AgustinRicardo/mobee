@@ -19,7 +19,7 @@ export async function getUser(): Promise<User | null> {
         email: email,
       },
     });
-    console.log(user);
+
     return user;
   };
 

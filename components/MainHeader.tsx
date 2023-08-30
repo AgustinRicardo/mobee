@@ -4,12 +4,25 @@ import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import React from "react";
 import SearchIcon from "./icons/SearchIcon";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import AddReviewIcon from "./icons/AddReviewIcon";
+import DropdownIcon from "./icons/DropdownIcon";
+import CreateDropdown from "./CreateDropdown";
 
 export default function MainHeader({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const dropdownContentStyle = "bg-beeBrownLight border-none text-beeBeig";
+
   const supabase = createClientComponentClient();
   const router = useRouter();
   const pathname = usePathname();
@@ -18,6 +31,7 @@ export default function MainHeader({
     await supabase.auth.signOut();
     router.replace("/login");
   };
+
   return (
     <>
       <header
@@ -58,14 +72,22 @@ export default function MainHeader({
           />
           <SearchIcon />
         </form>
-        {children}
-        <button
-          onClick={() => {
-            signOut();
-          }}
-        >
-          Sign out
-        </button>
+
+        <DropdownMenu>
+          <DropdownMenuTrigger>{children}</DropdownMenuTrigger>
+          <DropdownMenuContent className={dropdownContentStyle}>
+            <DropdownMenuItem
+              className=""
+              onClick={() => {
+                signOut();
+              }}
+            >
+              Sign out
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+
+        <CreateDropdown />
       </header>
     </>
   );

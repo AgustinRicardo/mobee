@@ -32,7 +32,6 @@ export default function FilmPoster({ src, alt, id, userId, className }: Props) {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.watchStatus) {
           setIsWatched(data.watchStatus.watched);
           setToWatch(data.watchStatus.to_watch);
@@ -49,7 +48,6 @@ export default function FilmPoster({ src, alt, id, userId, className }: Props) {
               <TooltipTrigger asChild>
                 <button
                   onClick={() => {
-                    console.log(id);
                     fetch("/api/filmStatus", {
                       method: "POST",
                       body: JSON.stringify({ apiId: id, userId, isWatched }),

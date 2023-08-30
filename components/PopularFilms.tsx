@@ -23,7 +23,7 @@ export default function PopularFilms({ userId }: Props) {
       };
       const res = await fetch(url, options);
       const { results } = await res.json();
-      console.log(results);
+
       setPopularFilms(results);
     } catch (e) {
       console.log(e);

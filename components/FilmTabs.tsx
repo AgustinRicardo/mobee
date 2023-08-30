@@ -1,6 +1,7 @@
 "use client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import FilmsSearchBar from "./FilmsSearchBar";
+import { Film } from "@/lib/interfaces";
 
 interface Props {
   popular: React.ReactNode;
@@ -53,7 +54,7 @@ export default function FilmTabs({
               Filter
             </TabsTrigger>
           </TabsList>
-          <FilmsSearchBar className="ml-auto" />
+          <FilmsSearchBar className="ml-auto flex-row" addFilm={false} />
         </div>
 
         <TabsContent value="popular">{popular}</TabsContent>

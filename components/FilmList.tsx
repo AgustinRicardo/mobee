@@ -19,15 +19,13 @@ export default function FilmList({ url, userId }: Props) {
         Authorization: `Bearer ${process.env.NEXT_PUBLIC_TMDB_API_KEY}`,
       },
     };
-    console.log(url);
+
     fetch(url, options)
       .then((res) => res.json())
       .then(({ results }) => {
         setFilmList(results);
       });
   }, [url]);
-
-  filmList.forEach((film) => console.log(film));
 
   const renderFilm = (film: Film, index: number) => {
     return (

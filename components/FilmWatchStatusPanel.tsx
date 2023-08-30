@@ -23,7 +23,6 @@ export default function FilmWatchStatusPanel({ apiId, userId, film }: Props) {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.watchStatus) {
           setIsWatched(data.watchStatus.watched);
           setToWatch(data.watchStatus.to_watch);
