@@ -54,7 +54,10 @@ export default function FilmTabs({
               Filter
             </TabsTrigger>
           </TabsList>
-          <FilmsSearchBar className="ml-auto flex-row" addFilm={false} />
+          <FilmsSearchBar
+            className="ml-auto flex-row"
+            action="goToFilmDetails"
+          />
         </div>
 
         <TabsContent value="popular">{popular}</TabsContent>

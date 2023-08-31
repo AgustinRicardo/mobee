@@ -9,7 +9,13 @@ import AddReviewIcon from "./icons/AddReviewIcon";
 import { Film } from "@/lib/interfaces";
 import { Checkbox } from "./ui/checkbox";
 import { CalendarForm } from "./CalendarForm";
-import { FormEventHandler, useState } from "react";
+import {
+  Children,
+  Dispatch,
+  FormEventHandler,
+  SetStateAction,
+  useState,
+} from "react";
 import RatingPicker from "./RatingPicker";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { Toaster } from "./ui/toaster";
@@ -18,10 +24,18 @@ import { useToast } from "./ui/use-toast";
 interface Props {
   film: Film;
   userId: string;
-  apiId: number;
+  children: React.ReactNode;
+  defaultOpen?: boolean;
+  setFilmToReview?: Dispatch<SetStateAction<Film | null>>;
 }
 
-export function DialogReview({ film, userId, apiId }: Props) {
+export function DialogReview({
+  film,
+  userId,
+  children,
+  defaultOpen,
+  setFilmToReview,
+}: Props) {
   const { toast } = useToast();
   const [checkedDateWatched, setCheckDateWatched] = useState<boolean>(false);
   const [ratingValue, setRatingValue] = useState<number | null>(null);
@@ -39,7 +53,7 @@ export function DialogReview({ film, userId, apiId }: Props) {
     } else {
       const reviewData = {
         userId,
-        apiId,
+        apiId: film.id,
         date,
         review,
         ratingValue,
@@ -63,14 +77,13 @@ export function DialogReview({ film, userId, apiId }: Props) {
           setDate(undefined);
           setRatingValue(null);
           setReview("");
+          if (setFilmToReview) {
+            setFilmToReview(null);
+          }
         }}
+        defaultOpen={defaultOpen}
       >
-        <DialogTrigger asChild>
-          <button className="flex flex-row">
-            <AddReviewIcon className="text-beeBrownBackground hover:cursor-pointer w-8" />
-            <span>Add review</span>
-          </button>
-        </DialogTrigger>
+        <DialogTrigger asChild>{children}</DialogTrigger>
         <DialogContent className="max-w-2xl max-h-fit border-none">
           <div className="flex flex-row font-switzer font-light">
             <div className="flex flex-col">

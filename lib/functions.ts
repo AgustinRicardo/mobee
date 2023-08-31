@@ -8,9 +8,9 @@ export async function getUser(): Promise<User | null> {
 
   const getUserAuth = async () => {
     const supabase = createServerComponentClient({ cookies });
-    const { data, error } = await supabase.auth.getUser();
+    const { data, error } = await supabase.auth.getSession();
     console.log(error);
-    if (!error) return data.user;
+    if (!error) return data.session?.user;
   };
 
   const getUserFromDB = async (email: string): Promise<User | null> => {

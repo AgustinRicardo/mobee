@@ -1,11 +1,13 @@
+import { User } from "@/lib/interfaces";
 import { getUser } from "../lib/functions";
 import DropdownIcon from "./icons/DropdownIcon";
 
 export const revalidate = 1000;
 
-export default async function UserProfile() {
-  const user = await getUser();
-
+interface Props {
+  user: User;
+}
+export default async function UserProfile({ user }: Props) {
   return (
     <div className="flex flex-row gap-2 items-center">
       <img

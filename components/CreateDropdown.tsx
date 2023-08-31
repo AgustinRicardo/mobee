@@ -21,22 +21,48 @@ import FilmsSearchBar from "./FilmsSearchBar";
 import { Film } from "@/lib/interfaces";
 import RemoveIcon from "./icons/RemoveIcon";
 import { DialogClose } from "@radix-ui/react-dialog";
+import { useToast } from "./ui/use-toast";
+import { Toaster } from "./ui/toaster";
+import { DialogReview } from "./DialogReview";
 
-export default function CreateDropdown() {
+interface Props {
+  userId: string;
+}
+
+export default function CreateDropdown({ userId }: Props) {
+  const { toast } = useToast();
   const [filmsOnNewList, setFilmsOnNewList] = useState<Film[]>([]);
   const [listTitle, setListTitle] = useState<string>("");
   const [listDescription, setListDescription] = useState<string>("");
+  const [filmToReview, setFilmToReview] = useState<Film | null>(null);
 
   const handleFormSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     const filmIds = filmsOnNewList.map((film) => film.id);
-    const listData = { listTitle, listDescription, filmIds };
-    await fetch("/api/list", {
-      method: "POST",
-      body: JSON.stringify(listData),
-    }).catch((e) => {
-      console.error(e);
-    });
+    const listData = { listTitle, listDescription, filmIds, userId };
+    if (!filmIds.length || listTitle === "") {
+      if (!filmIds.length) {
+        toast({
+          variant: "destructive",
+          title: "No films added",
+          description: "Add at least one film to the list",
+        });
+      }
+      if (listTitle === "") {
+        toast({
+          variant: "destructive",
+          title: "No title provided",
+          description: "Set a title for the list",
+        });
+      }
+    } else {
+      await fetch("/api/list", {
+        method: "POST",
+        body: JSON.stringify(listData),
+      }).catch((e) => {
+        console.error(e);
+      });
+    }
   };
 
   return (
@@ -46,22 +72,41 @@ export default function CreateDropdown() {
           Create <DropdownIcon className="w-4 h-4" />
         </DropdownMenuTrigger>
         <DropdownMenuContent className="bg-beeBrownLight border-none flex flex-col">
-          <Dialog>
-            <DialogTrigger>
+          {filmToReview ? (
+            <DialogReview
+              setFilmToReview={setFilmToReview}
+              film={filmToReview}
+              userId={userId}
+              defaultOpen={true}
+            >
               <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
                 New review
               </DropdownMenuItem>
-            </DialogTrigger>
-            <DialogContent>
-              <div className="w-10 h-10">
-                <span>review</span>
-              </div>
-            </DialogContent>
-          </Dialog>
-
+            </DialogReview>
+          ) : (
+            <Dialog
+              onOpenChange={() => {
+                setFilmToReview(null);
+              }}
+            >
+              <DialogTrigger>
+                <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                  New review
+                </DropdownMenuItem>
+              </DialogTrigger>
+              <DialogContent className="border-none">
+                <FilmsSearchBar
+                  action="reviewFilm"
+                  setFilmToReview={setFilmToReview}
+                />
+              </DialogContent>
+            </Dialog>
+          )}
           <Dialog
             onOpenChange={() => {
               setFilmsOnNewList([]);
+              setListTitle("");
+              setListDescription("");
             }}
           >
             <DialogTrigger>
@@ -97,7 +142,7 @@ export default function CreateDropdown() {
                   />
                   <FilmsSearchBar
                     className="flex-col gap-1"
-                    addFilm={true}
+                    action="addFilmToList"
                     filmsOnNewList={filmsOnNewList}
                     setFilmsOnNewList={setFilmsOnNewList}
                   />
@@ -142,6 +187,7 @@ export default function CreateDropdown() {
           </Dialog>
         </DropdownMenuContent>
       </DropdownMenu>
+      <Toaster />
     </>
   );
 }

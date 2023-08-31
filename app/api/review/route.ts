@@ -1,17 +1,19 @@
+import { getOrAddFilmToDB } from "@/lib/functions";
 import prismaClient from "../../../lib/prisma-client";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   const { userId, apiId, date, review, ratingValue } = await request.json();
-  try {
-    const film = await prismaClient.film.findUnique({
-      where: { tmdb_id: apiId },
-    });
+  console.log(userId, apiId, date, review, ratingValue);
 
-    if (film) {
+  try {
+    const filmId = await getOrAddFilmToDB(apiId);
+
+    if (filmId) {
+      console.log("hola");
       const data = await prismaClient.review.create({
         data: {
-          film_id: film.id,
+          film_id: filmId,
           user_id: userId,
           rating: ratingValue,
           review_description: review,
@@ -21,7 +23,7 @@ export async function POST(request: NextRequest) {
 
       const allReviews = await prismaClient.review.findMany({
         where: {
-          film_id: film.id,
+          film_id: filmId,
         },
       });
       let totalRating = 0;
@@ -34,12 +36,12 @@ export async function POST(request: NextRequest) {
       });
 
       await prismaClient.film.update({
-        where: { id: film.id },
+        where: { id: filmId },
         data: { average_rating: totalRating / numberOfReviews },
       });
     }
 
-    return NextResponse.json({ msg: "Successful", status: 200 });
+    return NextResponse.json({ message: "Successful" }, { status: 200 });
   } catch (e) {
     return NextResponse.error();
   }

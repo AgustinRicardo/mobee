@@ -16,11 +16,11 @@ import AddReviewIcon from "./icons/AddReviewIcon";
 import DropdownIcon from "./icons/DropdownIcon";
 import CreateDropdown from "./CreateDropdown";
 
-export default function MainHeader({
-  children,
-}: {
+interface Props {
   children: React.ReactNode;
-}) {
+  userId: string;
+}
+export default function MainHeader({ children, userId }: Props) {
   const dropdownContentStyle = "bg-beeBrownLight border-none text-beeBeig";
 
   const supabase = createClientComponentClient();
@@ -87,7 +87,7 @@ export default function MainHeader({
           </DropdownMenuContent>
         </DropdownMenu>
 
-        <CreateDropdown />
+        <CreateDropdown userId={userId} />
       </header>
     </>
   );

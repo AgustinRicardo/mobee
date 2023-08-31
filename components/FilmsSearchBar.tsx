@@ -6,16 +6,18 @@ import { Film } from "@/lib/interfaces";
 import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 interface Props {
-  className: string;
-  addFilm: boolean;
+  className?: string;
+  action: string;
   setFilmsOnNewList?: Dispatch<SetStateAction<Film[]>>;
   filmsOnNewList?: Film[];
+  setFilmToReview?: Dispatch<SetStateAction<Film | null>>;
 }
 export default function FilmsSearchBar({
   className,
-  addFilm,
+  action,
   setFilmsOnNewList,
   filmsOnNewList,
+  setFilmToReview,
 }: Props) {
   const router = useRouter();
   const [query, setQuery] = useState<string>("");
@@ -62,7 +64,7 @@ export default function FilmsSearchBar({
                       <li
                         className="hover:bg-beeBeig hover:text-beeBrownBackground hover:cursor-pointer gap-1 flex"
                         onClick={
-                          addFilm
+                          action === "addFilmToList"
                             ? () => {
                                 if (filmsOnNewList && setFilmsOnNewList) {
                                   if (
@@ -76,9 +78,17 @@ export default function FilmsSearchBar({
                                   }
                                 }
                               }
-                            : () => {
+                            : action === "reviewFilm"
+                            ? () => {
+                                if (setFilmToReview) {
+                                  setFilmToReview(film);
+                                }
+                              }
+                            : action === "goToFilmDetails"
+                            ? () => {
                                 router.push(`/film_details/${film.id}`);
                               }
+                            : () => {}
                         }
                         key={film.id}
                       >

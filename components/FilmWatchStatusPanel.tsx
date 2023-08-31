@@ -6,20 +6,22 @@ import WatchedIcon from "./icons/WatchedIcon";
 import { useEffect, useState } from "react";
 import { DialogReview } from "./DialogReview";
 import { Film } from "@/lib/interfaces";
+import { DialogTrigger } from "@radix-ui/react-dialog";
+import AddReviewIcon from "./icons/AddReviewIcon";
 
 interface Props {
-  apiId: number;
   userId: string;
   film: Film;
 }
-export default function FilmWatchStatusPanel({ apiId, userId, film }: Props) {
+export default function FilmWatchStatusPanel({ userId, film }: Props) {
   const [isWatched, setIsWatched] = useState<boolean>(false);
   const [toWatch, setToWatch] = useState<boolean>(false);
   const [filmId, setFilmId] = useState<string>("");
 
   useEffect(() => {
     fetch(
-      "/api/filmStatus?" + new URLSearchParams({ apiId: String(apiId), userId })
+      "/api/filmStatus?" +
+        new URLSearchParams({ apiId: String(film.id), userId })
     )
       .then((res) => res.json())
       .then((data) => {
@@ -38,7 +40,7 @@ export default function FilmWatchStatusPanel({ apiId, userId, film }: Props) {
         onClick={() => {
           fetch("/api/filmStatus", {
             method: "POST",
-            body: JSON.stringify({ apiId, userId, isWatched }),
+            body: JSON.stringify({ apiId: film.id, userId, isWatched }),
           });
           setIsWatched(!isWatched);
         }}
@@ -55,7 +57,7 @@ export default function FilmWatchStatusPanel({ apiId, userId, film }: Props) {
         onClick={() => {
           fetch("/api/filmStatus", {
             method: "POST",
-            body: JSON.stringify({ apiId, userId, toWatch }),
+            body: JSON.stringify({ apiId: film.id, userId, toWatch }),
           });
           setToWatch(!toWatch);
         }}
@@ -67,7 +69,12 @@ export default function FilmWatchStatusPanel({ apiId, userId, film }: Props) {
         />
         <span>{toWatch ? "Added to watchlist" : "Add to watchlist"}</span>
       </button>
-      <DialogReview film={film} userId={userId} apiId={apiId} />
+      <DialogReview film={film} userId={userId}>
+        <span className="flex flex-row hover:cursor-pointer">
+          <AddReviewIcon className="text-beeBrownBackground hover:cursor-pointer w-8" />
+          <span>Add review</span>
+        </span>
+      </DialogReview>
       <button className="flex flex-row">
         <AddToListIcon className="text-beeBrownBackground hover:cursor-pointer w-8" />
         <span>Add to list</span>
