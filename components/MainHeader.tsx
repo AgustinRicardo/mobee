@@ -36,7 +36,9 @@ export default function MainHeader({ children, userId }: Props) {
     <>
       <header
         className={`flex relative flex-row items-center px-[16%] bg-beeBrownHeader gap-12 h-16 font-switzer font-medium text-sm ${
-          pathname.includes("/film_details") ? "" : "mb-8"
+          pathname.includes("/film_details") || pathname.includes("/profile")
+            ? ""
+            : "mb-8"
         }`}
       >
         <img
@@ -76,6 +78,13 @@ export default function MainHeader({ children, userId }: Props) {
         <DropdownMenu>
           <DropdownMenuTrigger>{children}</DropdownMenuTrigger>
           <DropdownMenuContent className={dropdownContentStyle}>
+            <DropdownMenuItem
+              onClick={() => {
+                router.push("/profile");
+              }}
+            >
+              Profile
+            </DropdownMenuItem>
             <DropdownMenuItem
               className=""
               onClick={() => {

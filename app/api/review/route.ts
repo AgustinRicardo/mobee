@@ -10,7 +10,6 @@ export async function POST(request: NextRequest) {
     const filmId = await getOrAddFilmToDB(apiId);
 
     if (filmId) {
-      console.log("hola");
       const data = await prismaClient.review.create({
         data: {
           film_id: filmId,
