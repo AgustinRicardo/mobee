@@ -27,6 +27,7 @@ module.exports = {
         beeYellow: "#F2C53D",
         beeBeig: "#F6EAC4",
         beeBrownLight: "#7A6D6A",
+        beeBrownLightText:"#544B49",
         beeBrownBackground: "#2E2928",
         beeBrownHeader: "#252120",
         border: "hsl(var(--border))",

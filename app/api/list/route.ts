@@ -2,6 +2,12 @@ import { getOrAddFilmToDB } from "@/lib/functions";
 import { NextRequest, NextResponse } from "next/server";
 import prismaClient from "../../../lib/prisma-client";
 
+interface FilmOnDB {
+  id: string;
+  tmdb_id: number;
+  average_rating: number;
+}
+
 export async function POST(request: NextRequest) {
   const { listTitle, listDescription, filmIds, userId } = await request.json();
 
@@ -18,9 +24,9 @@ export async function POST(request: NextRequest) {
     });
     console.log(list.id);
     await Promise.all(
-      filmIdsOnDB.map(async (filmId: string) => {
+      filmIdsOnDB.map(async (film: FilmOnDB) => {
         await prismaClient.filmsOnLists.create({
-          data: { film_id: filmId, list_id: list.id },
+          data: { film_id: film.id, list_id: list.id },
         });
       })
     );

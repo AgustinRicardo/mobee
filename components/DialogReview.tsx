@@ -136,7 +136,7 @@ export function DialogReview({
                 <div className="flex flex-row items-end">
                   <div className="flex flex-col">
                     <span>Rating</span>
-                    <RatingPicker setRatingValue={setRatingValue} />
+                    <RatingPicker emptyIconColor="text-beeBrownLight" setRatingValue={setRatingValue} ratingValue={ratingValue}/>
                   </div>
                   <DialogClose asChild>
                     <button
