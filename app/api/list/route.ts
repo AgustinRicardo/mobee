@@ -35,3 +35,23 @@ export async function POST(request: NextRequest) {
     return NextResponse.error();
   }
 }
+
+export async function GET(request: NextRequest) {
+  const { searchParams } = new URL(request.url);
+  const userId = searchParams.get("userId");
+  let lists;
+  console.log(userId);
+  try {
+    if (userId) {
+      lists = await prismaClient.list.findMany({
+        where: { user_id: userId },
+      });
+    }
+    console.log(lists);
+    if (lists) {
+      return NextResponse.json({ lists }, { status: 200 });
+    }
+  } catch (e) {
+    return NextResponse.error();
+  }
+}

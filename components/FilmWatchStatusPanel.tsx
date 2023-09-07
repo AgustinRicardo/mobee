@@ -8,6 +8,7 @@ import { DialogReview } from "./DialogReview";
 import { Film } from "@/lib/interfaces";
 import AddReviewIcon from "./icons/AddReviewIcon";
 import RatingPicker from "./RatingPicker";
+import { DialogAddToList } from "./DialogAddToList";
 
 interface Props {
   userId: string;
@@ -97,10 +98,12 @@ export default function FilmWatchStatusPanel({ userId, film }: Props) {
           </DialogReview>
         </div>
         <div className="pt-5 pl-5 justify-center">
-          <button className="flex flex-row">
-            <AddToListIcon className="text-beeBrownBackground hover:cursor-pointer w-8" />
-            <span className="pl-2">Add to list</span>
-          </button>
+          <DialogAddToList apiId={film.id} userId={userId}>
+            <span className="flex flex-row hover:cursor-pointer">
+              <AddToListIcon className="text-beeBrownBackground hover:cursor-pointer w-8" />
+              <span className="pl-2">Add to list</span>
+            </span>
+          </DialogAddToList>
         </div>
         <div className="pt-5 pb-5 justify-center">
           <div className="flex flex-col">

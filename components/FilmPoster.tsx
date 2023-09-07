@@ -88,14 +88,17 @@ export default function FilmPoster({ src, alt, id, userId, className }: Props) {
                 <p>{toWatch ? "Added to watchlist" : "Not in watchlist"}</p>
               </TooltipContent>
             </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <button onClick={() => {}}>
+                  <AddToListIcon className="text-beeBrownBackground hover:cursor-pointer w-6" />
+                </button>
+              </TooltipTrigger>
+              <TooltipContent className="bg-beeBrownBackground text-beeBeig border-none text-xs">
+                <p>{"Add film to a list"}</p>
+              </TooltipContent>
+            </Tooltip>
           </TooltipProvider>
-
-          <button>
-            <AddToListIcon className="text-beeBrownBackground hover:cursor-pointer w-6" />
-          </button>
-          <button>
-            <AdditionalOptionsIcon className="text-beeBrownBackground hover:cursor-pointer w-6" />
-          </button>
         </div>
 
         <img
