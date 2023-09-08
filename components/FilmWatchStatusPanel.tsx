@@ -1,7 +1,6 @@
 "use client";
 import AddToListIcon from "./icons/AddToListIcon";
 import ToWatchIcon from "./icons/ToWatchIcon";
-import AdditionalOptionsIcon from "./icons/AdditionalOptionsIcon";
 import WatchedIcon from "./icons/WatchedIcon";
 import { useEffect, useState } from "react";
 import { DialogReview } from "./DialogReview";
@@ -109,12 +108,18 @@ export default function FilmWatchStatusPanel({ userId, film }: Props) {
           <div className="flex flex-col">
             <span className="pl-5"> Average Rating</span>
             <div className="flex flex-col items-center">
-              <RatingPicker
-                emptyIconColor="text-beeBrownBackground"
-                readOnly={true}
-                averageRating={averageRating}
-              />
-              <span>{averageRating}/5</span>
+              {averageRating !== null ? (
+                <>
+                  <RatingPicker
+                    emptyIconColor="text-beeBrownBackground"
+                    readOnly={true}
+                    averageRating={averageRating}
+                  />
+                  <span>{averageRating / 5}</span>
+                </>
+              ) : (
+                <span>No rating available</span>
+              )}
             </div>
           </div>
         </div>
