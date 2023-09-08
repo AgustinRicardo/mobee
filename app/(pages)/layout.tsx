@@ -15,7 +15,7 @@ export default async function PagesLayout({
         <UserProfile user={user!} />
       </MainHeader>
       <main className="text-beeBeig px-[16%]">{children}</main>
-      <footer className="h-12 bg-beeBrownHeader"></footer>
+      <footer className="bg-beeBrownHeader h-12"></footer>
     </>
   );
 }

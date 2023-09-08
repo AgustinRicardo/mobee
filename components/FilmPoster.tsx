@@ -42,7 +42,7 @@ export default function FilmPoster({ src, alt, id, userId, className }: Props) {
   return (
     <>
       <div className="group">
-        <div className="hidden flex-col justify-around px-2 py-8 gap-0.5 h-1/5 group-hover:flex absolute group-hover:bg-beeBrownLight/90 rounded-tl-md rounded-br-md ">
+        <div className="hidden flex-col justify-around px-2 py-2 gap-0.5 group-hover:flex absolute group-hover:bg-beeBrownLight/90 rounded-tl-md rounded-br-md ">
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>

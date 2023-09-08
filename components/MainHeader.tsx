@@ -15,6 +15,7 @@ import {
 import AddReviewIcon from "./icons/AddReviewIcon";
 import DropdownIcon from "./icons/DropdownIcon";
 import CreateDropdown from "./CreateDropdown";
+import { DropdownMenuArrow } from "@radix-ui/react-dropdown-menu";
 
 interface Props {
   children: React.ReactNode;
@@ -35,18 +36,14 @@ export default function MainHeader({ children, userId }: Props) {
   return (
     <>
       <header
-        className={`flex relative flex-row items-center px-[16%] bg-beeBrownHeader gap-12 h-16 font-switzer font-medium text-sm ${
+        className={`flex relative flex-row items-center px-[16%]  bg-beeBrownHeader gap-12 h-16 font-switzer font-medium text-sm justify-evenly ${
           pathname.includes("/film_details") || pathname.includes("/profile")
             ? ""
             : "mb-8"
         }`}
       >
-        <img
-          src="/logo.png"
-          alt="logo"
-          className="mr-auto justify-start w-24"
-        />
-        <nav className="flex flex-row gap-10 uppercase">
+        <img src="/logo.png" alt="logo" className="w-24" />
+        <nav className="flex flex-row gap-10 uppercase ml-auto">
           <Link
             href="/home"
             className={pathname === "/home" ? "" : "opacity-50"}
@@ -79,6 +76,7 @@ export default function MainHeader({ children, userId }: Props) {
           <DropdownMenuTrigger>{children}</DropdownMenuTrigger>
           <DropdownMenuContent className={dropdownContentStyle}>
             <DropdownMenuItem
+              className="text-beeBeig data-[highlighted]:bg-beeBeig data-[highlighted]:text-beeBrownBackground"
               onClick={() => {
                 router.push("/profile");
               }}
@@ -86,7 +84,7 @@ export default function MainHeader({ children, userId }: Props) {
               Profile
             </DropdownMenuItem>
             <DropdownMenuItem
-              className=""
+              className="text-beeBeig data-[highlighted]:bg-beeBeig data-[highlighted]:text-beeBrownBackground"
               onClick={() => {
                 signOut();
               }}
@@ -96,7 +94,7 @@ export default function MainHeader({ children, userId }: Props) {
           </DropdownMenuContent>
         </DropdownMenu>
 
-        <CreateDropdown userId={userId} />
+        {<CreateDropdown userId={userId} />}
       </header>
     </>
   );
