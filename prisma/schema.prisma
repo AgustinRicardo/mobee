@@ -18,6 +18,7 @@ model User {
   created_at           DateTime          @default(now())
   user_reviews         Review[]
   film_status          FilmWatchStatus[]
+  lists                ListSavedByUser[]
 }
 
 model Film {
@@ -30,11 +31,22 @@ model Film {
 }
 
 model List {
-  id          String         @id @default(uuid())
-  user_id     String
-  title       String
-  description String?
-  films       FilmsOnLists[]
+  id             String         @id @default(uuid())
+  user_id        String
+  title          String
+  description    String?
+  bookmark_count Int            @default(0)
+  films          FilmsOnLists[]
+  users          ListSavedByUser[]
+}
+
+model ListSavedByUser {
+  list    List   @relation(fields: [list_id], references: [id])
+  list_id String
+  user    User   @relation(fields: [user_id], references: [id])
+  user_id String
+
+  @@id([list_id, user_id])
 }
 
 model FilmsOnLists {
