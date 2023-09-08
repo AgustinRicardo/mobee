@@ -90,7 +90,10 @@ export default function CreateDropdown({ userId }: Props) {
               }}
             >
               <DialogTrigger>
-                <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                <DropdownMenuItem
+                  className="text-beeBeig data-[highlighted]:bg-beeBeig data-[highlighted]:text-beeBrownBackground"
+                  onSelect={(e) => e.preventDefault()}
+                >
                   New review
                 </DropdownMenuItem>
               </DialogTrigger>
@@ -110,7 +113,10 @@ export default function CreateDropdown({ userId }: Props) {
             }}
           >
             <DialogTrigger>
-              <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+              <DropdownMenuItem
+                className="text-beeBeig data-[highlighted]:bg-beeBeig data-[highlighted]:text-beeBrownBackground"
+                onSelect={(e) => e.preventDefault()}
+              >
                 New list
               </DropdownMenuItem>
             </DialogTrigger>

@@ -73,7 +73,7 @@ export default function FilterOptions({
                     })
                   );
                 }}
-                className="py-0"
+                className="text-beeBeig data-[highlighted]:bg-beeBeig data-[highlighted]:text-beeBrownBackground py-0"
                 key={selectYear.id}
               >
                 {selectYear.name}
@@ -102,7 +102,7 @@ export default function FilterOptions({
                     })
                   );
                 }}
-                className="py-0"
+                className="text-beeBeig data-[highlighted]:bg-beeBeig data-[highlighted]:text-beeBrownBackground py-0"
                 key={selectGenre.id}
               >
                 {selectGenre.name}
