@@ -67,11 +67,14 @@ export function DialogAddToList({ apiId, userId, children }: Props) {
     <>
       <Dialog onOpenChange={() => {}}>
         <DialogTrigger asChild>{children}</DialogTrigger>
-        <DialogContent className="border-none max-w-fit">
-          <DialogTitle>Add film to a list </DialogTitle>
-          <form className="flex flex-col justify-start" onSubmit={handleSubmit}>
-            <ScrollArea>
-              <ul className="flex flex-col">
+        <DialogContent className="border-none w-24">
+          <DialogTitle>Add film to a list</DialogTitle>
+          <form
+            className="flex flex-col justify-start w-full gap-6"
+            onSubmit={handleSubmit}
+          >
+            <ScrollArea className=" rounded-sm">
+              <ul className="flex flex-col bg-beeBrownHeader">
                 {lists &&
                   lists.map((list: List) => {
                     return (
@@ -83,7 +86,9 @@ export function DialogAddToList({ apiId, userId, children }: Props) {
                       >
                         <li
                           className={
-                            list.id === selectedList ? "bg-beeYellow" : ""
+                            list.id === selectedList
+                              ? "bg-beeBrownLight text-beeBrownBackground"
+                              : ""
                           }
                         >
                           {list.title}
@@ -96,7 +101,7 @@ export function DialogAddToList({ apiId, userId, children }: Props) {
             <DialogClose asChild>
               <button
                 type="submit"
-                className="bg-beeYellow text-beeBrownBackground self-end"
+                className="bg-beeYellow text-beeBrownBackground self-end px-2 py-0.5 rounded-md"
               >
                 Save
               </button>

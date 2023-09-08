@@ -34,7 +34,7 @@ export default function FilmList({ url, userId }: Props) {
           userId={userId}
           src={`https://image.tmdb.org/t/p/w500/${film.poster_path}`}
           alt={film.title}
-          id={String(film.id)}
+          apiId={film.id}
           className="rounded-md border-2 border-beeBrownLight min-w-full shadow-md hover:cursor-pointer"
         />
       </li>
