@@ -90,11 +90,14 @@ export default function CreateDropdown({ userId }: Props) {
               }}
             >
               <DialogTrigger>
-                <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                <DropdownMenuItem
+                  className="text-beeBeig data-[highlighted]:bg-beeBeig data-[highlighted]:text-beeBrownBackground"
+                  onSelect={(e) => e.preventDefault()}
+                >
                   New review
                 </DropdownMenuItem>
               </DialogTrigger>
-              <DialogContent className="border-none">
+              <DialogContent className="border-none justify-center">
                 <FilmsSearchBar
                   action="reviewFilm"
                   setFilmToReview={setFilmToReview}
@@ -110,74 +113,79 @@ export default function CreateDropdown({ userId }: Props) {
             }}
           >
             <DialogTrigger>
-              <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+              <DropdownMenuItem
+                className="text-beeBeig data-[highlighted]:bg-beeBeig data-[highlighted]:text-beeBrownBackground"
+                onSelect={(e) => e.preventDefault()}
+              >
                 New list
               </DropdownMenuItem>
             </DialogTrigger>
             <DialogContent className="border-none max-w-fit">
               <DialogTitle>Create a new list </DialogTitle>
-              <form className="flex flex-row" onSubmit={handleFormSubmit}>
-                <div className="flex flex-col gap-1">
-                  <label htmlFor="listTitle">List title</label>
-                  <input
-                    type="text"
-                    id="listTitle"
-                    value={listTitle}
-                    onChange={(e) => {
-                      setListTitle(e.target.value);
-                    }}
-                    className="w-[30ch] text-beeBrownBackground bg-beeBeig rounded-sm px-1 py-0.5"
-                  />
-                  <label htmlFor="listDescription">Description</label>
-                  <textarea
-                    className="w-[30ch] text-beeBrownBackground bg-beeBeig rounded-sm px-1 py-0.5"
-                    name="listDescription"
-                    id="listDescription"
-                    cols={12}
-                    rows={4}
-                    value={listDescription}
-                    onChange={(e) => {
-                      setListDescription(e.target.value);
-                    }}
-                  />
-                  <FilmsSearchBar
-                    className="flex-col gap-1"
-                    action="addFilmToList"
-                    filmsOnNewList={filmsOnNewList}
-                    setFilmsOnNewList={setFilmsOnNewList}
-                  />
-                </div>
-                <div className="bg-beeBrownHeader min-w-[15rem]">
-                  <ul>
-                    {filmsOnNewList.map((film) => {
-                      return (
-                        <li
-                          className="text-beeBeig flex flex-row gap-2 group"
-                          key={film.id}
-                        >
-                          <span>{film.title}</span>
-                          <span> {film.release_date.slice(0, 4)}</span>
-                          <button
-                            className="invisible group-hover:visible"
-                            onClick={() => {
-                              setFilmsOnNewList(
-                                filmsOnNewList.filter((filmOnList) => {
-                                  return filmOnList.id !== film.id;
-                                })
-                              );
-                            }}
+              <form className="flex flex-col gap-4" onSubmit={handleFormSubmit}>
+                <div className="flex flex-row gap-4">
+                  <div className="flex flex-col gap-1">
+                    <label htmlFor="listTitle">List title</label>
+                    <input
+                      type="text"
+                      id="listTitle"
+                      value={listTitle}
+                      onChange={(e) => {
+                        setListTitle(e.target.value);
+                      }}
+                      className="w-[30ch] text-beeBrownBackground bg-beeBeig rounded-sm px-1 py-0.5"
+                    />
+                    <label htmlFor="listDescription">Description</label>
+                    <textarea
+                      className="w-[30ch] text-beeBrownBackground bg-beeBeig rounded-sm px-1 py-0.5"
+                      name="listDescription"
+                      id="listDescription"
+                      cols={12}
+                      rows={4}
+                      value={listDescription}
+                      onChange={(e) => {
+                        setListDescription(e.target.value);
+                      }}
+                    />
+                    <FilmsSearchBar
+                      className="flex-col gap-1"
+                      action="addFilmToList"
+                      filmsOnNewList={filmsOnNewList}
+                      setFilmsOnNewList={setFilmsOnNewList}
+                    />
+                  </div>
+                  <div className="bg-beeBrownHeader min-w-[15rem]">
+                    <ul>
+                      {filmsOnNewList.map((film) => {
+                        return (
+                          <li
+                            className="text-beeBeig flex flex-row gap-2 group"
+                            key={film.id}
                           >
-                            <RemoveIcon className="w-4 h-4 self-center" />
-                          </button>
-                        </li>
-                      );
-                    })}
-                  </ul>
+                            <span>{film.title}</span>
+                            <span> {film.release_date.slice(0, 4)}</span>
+                            <button
+                              className="invisible group-hover:visible"
+                              onClick={() => {
+                                setFilmsOnNewList(
+                                  filmsOnNewList.filter((filmOnList) => {
+                                    return filmOnList.id !== film.id;
+                                  })
+                                );
+                              }}
+                            >
+                              <RemoveIcon className="w-4 h-4 self-center" />
+                            </button>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
                 </div>
-                <DialogClose>
+                <DialogClose asChild>
                   <button
                     type="submit"
-                    className="bg-beeYellow text-beeBrownBackground"
+                    className="bg-beeYellow text-beeBrownBackground self-end px-2 py-0.5 rounded-md"
                   >
                     Save
                   </button>

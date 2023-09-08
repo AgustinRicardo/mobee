@@ -93,13 +93,13 @@ export async function POST(request: NextRequest) {
 
   try {
     if (apiId) {
-      const filmId = await getOrAddFilmToDB(apiId);
-      if (filmId) {
+      const film = await getOrAddFilmToDB(apiId);
+      if (film) {
         if (isWatched !== undefined) {
-          await updateWatchedStatus(filmId, userId);
+          await updateWatchedStatus(film.id, userId);
         } else if (toWatch !== undefined) {
           statusToUpdate = "toWatch";
-          await updateToWatchStatus(filmId, userId);
+          await updateToWatchStatus(film.id, userId);
         }
       }
     }
@@ -115,9 +115,9 @@ export async function GET(request: NextRequest) {
   const userId = searchParams.get("userId");
   try {
     if (apiId && userId) {
-      const filmId = await getOrAddFilmToDB(apiId);
-      if (filmId) {
-        const watchStatus = await getFilmInfoFromUser(userId, filmId);
+      const film = await getOrAddFilmToDB(apiId);
+      if (film) {
+        const watchStatus = await getFilmInfoFromUser(userId, film.id);
 
         return NextResponse.json({ watchStatus }, { status: 200 });
       }
