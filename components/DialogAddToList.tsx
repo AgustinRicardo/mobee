@@ -39,29 +39,28 @@ export function DialogAddToList({ apiId, userId, children }: Props) {
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    /* if (ratingValue === null && review === "") {
-      toast({
-        title: "No rating nor review",
-        description: "Provide at least a rating or a written review",
-        variant: "destructive",
+    const listData = {
+      apiId,
+      listId: selectedList,
+    };
+    try {
+      const res = await fetch("/api/filmOnList", {
+        method: "POST",
+        body: JSON.stringify(listData),
       });
-    } else {
-      const reviewData = {
-        userId,
-        apiId: film.id,
-        date,
-        review,
-        ratingValue,
-      };
-      try {
-        await fetch("/api/review", {
-          method: "POST",
-          body: JSON.stringify(reviewData),
+      const data = await res.json();
+
+      console.log(data.filmOnList);
+
+      if (data.filmOnList !== null) {
+        toast({
+          title: "Film already added to the current list",
+          description: "This film has been already added to the current list",
         });
-      } catch (e) {
-        throw e;
       }
-    } */
+    } catch (e) {
+      throw e;
+    }
   };
 
   return (
@@ -76,7 +75,7 @@ export function DialogAddToList({ apiId, userId, children }: Props) {
                 {lists &&
                   lists.map((list: List) => {
                     return (
-                      <button
+                      <span
                         onClick={() => {
                           setSelectedList(list.id);
                         }}
@@ -89,12 +88,12 @@ export function DialogAddToList({ apiId, userId, children }: Props) {
                         >
                           {list.title}
                         </li>
-                      </button>
+                      </span>
                     );
                   })}
               </ul>
             </ScrollArea>
-            <DialogClose>
+            <DialogClose asChild>
               <button
                 type="submit"
                 className="bg-beeYellow text-beeBrownBackground self-end"

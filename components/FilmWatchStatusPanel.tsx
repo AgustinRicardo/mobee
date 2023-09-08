@@ -115,7 +115,7 @@ export default function FilmWatchStatusPanel({ userId, film }: Props) {
                     readOnly={true}
                     averageRating={averageRating}
                   />
-                  <span>{averageRating / 5}</span>
+                  <span>{`${averageRating}/5`}</span>
                 </>
               ) : (
                 <span>No rating available</span>
