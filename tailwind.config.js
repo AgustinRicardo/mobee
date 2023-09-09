@@ -29,6 +29,7 @@ module.exports = {
         beeBrownLight: "#7A6D6A",
         beeBrownBackground: "#2E2928",
         beeBrownHeader: "#252120",
+        beeBrownLightDarker: "#473f3D",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

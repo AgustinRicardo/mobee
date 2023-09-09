@@ -41,7 +41,6 @@ export default function ListCard({
         </div>
         {listTitle && numberOfFilms ? (
           <div className="flex flex-row">
-            {" "}
             <span>{listTitle}</span>
             <span>
               {numberOfFilms} {numberOfFilms > 1 ? "films" : "film"}

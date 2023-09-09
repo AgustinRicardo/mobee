@@ -71,7 +71,7 @@ export default function CreateDropdown({ userId }: Props) {
         <DropdownMenuTrigger className="bg-beeYellow rounded-md flex flex-row items-end px-2 py-1 text-beeBrownBackground">
           Create <DropdownIcon className="w-4 h-4" />
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="bg-beeBrownLight border-none flex flex-col">
+        <DropdownMenuContent className="bg-beeBrownLight border-none text-beeBeig p-0 flex-col flex">
           {filmToReview ? (
             <DialogReview
               setFilmToReview={setFilmToReview}
@@ -79,7 +79,10 @@ export default function CreateDropdown({ userId }: Props) {
               userId={userId}
               defaultOpen={true}
             >
-              <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+              <DropdownMenuItem
+                onSelect={(e) => e.preventDefault()}
+                className="text-beeBrownBackground data-[highlighted]:bg-beeBrownLightDarker data-[highlighted]:text-beeBeig hover:cursor-pointer rounded-none"
+              >
                 New review
               </DropdownMenuItem>
             </DialogReview>
@@ -90,7 +93,10 @@ export default function CreateDropdown({ userId }: Props) {
               }}
             >
               <DialogTrigger>
-                <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                <DropdownMenuItem
+                  onSelect={(e) => e.preventDefault()}
+                  className="text-beeBrownBackground data-[highlighted]:bg-beeBrownLightDarker data-[highlighted]:text-beeBeig hover:cursor-pointer rounded-none"
+                >
                   New review
                 </DropdownMenuItem>
               </DialogTrigger>
@@ -110,7 +116,10 @@ export default function CreateDropdown({ userId }: Props) {
             }}
           >
             <DialogTrigger>
-              <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+              <DropdownMenuItem
+                onSelect={(e) => e.preventDefault()}
+                className="text-beeBrownBackground data-[highlighted]:bg-beeBrownLightDarker data-[highlighted]:text-beeBeig hover:cursor-pointer rounded-none"
+              >
                 New list
               </DropdownMenuItem>
             </DialogTrigger>

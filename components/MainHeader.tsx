@@ -12,8 +12,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import AddReviewIcon from "./icons/AddReviewIcon";
-import DropdownIcon from "./icons/DropdownIcon";
 import CreateDropdown from "./CreateDropdown";
 
 interface Props {
@@ -21,8 +19,6 @@ interface Props {
   userId: string;
 }
 export default function MainHeader({ children, userId }: Props) {
-  const dropdownContentStyle = "bg-beeBrownLight border-none text-beeBeig";
-
   const supabase = createClientComponentClient();
   const router = useRouter();
   const pathname = usePathname();
@@ -77,16 +73,50 @@ export default function MainHeader({ children, userId }: Props) {
 
         <DropdownMenu>
           <DropdownMenuTrigger>{children}</DropdownMenuTrigger>
-          <DropdownMenuContent className={dropdownContentStyle}>
+          <DropdownMenuContent className="bg-beeBrownLight border-none text-beeBeig p-0">
             <DropdownMenuItem
+              className="text-beeBrownBackground data-[highlighted]:bg-beeBrownLightDarker data-[highlighted]:text-beeBeig hover:cursor-pointer rounded-none"
               onClick={() => {
-                router.push("/profile");
+                router.push("/my_profile");
               }}
             >
               Profile
             </DropdownMenuItem>
             <DropdownMenuItem
-              className=""
+              className="text-beeBrownBackground data-[highlighted]:bg-beeBrownLightDarker data-[highlighted]:text-beeBeig hover:cursor-pointer rounded-none"
+              onClick={() => {
+                router.push("/my_profile/watchlist");
+              }}
+            >
+              Watchlist
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              className="text-beeBrownBackground data-[highlighted]:bg-beeBrownLightDarker data-[highlighted]:text-beeBeig hover:cursor-pointer rounded-none"
+              onClick={() => {
+                router.push("/my_profile/films");
+              }}
+            >
+              Films
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              className="text-beeBrownBackground data-[highlighted]:bg-beeBrownLightDarker data-[highlighted]:text-beeBeig hover:cursor-pointer rounded-none"
+              onClick={() => {
+                router.push("/my_profile/lists");
+              }}
+            >
+              Lists
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              className="text-beeBrownBackground data-[highlighted]:bg-beeBrownLightDarker data-[highlighted]:text-beeBeig hover:cursor-pointer rounded-none"
+              onClick={() => {
+                router.push("/my_profile/reviews");
+              }}
+            >
+              Reviews
+            </DropdownMenuItem>
+            <DropdownMenuSeparator className="bg-beeBrownLightDarker" />
+            <DropdownMenuItem
+              className="text-beeBrownBackground data-[highlighted]:bg-beeRed data-[highlighted]:text-beeBeig hover:cursor-pointer rounded-none"
               onClick={() => {
                 signOut();
               }}

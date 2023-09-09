@@ -1,7 +1,7 @@
 import ListCard from "@/components/ListCard";
 import ReviewCard from "@/components/ReviewCard";
 
-export default function ProfilePage() {
+export default function MyProfilePage() {
   return (
     <>
       <img
