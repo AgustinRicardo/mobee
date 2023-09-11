@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { SkeletonDemo } from "./Skeleton";
+import { FilmSkeleton } from "./Skeleton";
 
 interface Props {
   filmId: number;
@@ -40,7 +40,7 @@ export default function FilmImageCard({ filmId, imageWidth }: Props) {
       className={imageStyle} src={ filmPath && `https://image.tmdb.org/t/p/original/${filmPath}`}
       alt="backdrop"
     /> :
-    <SkeletonDemo />
+    <FilmSkeleton className="h-[138px] w-24"/>
     }
       
     </>

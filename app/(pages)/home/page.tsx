@@ -1,3 +1,4 @@
+import FilmPoster from "@/components/FilmPoster";
 import PopularFilms from "@/components/PopularFilms";
 import PopularLists from "@/components/PopularLists";
 import { getUser } from "@/lib/functions";
