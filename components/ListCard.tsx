@@ -25,7 +25,7 @@ export default function ListCard({
         >
           {filmsIds?.map((filmId) => {
             return (
-              <FilmImageCard filmId={filmId} key={filmId} imageWidth={imageWidth}/>
+              <FilmImageCard key={filmId} filmId={filmId} imageWidth={imageWidth}/>
             );
           })}
         </div>

@@ -14,12 +14,10 @@ export default function RecentLists() {
       .then((res) => res.json())
       .then((data) => {
         if (data?.lists) {
-          setPopularList(data.lists);
+          setPopularList(data.lists.slice(0, 3));
         }
       });
   }, []);
-
-  console.log("useEffect", popularList);
 
   return (
     <>
@@ -27,10 +25,10 @@ export default function RecentLists() {
         return (
           <ListCard
             imageGap="gap-1"
-            imageWidth="w-20"
+            imageWidth="w-24"
             listTitle={list.title}
             numberOfFilms={list.films.length}
-            filmsIds={list.films.map((film) => film.film.tmdb_id)}
+            filmsIds={list.films.slice(0, 4).map((film) => film.film.tmdb_id)}
           />
         );
       })}
