@@ -1,9 +1,13 @@
 import { Skeleton } from "@/components/ui/skeleton"
  
-export function SkeletonDemo() {
+interface Props {
+  className: string;
+}
+
+export function FilmSkeleton({className}: Props) {
   return (
-    <div className="flex items-center space-x-4">
-      <Skeleton className="h-[138px] w-24" />
+    <div>
+      <Skeleton className={className} />
     </div>
   )
 }
