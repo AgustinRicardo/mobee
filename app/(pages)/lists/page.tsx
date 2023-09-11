@@ -10,7 +10,7 @@ export default async function Lists() {
           <span className="text-beeYellow">Recent Lists</span>
         </div>
         <hr className="border-beeYellow" />
-        <div className="flex flex-row justify-between">
+        <div className="grid grid-cols-3 gap-3">
           <RecentLists />
         </div>
       </div>
@@ -19,7 +19,7 @@ export default async function Lists() {
           <span className="text-beeYellow">Popular Lists</span>
         </div>
         <hr className="border-beeYellow" />
-        <div className="flex flex-row justify-between gap-1">
+        <div className="grid grid-cols-3 gap-3">
           <PopularLists />
         </div>
       </div>

@@ -15,9 +15,7 @@ export default function RecentLists() {
       .then((res) => res.json())
       .then((data) => {
         if (data?.lists) {
-          console.log("data beforer everse", data.lists.slice(-3))
-          console.log("data after everse", data.lists.slice(-3).reverse())
-          setRecentList(data.lists.slice(-3).reverse());
+          setRecentList(data.lists);
         }
       });
   }, []);
