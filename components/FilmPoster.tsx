@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation";
 import WatchedIcon from "./icons/WatchedIcon";
 import ToWatchIcon from "./icons/ToWatchIcon";
-import AdditionalOptionsIcon from "./icons/AdditionalOptionsIcon";
 import AddToListIcon from "./icons/AddToListIcon";
 import { useEffect, useState } from "react";
 import {

@@ -42,7 +42,7 @@ export default function MyProfilePage() {
 
       <div className="flex flex-row text-beeYellow">
         <div className="favorite-films ">
-          <span className="py-1 block">Favortie films</span>
+          <span className="py-1 block">Favorite films</span>
           <hr className="border-beeYellow" />
           <ListCard imageGap="gap-3" imageWidth="w-28" />
         </div>
@@ -67,9 +67,9 @@ export default function MyProfilePage() {
         </div>
         <hr className="border-beeYellow" />
         <div className="flex flex-row justify-between">
-          <ListCard imageGap="gap-1" imageWidth="w-20" />
-          <ListCard imageGap="gap-1" imageWidth="w-20" />
-          <ListCard imageGap="gap-1" imageWidth="w-20" />
+          <ListCard imageGap="gap-1" imageWidth="w-20" listTitle="List test1" numberOfFilms={0} filmsIds={[]}/>
+          <ListCard imageGap="gap-1" imageWidth="w-20" listTitle="List test2" numberOfFilms={0} filmsIds={[]}/>
+          <ListCard imageGap="gap-1" imageWidth="w-20" listTitle="List test3" numberOfFilms={0} filmsIds={[]}/>
         </div>
       </div>
       <div className="reviews-section ">

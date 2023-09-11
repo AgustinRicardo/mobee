@@ -1,5 +1,5 @@
 import FilmWatchStatusPanel from "@/components/FilmWatchStatusPanel";
-import { Film, WatchStatus } from "@/lib/interfaces";
+import { Film } from "@/lib/interfaces";
 import { getUser } from "@/lib/functions";
 import FilmDetailsTabs from "@/components/FilmDetailsTabs";
 import CastList from "@/components/CastList";
