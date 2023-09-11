@@ -45,6 +45,7 @@ export async function GET(request: NextRequest) {
     if (userId) {
       lists = await prismaClient.list.findMany({
         where: { user_id: userId },
+        include: { films: true }
       });
     }
     console.log(lists);

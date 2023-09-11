@@ -46,8 +46,22 @@ export interface Year {
   checked: boolean;
 }
 
+export interface FilmOnList {
+  average_rating: string;
+  id: string;
+  tmdb_id: number
+}
+
+export interface FilmsOnLists {
+  list_id: string;
+  film_id: string;
+  film: FilmOnList
+}
+
 export interface List {
   id: string;
   title: string;
   description: string;
+  bookmark_count: number;
+  films: FilmsOnLists[]
 }

@@ -1,5 +1,4 @@
 import PopularFilms from "@/components/PopularFilms";
-import { Toaster } from "@/components/ui/toaster";
 import { getUser } from "@/lib/functions";
 
 export default async function Home() {

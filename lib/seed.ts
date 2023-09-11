@@ -25,14 +25,51 @@ const user1 = await prismaClient.user.create({
   },
 });
 
-const film1 = await prismaClient.film.createMany({
+const films = await prismaClient.film.createMany({
   data: [
-    { tmdb_id: 667538 },
-    { tmdb_id: 447365 },
-    { tmdb_id: 298618 },
-    { tmdb_id: 346698 },
     { tmdb_id: 1076487 },
     { tmdb_id: 385687 },
     { tmdb_id: 455476 },
+  ],
+});
+
+const film1 = await prismaClient.film.create({
+  data: { tmdb_id: 667538 },
+});
+
+const film2 = await prismaClient.film.create({
+  data: { tmdb_id: 447365 },
+});
+
+const list1 = await prismaClient.list.create({
+  data: {
+    title: "Pelis verano",
+    user_id: user1.id,
+    bookmark_count: 5,
+  },
+});
+
+const film3 = await prismaClient.film.create({
+  data: { tmdb_id: 298618 },
+});
+
+const film4 = await prismaClient.film.create({
+  data: { tmdb_id: 346698 },
+});
+
+const list2 = await prismaClient.list.create({
+  data: {
+    title: "Próximas pelis",
+    user_id: user1.id,
+    bookmark_count: 6,
+  },
+});
+
+await prismaClient.filmsOnLists.createMany({
+  data: [
+    { film_id: film1.id, list_id: list1.id },
+    { film_id: film2.id, list_id: list1.id },
+    { film_id: film3.id, list_id: list2.id },
+    { film_id: film4.id, list_id: list2.id },
   ],
 });
