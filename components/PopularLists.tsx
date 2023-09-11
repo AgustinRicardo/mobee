@@ -8,16 +8,18 @@ export default function RecentLists() {
   const [popularList, setPopularList] = useState<List[]>([]);
 
   useEffect(() => {
-    fetch("/api/listSavedByUser", {
+    fetch("/api/popularLists", {
       method: "GET",
     })
       .then((res) => res.json())
       .then((data) => {
         if (data?.lists) {
-          setPopularList(data.lists.slice(0, 3));
+          setPopularList(data.lists);
         }
       });
   }, []);
+
+  console.log("Popular Lists", popularList)
 
   return (
     <>

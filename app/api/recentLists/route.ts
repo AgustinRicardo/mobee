@@ -4,7 +4,9 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(request: NextRequest) {
     try {
       const lists = await prismaClient.list.findMany({
-        include: { films: { include: { film: true } } }
+        take: 6,
+        include: { films: { include: { film: true } } },
+        //orderBy: { createdAt : "desc" },
       });
   
       return NextResponse.json({ lists }, { status: 200 });

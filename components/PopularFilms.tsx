@@ -45,11 +45,6 @@ export default function PopularFilms({ userId }: Props) {
             .map((film) => {
               return (
                 <li key={film.id}>
-                  {/* {<img
-                  src={`https://image.tmdb.org/t/p/w500/${film.poster_path}`}
-                  alt={film.title}
-                  className="w-28 h-auto rounded-md border-beeBeig border"
-                />} */}
                   <FilmPoster
                     alt={film.title}
                     src={`https://image.tmdb.org/t/p/w500/${film.poster_path}`}

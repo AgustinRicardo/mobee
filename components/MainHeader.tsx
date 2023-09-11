@@ -3,7 +3,7 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import React from "react";
-import SearchIcon from "./icons/SearchIcon";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import CreateDropdown from "./CreateDropdown";
 import { DropdownMenuArrow } from "@radix-ui/react-dropdown-menu";
+import { SearchBar } from "./SearchBar";
 
 interface Props {
   children: React.ReactNode;
@@ -59,14 +60,7 @@ export default function MainHeader({ children, userId }: Props) {
             Lists
           </Link>
         </nav>
-        <form id="search-bar" className="relative flex flex-row items-center">
-          <input
-            type="text"
-            className="h-7 rounded-sm text-beeBrownBackground bg-beeBeig placeholder:text-beeBrownBackground pl-2 placeholder:opacity-50"
-            placeholder="Search"
-          />
-          <SearchIcon />
-        </form>
+        <SearchBar/>
 
         <DropdownMenu>
           <DropdownMenuTrigger>{children}</DropdownMenuTrigger>
