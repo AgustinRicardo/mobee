@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default function FilmImageCard({ filmId, imageWidth }: Props) {
-  const [filmPath, setFilmPath] = useState("")
+  const [filmPath, setFilmPath] = useState("");
   const imageStyle = `${imageWidth} rounded-sm border-beeBrownLight border-2 `;
 
   useEffect(() => {
@@ -23,26 +23,24 @@ export default function FilmImageCard({ filmId, imageWidth }: Props) {
       .then((res) => res.json())
       .then((data) => {
         if (data?.poster_path) {
-          console.log("filmData", data)
           setFilmPath(data.poster_path);
-        }
-        else{
+        } else {
           setFilmPath("");
         }
       });
-
   }, [filmId]);
 
   return (
     <>
-    {filmPath ?
-      <img
-      className={imageStyle} src={ filmPath && `https://image.tmdb.org/t/p/original/${filmPath}`}
-      alt="backdrop"
-    /> :
-    <FilmSkeleton className="h-[138px] w-24"/>
-    }
-      
+      {filmPath ? (
+        <img
+          className={imageStyle}
+          src={filmPath && `https://image.tmdb.org/t/p/original/${filmPath}`}
+          alt="backdrop"
+        />
+      ) : (
+        <FilmSkeleton className="h-[138px] w-24" />
+      )}
     </>
   );
 }

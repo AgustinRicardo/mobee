@@ -49,13 +49,13 @@ export interface Year {
 export interface FilmOnList {
   average_rating: string;
   id: string;
-  tmdb_id: number
+  tmdb_id: number;
 }
 
 export interface FilmsOnLists {
   list_id: string;
   film_id: string;
-  film: FilmOnList
+  film: FilmOnList;
 }
 
 export interface List {
@@ -63,5 +63,13 @@ export interface List {
   title: string;
   description: string;
   bookmark_count: number;
-  films: FilmsOnLists[]
+  films: FilmsOnLists[];
+}
+
+export interface Review {
+  userId: string;
+  filmId: string;
+  rating: number;
+  reviewDescription: string;
+  watchedAt: Date;
 }

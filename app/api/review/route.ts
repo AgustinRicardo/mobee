@@ -45,3 +45,13 @@ export async function POST(request: NextRequest) {
     return NextResponse.error();
   }
 }
+
+export async function GET(request: NextRequest) {
+  try {
+    const recentReviews = await prismaClient.review.findMany({ take: 4 });
+    console.log(recentReviews);
+    return NextResponse.json({ recentReviews }, { status: 200 });
+  } catch (error) {
+    return NextResponse.error();
+  }
+}
