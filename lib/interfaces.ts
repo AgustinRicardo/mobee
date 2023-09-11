@@ -45,3 +45,9 @@ export interface Year {
   year_gte: string;
   checked: boolean;
 }
+
+export interface List {
+  id: string;
+  title: string;
+  description: string;
+}

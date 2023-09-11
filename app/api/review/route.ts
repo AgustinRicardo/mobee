@@ -7,12 +7,12 @@ export async function POST(request: NextRequest) {
   console.log(userId, apiId, date, review, ratingValue);
 
   try {
-    const filmId = await getOrAddFilmToDB(apiId);
+    const film = await getOrAddFilmToDB(apiId);
 
-    if (filmId) {
+    if (film) {
       const data = await prismaClient.review.create({
         data: {
-          film_id: filmId,
+          film_id: film.id,
           user_id: userId,
           rating: ratingValue,
           review_description: review,
@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
 
       const allReviews = await prismaClient.review.findMany({
         where: {
-          film_id: filmId,
+          film_id: film.id,
         },
       });
       let totalRating = 0;
@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
       });
 
       await prismaClient.film.update({
-        where: { id: filmId },
+        where: { id: film.id },
         data: { average_rating: totalRating / numberOfReviews },
       });
     }

@@ -46,7 +46,7 @@ export default function FilmsSearchBar({
   return (
     <>
       <div className={`flex ${className}`}>
-        <span>Find a film</span>
+        <span className="pr-2">Find a film</span>
         <div className="relative">
           <input
             className="bg-beeBeig text-beeBrownBackground rounded-sm py-0.5"

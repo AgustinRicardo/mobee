@@ -12,23 +12,30 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { DialogAddToList } from "./DialogAddToList";
 
 interface Props {
   src: string;
   alt: string;
-  id: string;
+  apiId: number;
   userId: string;
   className: string;
 }
 
-export default function FilmPoster({ src, alt, id, userId, className }: Props) {
+export default function FilmPoster({
+  src,
+  alt,
+  apiId,
+  userId,
+  className,
+}: Props) {
   const router = useRouter();
   const [isWatched, setIsWatched] = useState<boolean>(false);
   const [toWatch, setToWatch] = useState<boolean>(false);
 
   useEffect(() => {
     fetch(
-      "/api/filmStatus?" + new URLSearchParams({ apiId: String(id), userId })
+      "/api/filmStatus?" + new URLSearchParams({ apiId: String(apiId), userId })
     )
       .then((res) => res.json())
       .then((data) => {
@@ -42,7 +49,7 @@ export default function FilmPoster({ src, alt, id, userId, className }: Props) {
   return (
     <>
       <div className="group">
-        <div className="hidden flex-col justify-around px-2 py-8 gap-0.5 h-1/5 group-hover:flex absolute group-hover:bg-beeBrownLight/90 rounded-tl-md rounded-br-md ">
+        <div className="hidden flex-col justify-around px-2 py-2 gap-0.5 group-hover:flex absolute group-hover:bg-beeBrownLight/90 rounded-tl-md rounded-br-md ">
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -50,7 +57,7 @@ export default function FilmPoster({ src, alt, id, userId, className }: Props) {
                   onClick={() => {
                     fetch("/api/filmStatus", {
                       method: "POST",
-                      body: JSON.stringify({ apiId: id, userId, isWatched }),
+                      body: JSON.stringify({ apiId, userId, isWatched }),
                     });
                     setIsWatched(!isWatched);
                   }}
@@ -72,7 +79,7 @@ export default function FilmPoster({ src, alt, id, userId, className }: Props) {
                   onClick={() => {
                     fetch("/api/filmStatus", {
                       method: "POST",
-                      body: JSON.stringify({ apiId: id, userId, toWatch }),
+                      body: JSON.stringify({ apiId, userId, toWatch }),
                     });
                     setToWatch(!toWatch);
                   }}
@@ -88,19 +95,22 @@ export default function FilmPoster({ src, alt, id, userId, className }: Props) {
                 <p>{toWatch ? "Added to watchlist" : "Not in watchlist"}</p>
               </TooltipContent>
             </Tooltip>
+            <Tooltip>
+              <DialogAddToList apiId={apiId} userId={userId}>
+                <TooltipTrigger>
+                  <AddToListIcon className="text-beeBrownBackground hover:cursor-pointer w-6" />
+                </TooltipTrigger>
+              </DialogAddToList>
+              <TooltipContent className="bg-beeBrownBackground text-beeBeig border-none text-xs">
+                <p>Add film to a list</p>
+              </TooltipContent>
+            </Tooltip>
           </TooltipProvider>
-
-          <button>
-            <AddToListIcon className="text-beeBrownBackground hover:cursor-pointer w-6" />
-          </button>
-          <button>
-            <AdditionalOptionsIcon className="text-beeBrownBackground hover:cursor-pointer w-6" />
-          </button>
         </div>
 
         <img
           onClick={() => {
-            router.push(`/film_details/${id}`);
+            router.push(`/film_details/${String(apiId)}`);
           }}
           className={className}
           src={src}

@@ -24,7 +24,7 @@
 
 4. Inicia el servicio de la base de datos con Docker Compose:
 
-`npm docker-compose up -d`
+`docker compose up -d`
 
 5. Conectar con la base de datos de prisma y generar cliente
 

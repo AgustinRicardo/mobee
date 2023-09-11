@@ -44,10 +44,10 @@ export async function getOrAddFilmToDB(filmId: number) {
           tmdb_id: filmId,
         },
       });
-      return film.id;
+      return film;
     }
 
-    return data.id;
+    return data;
   } catch (e) {
     console.log(e);
   }
