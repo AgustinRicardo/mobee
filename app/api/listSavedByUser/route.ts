@@ -69,7 +69,10 @@ export async function DELETE(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   try {
-    const lists = await prismaClient.list.findMany({ orderBy: { bookmark_count: 'desc' } });
+    const lists = await prismaClient.list.findMany({
+      include: { films: { include: { film: true } } },
+      orderBy: { bookmark_count: "desc" },
+    });
 
     return NextResponse.json({ lists }, { status: 200 });
   } catch (e) {
