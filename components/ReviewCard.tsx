@@ -61,11 +61,11 @@ export default function ReviewCard({ filmOnDB, user, review }: Props) {
               averageRating={review?.rating}
               size={"0.8rem"}
             />
-            {pathname.includes("/my_profile") && (
+            {pathname.includes("/my_profile") && review?.watched_at ? (
               <span className="opacity-50">
                 Watched at {review?.watched_at.getDate()}
               </span>
-            )}
+            ) : null}
           </div>
           <p className="review-description">{review?.review_description}</p>
         </div>

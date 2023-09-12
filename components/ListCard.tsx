@@ -5,7 +5,7 @@ interface Props {
   imageGap: string;
   imageWidth: string;
   listTitle?: string;
-  numberOfFilms?: number;
+
   apiIds?: number[];
 }
 
@@ -13,7 +13,7 @@ export default function ListCard({
   imageGap,
   imageWidth,
   listTitle,
-  numberOfFilms,
+
   apiIds,
 }: Props) {
   return (
@@ -32,14 +32,14 @@ export default function ListCard({
             );
           })}
         </div>
-        {listTitle && numberOfFilms ? (
+        {listTitle && apiIds ? (
           <div className="flex flex-row">
             <span className="pr-2">
               {listTitle}
               {":"}
             </span>
             <span>
-              {numberOfFilms} {numberOfFilms > 1 ? "films" : "film"}
+              {apiIds.length} {apiIds.length > 1 ? "films" : "film"}
             </span>
           </div>
         ) : (
