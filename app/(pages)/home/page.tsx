@@ -17,6 +17,7 @@ export default async function Home() {
             url={
               "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1"
             }
+            numOfFilms={5}
           />
         </section>
         <section>

@@ -91,6 +91,7 @@ export default async function Page({ params }: { params: { id: string } }) {
               <FilmSlider
                 userId={user?.id!}
                 url={`https://api.themoviedb.org/3/movie/${film.id}/similar?language=en-US&page=1`}
+                numOfFilms={8}
               />
             </section>
           </div>

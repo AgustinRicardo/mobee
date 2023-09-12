@@ -8,9 +8,10 @@ import RightArrow from "./icons/RightArrow";
 interface Props {
   userId: string;
   url: string;
+  numOfFilms: number;
 }
 
-export default function FilmSlider({ userId, url }: Props) {
+export default function FilmSlider({ userId, url, numOfFilms }: Props) {
   const [films, setFilms] = useState<Array<any>>([]);
   const [slidePosition, setSlidePosition] = useState<number>(0);
   const getFilms = async () => {
@@ -40,19 +41,24 @@ export default function FilmSlider({ userId, url }: Props) {
     <>
       {films && (
         <ul className="flex flex-row pt-5 pb-2 gap-2">
-          {films.slice(5 * slidePosition, 5 * slidePosition + 5).map((film) => {
-            return (
-              <li key={film.id}>
-                <FilmPoster
-                  alt={film.title}
-                  src={`https://image.tmdb.org/t/p/w500/${film.poster_path}`}
-                  className=" rounded-md border-beeBrownLight border-2 hover:cursor-pointer basis-auto"
-                  userId={userId}
-                  apiId={film.id}
-                />
-              </li>
-            );
-          })}
+          {films
+            .slice(
+              numOfFilms * slidePosition,
+              numOfFilms * slidePosition + numOfFilms
+            )
+            .map((film) => {
+              return (
+                <li key={film.id}>
+                  <FilmPoster
+                    alt={film.title}
+                    src={`https://image.tmdb.org/t/p/w500/${film.poster_path}`}
+                    className=" rounded-md border-beeBrownLight border-2 hover:cursor-pointer basis-auto"
+                    userId={userId}
+                    apiId={film.id}
+                  />
+                </li>
+              );
+            })}
         </ul>
       )}
       <div className="flex flex-row">
