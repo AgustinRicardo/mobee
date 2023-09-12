@@ -10,7 +10,7 @@ export default function CastList({ cast }: Props) {
   const [showMore, setShowMore] = useState<boolean>(false);
   const numberOfItems = showMore ? cast.length : 10;
   return (
-    <div>
+    <div className="mb-5">
       <ul className="flex flex-wrap">
         {cast.slice(0, numberOfItems).map((cast) => {
           return (

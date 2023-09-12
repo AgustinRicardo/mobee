@@ -7,13 +7,14 @@ import RightArrow from "./icons/RightArrow";
 
 interface Props {
   userId: string;
+  url: string;
+  numOfFilms: number;
 }
 
-export default function PopularFilms({ userId }: Props) {
-  const [popularFilms, setPopularFilms] = useState<Array<any>>([]);
+export default function FilmSlider({ userId, url, numOfFilms }: Props) {
+  const [films, setFilms] = useState<Array<any>>([]);
   const [slidePosition, setSlidePosition] = useState<number>(0);
-  const getPopularFilms = async () => {
-    const url = `https://api.themoviedb.org/3/movie/popular?language=en-US&page=1`;
+  const getFilms = async () => {
     const authorization = `Bearer ${process.env.NEXT_PUBLIC_TMDB_API_KEY}`;
     try {
       const options = {
@@ -26,29 +27,32 @@ export default function PopularFilms({ userId }: Props) {
       const res = await fetch(url, options);
       const { results } = await res.json();
 
-      setPopularFilms(results);
+      setFilms(results);
     } catch (e) {
       console.log(e);
     }
   };
 
   useEffect(() => {
-    getPopularFilms();
+    getFilms();
   }, []);
 
   return (
     <>
-      {popularFilms && (
+      {films && (
         <ul className="flex flex-row pt-5 pb-2 gap-2">
-          {popularFilms
-            .slice(5 * slidePosition, 5 * slidePosition + 5)
+          {films
+            .slice(
+              numOfFilms * slidePosition,
+              numOfFilms * slidePosition + numOfFilms
+            )
             .map((film) => {
               return (
                 <li key={film.id}>
                   <FilmPoster
                     alt={film.title}
                     src={`https://image.tmdb.org/t/p/w500/${film.poster_path}`}
-                    className="rounded-md border-2 border-beeBrownLight hover:cursor-pointer basis-auto"
+                    className=" rounded-md border-beeBrownLight border-2 hover:cursor-pointer basis-auto"
                     userId={userId}
                     apiId={film.id}
                   />
