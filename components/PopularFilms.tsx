@@ -48,7 +48,7 @@ export default function PopularFilms({ userId }: Props) {
                   <FilmPoster
                     alt={film.title}
                     src={`https://image.tmdb.org/t/p/w500/${film.poster_path}`}
-                    className=" rounded-md border-beeBrownLight border-2 hover:cursor-pointer basis-auto"
+                    className="rounded-md border-2 border-beeBrownLight hover:cursor-pointer basis-auto"
                     userId={userId}
                     apiId={film.id}
                   />
@@ -59,7 +59,7 @@ export default function PopularFilms({ userId }: Props) {
       )}
       <div className="flex flex-row">
         <button
-          className="bg-beeYellow text-beeBrownBackground rounded-sm h-4 flex items-center shadow-sm"
+          className="bg-beeBrownHeader text-beeYellow rounded-sm h-4 flex items-center shadow-sm  hover:scale-105"
           onClick={() => {
             if (slidePosition === 0) {
               setSlidePosition(3);
@@ -71,7 +71,7 @@ export default function PopularFilms({ userId }: Props) {
           <LeftArrow />
         </button>
         <button
-          className="bg-beeYellow text-beeBrownBackground rounded-sm h-4 flex items-center ml-auto shadow-sm"
+          className="bg-beeBrownHeader text-beeYellow rounded-sm h-4 flex items-center ml-auto shadow-sm hover:scale-105"
           onClick={() => {
             if (slidePosition === 3) {
               setSlidePosition(0);

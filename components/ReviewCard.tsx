@@ -59,7 +59,7 @@ export default function ReviewCard({ filmOnDB, user, review }: Props) {
               readOnly={true}
               emptyIconColor="text-beeBrownBackground"
               averageRating={review?.rating}
-              size={"1rem"}
+              size={"0.8rem"}
             />
             {pathname.includes("/my_profile") && (
               <span className="opacity-50">

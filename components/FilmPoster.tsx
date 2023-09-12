@@ -46,8 +46,7 @@ export default function FilmPoster({
       });
   }, []);
 
-  return (
-    src?
+  return src ? (
     <>
       <div className="group">
         <div className="hidden flex-col justify-around px-2 py-2 gap-0.5 group-hover:flex absolute group-hover:bg-beeBrownLight/90 rounded-tl-md rounded-br-md ">
@@ -119,7 +118,7 @@ export default function FilmPoster({
         />
       </div>
     </>
-    :
-    <FilmSkeleton className="w-56 h-80"/>
+  ) : (
+    <FilmSkeleton className="w-56 h-80" />
   );
 }

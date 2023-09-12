@@ -36,43 +36,51 @@ export default async function Page({ params }: { params: { id: string } }) {
           className="z-0 "
         />
       </div>
-      <div className="flex flex-row justify-around z-20 relative bottom-28">
+      <div className="flex flex-row gap-4 z-20 relative bottom-32 overflow-visible px-4">
         <img
           src={`https://image.tmdb.org/t/p/w500/${film.poster_path}`}
           alt="poster"
-          className="w-44 h-min border-beeBeig border-2 rounded-md"
+          className="w-44 h-min border-beeBrownLight border-2 rounded-md sticky top-5 "
         />
-
-        <div className="film_details flex flex-col w-[30rem] gap-2">
-          <div className="title flex flex-row">
-            <h1 className="mr-auto text-[48px] font-lora font-medium">
-              {film.title}
-            </h1>
-            <span className="text-[24px] font-lora font-thin mt-[20px]">
-              {film.release_date.slice(0, 4)}
-            </span>
+        <div className="flex flex-col gap-4 w-full">
+          <div className="flex flex-row gap-4 w-full justify-between">
+            <div className="film_details flex flex-col w-[34rem] gap-2">
+              <div className="title flex flex-row">
+                <h1 className="mr-auto text-[48px] font-lora font-medium">
+                  {film.title}
+                </h1>
+                <span className="text-[24px] font-lora font-thin mt-[20px]">
+                  {film.release_date.slice(0, 4)}
+                </span>
+              </div>
+              <span className="text-[20px] font-switzer">{`Directed by ${
+                film.credits.crew.find((person) => {
+                  return person.job === "Director";
+                })?.name || "Unknown"
+              }`}</span>
+              <span className="text-[20px] font-switzer mb-[20px]">{`${film.runtime} min`}</span>
+              <span className="italic">{film.tagline.toUpperCase()}</span>
+              <p className="font-semibold font-lora text-[20px]">
+                {film.overview}
+              </p>
+              <FilmDetailsTabs
+                cast={<CastList cast={film.credits.cast} />}
+                crew={undefined}
+                details={undefined}
+                genres={undefined}
+              ></FilmDetailsTabs>
+            </div>
+            <FilmWatchStatusPanel userId={user?.id!} film={film} />
           </div>
-          <span className="text-[20px] font-switzer">{`Directed by ${
-            film.credits.crew.find((person) => {
-              return person.job === "Director";
-            })?.name || "Unknown"
-          }`}</span>
-          <span className="text-[20px] font-switzer mb-[20px]">{`${film.runtime} min`}</span>
-          <span className="italic">{film.tagline.toUpperCase()}</span>
-          <p className="font-semibold font-lora text-[20px]">{film.overview}</p>
-          <FilmDetailsTabs
-            cast={<CastList cast={film.credits.cast} />}
-            crew={undefined}
-            details={undefined}
-            genres={undefined}
-          ></FilmDetailsTabs>
+          <div className="recent-reviews flex flex-col">
+            <span className="text-beeYellow pb-1">Recent reviews</span>
+            <hr className="border-beeYellow" />
+            <ReviewCard></ReviewCard>
+          </div>
         </div>
-
-        <FilmWatchStatusPanel userId={user?.id!} film={film} />
       </div>
-      <span>reviews</span>
-      <hr />
-      <ReviewCard></ReviewCard>
+
+      <div className="h-96"></div>
     </>
   );
 }

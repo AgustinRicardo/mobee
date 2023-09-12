@@ -39,7 +39,11 @@ export default function Login() {
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center h-screen px-32 w-max gap-2">
+      <div className="flex flex-col justify-center items-center h-screen px-20 w-max gap-2">
+        <img src="/logo.png" alt="" className="w-32" />
+        <span className="block w-[40ch] text-center mb-5 opacity-80">
+          Find new films and keep track of the ones you have watched
+        </span>
         <form onSubmit={handleSubmit} className="flex flex-col w-52 gap-2">
           <label className="flex flex-col">
             Email

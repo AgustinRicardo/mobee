@@ -34,7 +34,7 @@ export default function MainHeader({ children, userId }: Props) {
     <>
       <header
         className={`flex relative flex-row items-center px-[16%]  bg-beeBrownHeader gap-12 h-16 font-switzer font-medium text-sm justify-evenly ${
-          pathname.includes("/film_details") || pathname.includes("/profile")
+          pathname.includes("/film_details") || pathname.includes("/my_profile")
             ? ""
             : "mb-8"
         }`}
@@ -60,7 +60,7 @@ export default function MainHeader({ children, userId }: Props) {
             Lists
           </Link>
         </nav>
-        <SearchBar/>
+        <SearchBar />
 
         <DropdownMenu>
           <DropdownMenuTrigger>{children}</DropdownMenuTrigger>

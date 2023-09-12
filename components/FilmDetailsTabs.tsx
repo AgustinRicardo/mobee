@@ -17,7 +17,7 @@ export default function FilmDetailsTabs({
   return (
     <>
       <Tabs defaultValue="cast" className="w-full">
-        <div className="flex flex-row items-center mt-10">
+        <div className="flex flex-row items-center mt-10 pb-1">
           <TabsList className="text-beeYellow p-0 h-fit bg-transparent">
             <TabsTrigger
               className="data-[state=active]:bg-beeYellow data-[state=active]:text-beeBrownBackground"
@@ -45,7 +45,7 @@ export default function FilmDetailsTabs({
             </TabsTrigger>
           </TabsList>
         </div>
-        <div className="h-0.5 w-55 mt-2 bg-beeYellow"/>
+        <hr className="border-beeYellow" />
         <TabsContent value="cast">{cast}</TabsContent>
         <TabsContent value="crew">{crew}</TabsContent>
         <TabsContent value="details">{details}</TabsContent>

@@ -21,6 +21,7 @@ export default function RatingPicker({
   return (
     <>
       <Rating
+        className="flex flex-row gap-[0.1rem]"
         onChange={(event, value) => {
           if (value && setRatingValue) {
             setRatingValue(value);
@@ -29,7 +30,7 @@ export default function RatingPicker({
         precision={0.5}
         icon={
           <HexagonIcon
-            style={{ width: size, height: size }}
+            style={{ width: size, height: size, padding: 0 }}
             className="text-beeYellow"
           />
         }

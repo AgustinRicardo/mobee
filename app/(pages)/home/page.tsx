@@ -25,7 +25,7 @@ export default async function Home() {
         <section>
           <h1 className="text-beeYellow">Popular Lists</h1>
           <hr className="border-beeYellow" />
-          <div className="flex flex-row justify-between gap-1">
+          <div className="grid grid-cols-3 justify-between gap-1">
             <PopularLists />
           </div>
         </section>
