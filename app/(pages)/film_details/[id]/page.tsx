@@ -3,6 +3,9 @@ import { Film, WatchStatus } from "@/lib/interfaces";
 import { getUser } from "@/lib/functions";
 import FilmDetailsTabs from "@/components/FilmDetailsTabs";
 import CastList from "@/components/CastList";
+import GenreList from "@/components/GenreList";
+import CrewList from "@/components/CrewList";
+import DetailsList from "@/components/DetailsList";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const user = await getUser();
@@ -39,8 +42,12 @@ export default async function Page({ params }: { params: { id: string } }) {
 
         <div className="film_details flex flex-col relative bottom-2 w-[550px] gap-2">
           <div className="title flex flex-row">
-            <h1 className="mr-auto text-[48px] font-lora font-medium">{film.title}</h1>
-            <span className="text-[24px] font-lora font-thin mt-[20px]">{film.release_date.slice(0, 4)}</span>
+            <h1 className="mr-auto text-[48px] font-lora font-medium">
+              {film.title}
+            </h1>
+            <span className="text-[24px] font-lora font-thin mt-[20px]">
+              {film.release_date.slice(0, 4)}
+            </span>
           </div>
           <span className="text-[20px] font-switzer">{`Directed by ${
             film.credits.crew.find((person) => {
@@ -50,9 +57,18 @@ export default async function Page({ params }: { params: { id: string } }) {
           <span className="text-[20px] font-switzer mb-[20px]">{`${film.runtime} min`}</span>
           <span className="italic">{film.tagline.toUpperCase()}</span>
           <p className="font-semibold font-lora text-[20px]">{film.overview}</p>
-          <FilmDetailsTabs cast={<CastList cast={film.credits.cast}/>} crew={undefined} details={undefined} genres={undefined}></FilmDetailsTabs>
+          <FilmDetailsTabs
+            cast={<CastList cast={film.credits.cast} />}
+            crew={<CrewList crew={film.credits.crew} />}
+            details={
+              <DetailsList
+                companies={film.production_companies}
+                countries={film.production_countries}
+              />
+            }
+            genres={<GenreList genres={film.genres} />}
+          ></FilmDetailsTabs>
         </div>
-
         <FilmWatchStatusPanel userId={user?.id!} film={film} />
       </div>
     </>
