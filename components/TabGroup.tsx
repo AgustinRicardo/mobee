@@ -6,7 +6,7 @@ interface Category {
   department: string;
 }
 interface Props {
-  category: Category[] | [{ name: string }] | [{ name: string }];
+  category: Category[] | [{ name: string }];
   title: string;
 }
 

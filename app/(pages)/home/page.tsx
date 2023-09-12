@@ -1,4 +1,4 @@
-import ApiFilms from "@/components/ApiFilms";
+import FilmSlider from "@/components/FilmSlider";
 import { Toaster } from "@/components/ui/toaster";
 import { getUser } from "@/lib/functions";
 
@@ -11,7 +11,7 @@ export default async function Home() {
         <section>
           <h1 className="text-beeYellow">POPULAR FILMS</h1>
           <hr className="border-beeYellow" />
-          <ApiFilms
+          <FilmSlider
             userId={user?.id!}
             url={
               "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1"
