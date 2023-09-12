@@ -48,9 +48,23 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   try {
-    const recentReviews = await prismaClient.review.findMany({ take: 4 });
-    console.log(recentReviews);
-    return NextResponse.json({ recentReviews }, { status: 200 });
+    const recentReviews = await prismaClient.review.findMany({
+      take: 4,
+      where: { review_description: { not: null } },
+    });
+    const recentReviewsWithUserAndFilm = await Promise.all(
+      recentReviews.map(async (review) => {
+        const film = await prismaClient.film.findUnique({
+          where: { id: review.film_id },
+        });
+        const user = await prismaClient.user.findUnique({
+          where: { id: review.user_id },
+        });
+        return { review, user, film };
+      })
+    );
+
+    return NextResponse.json({ recentReviewsWithUserAndFilm }, { status: 200 });
   } catch (error) {
     return NextResponse.error();
   }

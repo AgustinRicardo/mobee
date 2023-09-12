@@ -19,9 +19,8 @@ export default async function Home() {
         <section>
           <h1 className="text-beeYellow">Recent Reviews</h1>
           <hr className="border-beeYellow" />
-          <div className="grid grid-cols-2 gap-2">
-            <HomeRecentReviews />
-          </div>
+
+          <HomeRecentReviews />
         </section>
         <section>
           <h1 className="text-beeYellow">Popular Lists</h1>

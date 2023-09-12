@@ -24,19 +24,10 @@ export default function MyProfilePage() {
             </button>
           </div>
         </div>
-        <div className="profile-stats flex flex-row ml-auto gap-4">
-          <div className="flex flex-col items-center">
-            <span>192 </span>
-            <span>films</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <span>80 </span>
-            <span>films this year</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <span>45 </span>
-            <span>lists</span>
-          </div>
+
+        <div className="flex flex-col items-center ml-auto">
+          <span>192 </span>
+          <span>watched films</span>
         </div>
       </div>
 
@@ -67,9 +58,27 @@ export default function MyProfilePage() {
         </div>
         <hr className="border-beeYellow" />
         <div className="flex flex-row justify-between">
-          <ListCard imageGap="gap-1" imageWidth="w-20" listTitle="List test1" numberOfFilms={0} filmsIds={[]}/>
-          <ListCard imageGap="gap-1" imageWidth="w-20" listTitle="List test2" numberOfFilms={0} filmsIds={[]}/>
-          <ListCard imageGap="gap-1" imageWidth="w-20" listTitle="List test3" numberOfFilms={0} filmsIds={[]}/>
+          <ListCard
+            imageGap="gap-1"
+            imageWidth="w-20"
+            listTitle="List test1"
+            numberOfFilms={0}
+            apiIds={[]}
+          />
+          <ListCard
+            imageGap="gap-1"
+            imageWidth="w-20"
+            listTitle="List test2"
+            numberOfFilms={0}
+            apiIds={[]}
+          />
+          <ListCard
+            imageGap="gap-1"
+            imageWidth="w-20"
+            listTitle="List test3"
+            numberOfFilms={0}
+            apiIds={[]}
+          />
         </div>
       </div>
       <div className="reviews-section ">

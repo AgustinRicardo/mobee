@@ -67,9 +67,16 @@ export interface List {
 }
 
 export interface Review {
+  id: string;
   userId: string;
   filmId: string;
   rating: number;
-  reviewDescription: string;
-  watchedAt: Date;
+  review_description: string;
+  watched_at: Date;
+}
+
+export interface FilmOnDB {
+  id: string;
+  tmdb_id: number;
+  average_rating: number;
 }

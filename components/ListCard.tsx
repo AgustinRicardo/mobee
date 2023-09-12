@@ -6,7 +6,7 @@ interface Props {
   imageWidth: string;
   listTitle?: string;
   numberOfFilms?: number;
-  filmsIds?: number[];
+  apiIds?: number[];
 }
 
 export default function ListCard({
@@ -14,7 +14,7 @@ export default function ListCard({
   imageWidth,
   listTitle,
   numberOfFilms,
-  filmsIds,
+  apiIds,
 }: Props) {
   return (
     <>
@@ -22,11 +22,11 @@ export default function ListCard({
         <div
           className={`film-posters flex flex-row items-center ${imageGap} py-4`}
         >
-          {filmsIds?.map((filmId) => {
+          {apiIds?.map((apiId) => {
             return (
               <FilmImageCard
-                key={filmId}
-                filmId={filmId}
+                key={apiId}
+                apiId={apiId}
                 imageWidth={imageWidth}
               />
             );

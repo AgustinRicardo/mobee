@@ -8,10 +8,16 @@ interface Props {
   emptyIconColor: string;
   readOnly?: boolean;
   averageRating?: number | null;
-
+  size?: string;
 }
-export default function RatingPicker({ setRatingValue, emptyIconColor, readOnly=false, ratingValue, averageRating=null }: Props) {
-  const size = "2.5rem";
+export default function RatingPicker({
+  setRatingValue,
+  emptyIconColor,
+  readOnly = false,
+  ratingValue,
+  averageRating = null,
+  size = "2.5rem",
+}: Props) {
   return (
     <>
       <Rating
