@@ -19,18 +19,19 @@ export default function RecentLists() {
       });
   }, []);
 
-  console.log("Popular Lists", popularList)
+  console.log("Popular Lists", popularList);
 
   return (
     <>
       {popularList.map((list) => {
         return (
           <ListCard
+            key={list.id}
             imageGap="gap-1"
-            imageWidth="w-24"
+            imageWidth="w-20"
             listTitle={list.title}
             numberOfFilms={list.films.length}
-            filmsIds={list.films.slice(0, 4).map((film) => film.film.tmdb_id)}
+            apiIds={list.films.slice(0, 4).map((film) => film.film.tmdb_id)}
           />
         );
       })}

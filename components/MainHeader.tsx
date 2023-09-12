@@ -12,8 +12,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import AddReviewIcon from "./icons/AddReviewIcon";
-import DropdownIcon from "./icons/DropdownIcon";
 import CreateDropdown from "./CreateDropdown";
 import { DropdownMenuArrow } from "@radix-ui/react-dropdown-menu";
 import { SearchBar } from "./SearchBar";
@@ -23,8 +21,6 @@ interface Props {
   userId: string;
 }
 export default function MainHeader({ children, userId }: Props) {
-  const dropdownContentStyle = "bg-beeBrownLight border-none text-beeBeig";
-
   const supabase = createClientComponentClient();
   const router = useRouter();
   const pathname = usePathname();
@@ -38,7 +34,7 @@ export default function MainHeader({ children, userId }: Props) {
     <>
       <header
         className={`flex relative flex-row items-center px-[16%]  bg-beeBrownHeader gap-12 h-16 font-switzer font-medium text-sm justify-evenly ${
-          pathname.includes("/film_details") || pathname.includes("/profile")
+          pathname.includes("/film_details") || pathname.includes("/my_profile")
             ? ""
             : "mb-8"
         }`}
@@ -64,21 +60,54 @@ export default function MainHeader({ children, userId }: Props) {
             Lists
           </Link>
         </nav>
-        <SearchBar/>
+        <SearchBar />
 
         <DropdownMenu>
           <DropdownMenuTrigger>{children}</DropdownMenuTrigger>
-          <DropdownMenuContent className={dropdownContentStyle}>
+          <DropdownMenuContent className="bg-beeBrownLight border-none text-beeBeig p-0">
             <DropdownMenuItem
-              className="text-beeBeig data-[highlighted]:bg-beeBeig data-[highlighted]:text-beeBrownBackground"
+              className="text-beeBrownBackground data-[highlighted]:bg-beeBrownLightDarker data-[highlighted]:text-beeBeig hover:cursor-pointer rounded-none"
               onClick={() => {
-                router.push("/profile");
+                router.push("/my_profile");
               }}
             >
               Profile
             </DropdownMenuItem>
             <DropdownMenuItem
-              className="text-beeBeig data-[highlighted]:bg-beeBeig data-[highlighted]:text-beeBrownBackground"
+              className="text-beeBrownBackground data-[highlighted]:bg-beeBrownLightDarker data-[highlighted]:text-beeBeig hover:cursor-pointer rounded-none"
+              onClick={() => {
+                router.push("/my_profile/watchlist");
+              }}
+            >
+              Watchlist
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              className="text-beeBrownBackground data-[highlighted]:bg-beeBrownLightDarker data-[highlighted]:text-beeBeig hover:cursor-pointer rounded-none"
+              onClick={() => {
+                router.push("/my_profile/films");
+              }}
+            >
+              Films
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              className="text-beeBrownBackground data-[highlighted]:bg-beeBrownLightDarker data-[highlighted]:text-beeBeig hover:cursor-pointer rounded-none"
+              onClick={() => {
+                router.push("/my_profile/lists");
+              }}
+            >
+              Lists
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              className="text-beeBrownBackground data-[highlighted]:bg-beeBrownLightDarker data-[highlighted]:text-beeBeig hover:cursor-pointer rounded-none"
+              onClick={() => {
+                router.push("/my_profile/reviews");
+              }}
+            >
+              Reviews
+            </DropdownMenuItem>
+            <DropdownMenuSeparator className="bg-beeBrownLightDarker" />
+            <DropdownMenuItem
+              className="text-beeBrownBackground data-[highlighted]:bg-beeRed data-[highlighted]:text-beeBeig hover:cursor-pointer rounded-none"
               onClick={() => {
                 signOut();
               }}

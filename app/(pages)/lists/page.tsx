@@ -19,7 +19,7 @@ export default async function Lists() {
           <span className="text-beeYellow">Popular Lists</span>
         </div>
         <hr className="border-beeYellow" />
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-3 gap-1">
           <PopularLists />
         </div>
       </div>

@@ -4,7 +4,6 @@ import { List } from "@/lib/interfaces";
 import { useEffect, useState } from "react";
 import ListCard from "./ListCard";
 
-
 export default function RecentLists() {
   const [recentList, setRecentList] = useState<List[]>([]);
 
@@ -23,18 +22,18 @@ export default function RecentLists() {
   return (
     <>
       <>
-      {recentList.map((list) => {
-        return (
-          <ListCard
-            imageGap="gap-1"
-            imageWidth="w-24"
-            listTitle={list.title}
-            numberOfFilms={list.films.length}
-            filmsIds={list.films.slice(0, 4).map((film) => film.film.tmdb_id)}
-          />
-        );
-      })}
-    </>
+        {recentList.map((list) => {
+          return (
+            <ListCard
+              imageGap="gap-1"
+              imageWidth="w-20"
+              listTitle={list.title}
+              numberOfFilms={list.films.length}
+              apiIds={list.films.slice(0, 4).map((film) => film.film.tmdb_id)}
+            />
+          );
+        })}
+      </>
     </>
   );
 }
