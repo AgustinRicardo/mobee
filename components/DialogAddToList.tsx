@@ -34,7 +34,6 @@ export function DialogAddToList({ apiId, userId, children }: Props) {
           setLists(data.lists);
         }
       });
-    console.log(lists);
   }, []);
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
@@ -49,8 +48,6 @@ export function DialogAddToList({ apiId, userId, children }: Props) {
         body: JSON.stringify(listData),
       });
       const data = await res.json();
-
-      console.log(data.filmOnList);
 
       if (data.filmOnList !== null) {
         toast({

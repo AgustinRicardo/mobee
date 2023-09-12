@@ -1,5 +1,6 @@
 import FilmSlider from "@/components/FilmSlider";
-import { Toaster } from "@/components/ui/toaster";
+import HomeRecentReviews from "@/components/HomeRecentReviews";
+import PopularLists from "@/components/PopularLists";
 import { getUser } from "@/lib/functions";
 
 export default async function Home() {
@@ -21,10 +22,15 @@ export default async function Home() {
         <section>
           <h1 className="text-beeYellow">RECENT REVIEWS</h1>
           <hr className="border-beeYellow" />
+
+          <HomeRecentReviews />
         </section>
         <section>
           <h1 className="text-beeYellow">POPULAR LISTS</h1>
           <hr className="border-beeYellow" />
+          <div className="grid grid-cols-3 justify-between gap-1">
+            <PopularLists />
+          </div>
         </section>
       </div>
     </>

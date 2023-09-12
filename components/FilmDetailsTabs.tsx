@@ -17,7 +17,7 @@ export default function FilmDetailsTabs({
   return (
     <>
       <Tabs defaultValue="cast" className="w-full">
-        <div className="flex flex-row items-center mt-10">
+        <div className="flex flex-row items-center mt-10 pb-1">
           <TabsList className="text-beeYellow p-0 h-fit bg-transparent">
             <TabsTrigger
               className="data-[state=active]:bg-beeYellow data-[state=active]:text-beeBrownBackground"

@@ -44,11 +44,11 @@ export default function FilmWatchStatusPanel({ userId, film }: Props) {
   }, []);
 
   return (
-    <div className="user-input h-fit w-[300px] relative bottom-5 bg-beeBrownLight ">
-      <div className="divide-y divide-beeBrownBackground flex flex-col gap-4">
-        <div className="pt-5 pl-5 justify-center">
+    <div className="user-input h-fit w-64  bg-beeBrownLight rounded-md">
+      <div className="flex flex-col pt-2 pb-2 gap-2">
+        <div className="flex flex-row pl-5">
           <button
-            className="flex flex-row"
+            className="flex flex-row items-center"
             onClick={() => {
               fetch("/api/filmStatus", {
                 method: "POST",
@@ -67,9 +67,10 @@ export default function FilmWatchStatusPanel({ userId, film }: Props) {
             </span>
           </button>
         </div>
-        <div className="pt-5 pl-5 justify-center">
+        <hr className="border-beeBrownBackground" />
+        <div className="flex flex-row pl-5">
           <button
-            className="flex flex-row"
+            className="flex flex-row items-center"
             onClick={() => {
               fetch("/api/filmStatus", {
                 method: "POST",
@@ -88,39 +89,41 @@ export default function FilmWatchStatusPanel({ userId, film }: Props) {
             </span>
           </button>
         </div>
-        <div className="pt-5 pl-5 justify-center">
+        <hr className="border-beeBrownBackground" />
+        <div className="flex flex-row pl-5">
           <DialogReview film={film} userId={userId}>
-            <span className="flex flex-row hover:cursor-pointer">
+            <span className="flex flex-row hover:cursor-pointer items-center">
               <AddReviewIcon className="text-beeBrownBackground hover:cursor-pointer w-8" />
               <span className="pl-2">Add review</span>
             </span>
           </DialogReview>
         </div>
-        <div className="pt-5 pl-5 justify-center">
+        <hr className="border-beeBrownBackground" />
+        <div className="flex flex-row pl-5">
           <DialogAddToList apiId={film.id} userId={userId}>
-            <span className="flex flex-row hover:cursor-pointer">
+            <span className="flex flex-row hover:cursor-pointer items-center">
               <AddToListIcon className="text-beeBrownBackground hover:cursor-pointer w-8" />
               <span className="pl-2">Add to list</span>
             </span>
           </DialogAddToList>
         </div>
-        <div className="pt-5 pb-5 justify-center">
-          <div className="flex flex-col">
-            <span className="pl-5"> Average Rating</span>
-            <div className="flex flex-col items-center">
-              {averageRating !== null ? (
-                <>
-                  <RatingPicker
-                    emptyIconColor="text-beeBrownBackground"
-                    readOnly={true}
-                    averageRating={averageRating}
-                  />
-                  <span>{`${averageRating}/5`}</span>
-                </>
-              ) : (
-                <span>No rating available</span>
-              )}
-            </div>
+        <hr className="border-beeBrownBackground" />
+        <div className="flex flex-col">
+          <span className="pl-5"> Average Rating</span>
+          <div className="flex flex-col items-center">
+            {averageRating !== null ? (
+              <>
+                <div className="flex flex-row gap-1 py-1"></div>
+                <RatingPicker
+                  emptyIconColor="text-beeBrownBackground"
+                  readOnly={true}
+                  averageRating={averageRating}
+                />
+                <span>{`${averageRating}/5`}</span>
+              </>
+            ) : (
+              <span className="py-2">No rating available</span>
+            )}
           </div>
         </div>
       </div>

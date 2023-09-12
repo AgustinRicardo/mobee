@@ -66,13 +66,3 @@ export async function DELETE(request: NextRequest) {
     return NextResponse.error();
   }
 }
-
-export async function GET(request: NextRequest) {
-  try {
-    const lists = await prismaClient.list.findMany({ orderBy: { bookmark_count: 'desc' } });
-
-    return NextResponse.json({ lists }, { status: 200 });
-  } catch (e) {
-    return NextResponse.error();
-  }
-}

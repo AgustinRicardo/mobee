@@ -57,7 +57,7 @@ export default function FilmSlider({ userId, url }: Props) {
       )}
       <div className="flex flex-row">
         <button
-          className="bg-beeYellow text-beeBrownBackground rounded-sm h-4 flex items-center shadow-sm"
+          className="bg-beeBrownHeader text-beeYellow rounded-sm h-4 flex items-center shadow-sm  hover:scale-105"
           onClick={() => {
             if (slidePosition === 0) {
               setSlidePosition(3);
@@ -69,7 +69,7 @@ export default function FilmSlider({ userId, url }: Props) {
           <LeftArrow />
         </button>
         <button
-          className="bg-beeYellow text-beeBrownBackground rounded-sm h-4 flex items-center ml-auto shadow-sm"
+          className="bg-beeBrownHeader text-beeYellow rounded-sm h-4 flex items-center ml-auto shadow-sm hover:scale-105"
           onClick={() => {
             if (slidePosition === 3) {
               setSlidePosition(0);

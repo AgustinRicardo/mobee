@@ -8,13 +8,20 @@ interface Props {
   emptyIconColor: string;
   readOnly?: boolean;
   averageRating?: number | null;
-
+  size?: string;
 }
-export default function RatingPicker({ setRatingValue, emptyIconColor, readOnly=false, ratingValue, averageRating=null }: Props) {
-  const size = "2.5rem";
+export default function RatingPicker({
+  setRatingValue,
+  emptyIconColor,
+  readOnly = false,
+  ratingValue,
+  averageRating = null,
+  size = "2.5rem",
+}: Props) {
   return (
     <>
       <Rating
+        className="flex flex-row gap-[0.1rem]"
         onChange={(event, value) => {
           if (value && setRatingValue) {
             setRatingValue(value);
@@ -23,7 +30,7 @@ export default function RatingPicker({ setRatingValue, emptyIconColor, readOnly=
         precision={0.5}
         icon={
           <HexagonIcon
-            style={{ width: size, height: size }}
+            style={{ width: size, height: size, padding: 0 }}
             className="text-beeYellow"
           />
         }
