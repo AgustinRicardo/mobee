@@ -7,13 +7,13 @@ import RightArrow from "./icons/RightArrow";
 
 interface Props {
   userId: string;
+  url: string;
 }
 
-export default function PopularFilms({ userId }: Props) {
-  const [popularFilms, setPopularFilms] = useState<Array<any>>([]);
+export default function ApiFilms({ userId, url }: Props) {
+  const [apiFilms, setApiFilms] = useState<Array<any>>([]);
   const [slidePosition, setSlidePosition] = useState<number>(0);
-  const getPopularFilms = async () => {
-    const url = `https://api.themoviedb.org/3/movie/popular?language=en-US&page=1`;
+  const getApiFilms = async () => {
     const authorization = `Bearer ${process.env.NEXT_PUBLIC_TMDB_API_KEY}`;
     try {
       const options = {
@@ -26,21 +26,21 @@ export default function PopularFilms({ userId }: Props) {
       const res = await fetch(url, options);
       const { results } = await res.json();
 
-      setPopularFilms(results);
+      setApiFilms(results);
     } catch (e) {
       console.log(e);
     }
   };
 
   useEffect(() => {
-    getPopularFilms();
+    getApiFilms();
   }, []);
 
   return (
     <>
-      {popularFilms && (
+      {apiFilms && (
         <ul className="flex flex-row pt-5 pb-2 gap-2">
-          {popularFilms
+          {apiFilms
             .slice(5 * slidePosition, 5 * slidePosition + 5)
             .map((film) => {
               return (

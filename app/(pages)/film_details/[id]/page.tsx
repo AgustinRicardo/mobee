@@ -6,6 +6,7 @@ import CastList from "@/components/CastList";
 import GenreList from "@/components/GenreList";
 import CrewList from "@/components/CrewList";
 import DetailsList from "@/components/DetailsList";
+import ApiFilms from "@/components/ApiFilms";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const user = await getUser();
@@ -68,6 +69,14 @@ export default async function Page({ params }: { params: { id: string } }) {
             }
             genres={<GenreList genres={film.genres} />}
           ></FilmDetailsTabs>
+          <section>
+            <h1 className="text-beeYellow">SIMILAR FILMS</h1>
+            <hr className="border-beeYellow" />
+            <ApiFilms
+              userId={user?.id!}
+              url={`https://api.themoviedb.org/3/movie/${film.id}/similar?language=en-US&page=1`}
+            />
+          </section>
         </div>
         <FilmWatchStatusPanel userId={user?.id!} film={film} />
       </div>
