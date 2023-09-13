@@ -45,7 +45,7 @@ export default function FilmDetailsTabs({
             </TabsTrigger>
           </TabsList>
         </div>
-        <hr className="border-beeYellow" />
+        <hr className=" mt-2 border-beeYellow" />
         <TabsContent value="cast">{cast}</TabsContent>
         <TabsContent value="crew">{crew}</TabsContent>
         <TabsContent value="details">{details}</TabsContent>

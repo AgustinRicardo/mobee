@@ -4,7 +4,7 @@ export interface Film {
   id: number;
   title: string;
   backdrop_path: string;
-  genres: [{ name: string }];
+  genres: [{ id: number; name: string }];
   overview: string;
   poster_path: string;
   tagline: string;
@@ -12,8 +12,10 @@ export interface Film {
   runtime: string;
   credits: {
     cast: [{ name: string; character: string }];
-    crew: [{ job: string; name: string }];
+    crew: [{ job: string; name: string; department: string }];
   };
+  production_companies: [{ id: number; name: string }];
+  production_countries: [{ name: string }];
 }
 
 export interface User {

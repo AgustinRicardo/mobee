@@ -3,6 +3,10 @@ import { Film } from "@/lib/interfaces";
 import { getUser } from "@/lib/functions";
 import FilmDetailsTabs from "@/components/FilmDetailsTabs";
 import CastList from "@/components/CastList";
+import GenreList from "@/components/GenreList";
+import CrewList from "@/components/CrewList";
+import DetailsList from "@/components/DetailsList";
+import FilmSlider from "@/components/FilmSlider";
 import ReviewCard from "@/components/ReviewCard";
 
 export default async function Page({ params }: { params: { id: string } }) {
@@ -65,9 +69,14 @@ export default async function Page({ params }: { params: { id: string } }) {
               </p>
               <FilmDetailsTabs
                 cast={<CastList cast={film.credits.cast} />}
-                crew={undefined}
-                details={undefined}
-                genres={undefined}
+                crew={<CrewList crew={film.credits.crew} />}
+                details={
+                  <DetailsList
+                    companies={film.production_companies}
+                    countries={film.production_countries}
+                  />
+                }
+                genres={<GenreList genres={film.genres} />}
               ></FilmDetailsTabs>
             </div>
             <FilmWatchStatusPanel userId={user?.id!} film={film} />
@@ -75,7 +84,16 @@ export default async function Page({ params }: { params: { id: string } }) {
           <div className="recent-reviews flex flex-col">
             <span className="text-beeYellow pb-1">Recent reviews</span>
             <hr className="border-beeYellow" />
-            <ReviewCard></ReviewCard>
+            <ReviewCard />
+            <section>
+              <h1 className="text-beeYellow">SIMILAR FILMS</h1>
+              <hr className="border-beeYellow" />
+              <FilmSlider
+                userId={user?.id!}
+                url={`https://api.themoviedb.org/3/movie/${film.id}/similar?language=en-US&page=1`}
+                numOfFilms={8}
+              />
+            </section>
           </div>
         </div>
       </div>

@@ -1,8 +1,6 @@
-import FilmPoster from "@/components/FilmPoster";
+import FilmSlider from "@/components/FilmSlider";
 import HomeRecentReviews from "@/components/HomeRecentReviews";
-import PopularFilms from "@/components/PopularFilms";
 import PopularLists from "@/components/PopularLists";
-import ReviewCard from "@/components/ReviewCard";
 import { getUser } from "@/lib/functions";
 
 export default async function Home() {
@@ -12,18 +10,24 @@ export default async function Home() {
     <>
       <div className="flex flex-col gap-4">
         <section>
-          <h1 className="text-beeYellow">Popular Films</h1>
+          <h1 className="text-beeYellow">POPULAR FILMS</h1>
           <hr className="border-beeYellow" />
-          <PopularFilms userId={user?.id!} />
+          <FilmSlider
+            userId={user?.id!}
+            url={
+              "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1"
+            }
+            numOfFilms={5}
+          />
         </section>
         <section>
-          <h1 className="text-beeYellow">Recent Reviews</h1>
+          <h1 className="text-beeYellow">RECENT REVIEWS</h1>
           <hr className="border-beeYellow" />
 
           <HomeRecentReviews />
         </section>
         <section>
-          <h1 className="text-beeYellow">Popular Lists</h1>
+          <h1 className="text-beeYellow">POPULAR LISTS</h1>
           <hr className="border-beeYellow" />
           <div className="grid grid-cols-3 justify-between gap-1">
             <PopularLists />
