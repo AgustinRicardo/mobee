@@ -15,7 +15,7 @@ export default function MyUserListsComponent({ userId }: Props) {
           setLists(lists);
         }
       });
-  });
+  }, []);
 
   return (
     <>
