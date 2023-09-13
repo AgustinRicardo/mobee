@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import ListCard from "./ListCard";
 import ReviewCard from "./ReviewCard";
 import { WatchStatus, Review, List } from "@/lib/interfaces";
+import { useRouter } from "next/navigation";
 
 interface Props {
   userId: string;
@@ -13,6 +14,7 @@ export default function ProfileContent({ userId }: Props) {
   const [reviews, setReviews] = useState<Review[]>();
   const [lists, setLists] = useState<List[]>();
   const [watchedFilms, setWatchFilms] = useState<number>();
+  const router = useRouter();
 
   useEffect(() => {
     fetch(`/api/my_profile?userId=${userId}`)
@@ -68,7 +70,12 @@ export default function ProfileContent({ userId }: Props) {
           <div className="watchlist ml-auto ">
             <div className="flex flex-row py-1">
               <span className="text-beeYellow">WATCHLIST</span>
-              <button className="inline ml-auto text-beeYellow hover:bg-beeYellow hover:text-beeBrownBackground hover:rounded-sm px-1 ">
+              <button
+                className="inline ml-auto text-beeYellow hover:bg-beeYellow hover:text-beeBrownBackground hover:rounded-sm px-1 "
+                onClick={() => {
+                  router.push("/my_profile/watchlist");
+                }}
+              >
                 More
               </button>
             </div>

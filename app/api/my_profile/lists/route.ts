@@ -40,10 +40,10 @@ export async function GET(request: NextRequest) {
     if (userId) {
       lists = await prismaClient.list.findMany({
         where: { user_id: userId },
-        include: { films: true },
+        include: { films: { include: { film: true } } },
       });
     }
-    console.log(lists);
+
     if (lists) {
       return NextResponse.json({ lists });
     }
