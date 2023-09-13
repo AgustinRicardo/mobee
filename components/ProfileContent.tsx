@@ -65,7 +65,7 @@ export default function ProfileContent({ userId }: Props) {
           <div className="favorite-films ">
             <span className="py-1 block">FAVORITE FILMS</span>
             <hr className="border-beeYellow" />
-            <ListCard imageGap="gap-3" imageWidth="w-28" />
+            {/* <ListCard imageGap="gap-3" imageWidth="w-28" />*/}
           </div>
           <div className="watchlist ml-auto ">
             <div className="flex flex-row py-1">
@@ -105,8 +105,7 @@ export default function ProfileContent({ userId }: Props) {
                   <ListCard
                     imageGap="gap-1"
                     imageWidth="w-20"
-                    listTitle={list.title}
-                    listId={list.id}
+                    list={list}
                     apiIds={list.films.map((item) => item.film.tmdb_id)}
                   />
                 );

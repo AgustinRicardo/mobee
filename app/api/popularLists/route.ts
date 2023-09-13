@@ -7,7 +7,7 @@ export async function GET(request: NextRequest) {
     const lists = await prismaClient.list.findMany({
       take: 6,
       include: { films: { include: { film: true } } },
-      orderBy: { bookmark_count: "desc" },
+      orderBy: { bookmark_count: "asc" },
     });
 
     return NextResponse.json({ lists });

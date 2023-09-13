@@ -67,6 +67,7 @@ export interface List {
   description: string;
   bookmark_count: number;
   films: FilmsOnLists[];
+  user_id: string;
 }
 
 export interface Review {

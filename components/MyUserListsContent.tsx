@@ -27,8 +27,7 @@ export default function MyUserListsComponent({ userId }: Props) {
               <ListCard
                 imageGap="gap-1"
                 imageWidth="w-24"
-                listTitle={list.title}
-                listId={list.id}
+                list={list}
                 apiIds={list.films.map((filmOnList) => {
                   return filmOnList.film.tmdb_id;
                 })}
