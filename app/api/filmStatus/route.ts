@@ -103,7 +103,7 @@ export async function POST(request: NextRequest) {
         }
       }
     }
-    return NextResponse.json({ msg: "Successful", status: 200 });
+    return NextResponse.json({ msg: "Successful" });
   } catch (e) {
     return NextResponse.error();
   }
@@ -119,7 +119,7 @@ export async function GET(request: NextRequest) {
       if (film) {
         const watchStatus = await getFilmInfoFromUser(userId, film.id);
 
-        return NextResponse.json({ watchStatus }, { status: 200 });
+        return NextResponse.json({ watchStatus });
       }
     }
   } catch (e) {

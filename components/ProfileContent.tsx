@@ -55,19 +55,19 @@ export default function ProfileContent({ userId }: Props) {
 
           <div className="flex flex-col items-center ml-auto">
             <span>{watchedFilms}</span>
-            <span>watched films</span>
+            <span>Watched films</span>
           </div>
         </div>
 
         <div className="flex flex-row text-beeYellow">
           <div className="favorite-films ">
-            <span className="py-1 block">Favorite films</span>
+            <span className="py-1 block">FAVORITE FILMS</span>
             <hr className="border-beeYellow" />
             <ListCard imageGap="gap-3" imageWidth="w-28" />
           </div>
           <div className="watchlist ml-auto ">
             <div className="flex flex-row py-1">
-              <span className="text-beeYellow">Watchlist</span>
+              <span className="text-beeYellow">WATCHLIST</span>
               <button className="inline ml-auto text-beeYellow hover:bg-beeYellow hover:text-beeBrownBackground hover:rounded-sm px-1 ">
                 More
               </button>
@@ -85,7 +85,7 @@ export default function ProfileContent({ userId }: Props) {
         </div>
         <div className="lists-section text-beeYellow">
           <div className="flex flex-row py-1">
-            <span className="text-beeYellow">List</span>
+            <span className="text-beeYellow">LISTS</span>
             <button className="inline ml-auto text-beeYellow hover:bg-beeYellow hover:text-beeBrownBackground hover:rounded-sm px-1 py-0.5">
               More
             </button>
@@ -99,6 +99,7 @@ export default function ProfileContent({ userId }: Props) {
                     imageGap="gap-1"
                     imageWidth="w-20"
                     listTitle={list.title}
+                    listId={list.id}
                     apiIds={list.films.map((item) => item.film.tmdb_id)}
                   />
                 );
@@ -107,7 +108,7 @@ export default function ProfileContent({ userId }: Props) {
         </div>
         <div className="reviews-section">
           <div className="flex flex-row py-1">
-            <span className="text-beeYellow">Recent activity</span>
+            <span className="text-beeYellow">RECENT ACTIVITY</span>
             <button className="inline ml-auto text-beeYellow hover:bg-beeYellow hover:text-beeBrownBackground hover:rounded-sm px-1 py-0.5">
               More
             </button>

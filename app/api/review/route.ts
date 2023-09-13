@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    return NextResponse.json({ message: "Successful" }, { status: 200 });
+    return NextResponse.json({ message: "Successful" });
   } catch (e) {
     return NextResponse.error();
   }
@@ -64,7 +64,7 @@ export async function GET(request: NextRequest) {
       })
     );
 
-    return NextResponse.json({ recentReviewsWithUserAndFilm }, { status: 200 });
+    return NextResponse.json({ recentReviewsWithUserAndFilm });
   } catch (error) {
     return NextResponse.error();
   }

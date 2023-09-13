@@ -25,7 +25,7 @@ export function DialogAddToList({ apiId, userId, children }: Props) {
   const [selectedList, setSelectedList] = useState<string>();
 
   useEffect(() => {
-    fetch("/api/list?" + new URLSearchParams({ userId }))
+    fetch("/api/my_profile/lists?" + new URLSearchParams({ userId }))
       .then((res) => {
         return res.json();
       })

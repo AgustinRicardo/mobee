@@ -61,7 +61,7 @@ export async function DELETE(request: NextRequest) {
       });
     }
 
-    return NextResponse.json({ message: "Successful" }, { status: 200 });
+    return NextResponse.json({ message: "Successful" });
   } catch (e) {
     return NextResponse.error();
   }

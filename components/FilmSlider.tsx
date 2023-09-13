@@ -50,8 +50,6 @@ export default function FilmSlider({ userId, url, numOfFilms }: Props) {
               return (
                 <li key={film.id}>
                   <FilmPoster
-                    alt={film.title}
-                    src={`https://image.tmdb.org/t/p/w500/${film.poster_path}`}
                     className=" rounded-md border-beeBrownLight border-2 hover:cursor-pointer basis-auto"
                     userId={userId}
                     apiId={film.id}

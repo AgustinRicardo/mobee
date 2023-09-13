@@ -58,7 +58,7 @@ export default function CreateDropdown({ userId }: Props) {
         });
       }
     } else {
-      await fetch("/api/list", {
+      await fetch("/api/my_profile/lists", {
         method: "POST",
         body: JSON.stringify(listData),
       })

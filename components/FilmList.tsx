@@ -32,8 +32,6 @@ export default function FilmList({ url, userId }: Props) {
       <li key={index}>
         <FilmPoster
           userId={userId}
-          src={`https://image.tmdb.org/t/p/w500/${film.poster_path}`}
-          alt={film.title}
           apiId={film.id}
           className="rounded-md border-2 border-beeBrownLight min-w-full shadow-md hover:cursor-pointer"
         />

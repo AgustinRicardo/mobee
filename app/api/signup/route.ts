@@ -47,7 +47,7 @@ export async function POST(request: NextRequest) {
       await createSupabaseUser({ email, password });
       await createDBUser({ username, email });
     }
-    return NextResponse.json({ msg: "Successful", status: 200 });
+    return NextResponse.json({ msg: "Successful" });
   } catch (e) {
     return NextResponse.error();
   }

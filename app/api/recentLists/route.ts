@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
       orderBy: { created_at: "desc" },
     });
 
-    return NextResponse.json({ lists }, { status: 200 });
+    return NextResponse.json({ lists });
   } catch (e) {
     return NextResponse.error();
   }

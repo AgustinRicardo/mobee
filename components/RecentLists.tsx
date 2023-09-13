@@ -28,7 +28,7 @@ export default function RecentLists() {
               imageGap="gap-1"
               imageWidth="w-20"
               listTitle={list.title}
-              numberOfFilms={list.films.length}
+              listId={list.id}
               apiIds={list.films.slice(0, 4).map((film) => film.film.tmdb_id)}
             />
           );

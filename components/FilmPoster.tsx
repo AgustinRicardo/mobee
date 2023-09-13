@@ -15,23 +15,16 @@ import { DialogAddToList } from "./DialogAddToList";
 import { FilmSkeleton } from "./Skeleton";
 
 interface Props {
-  src: string;
-  alt: string;
   apiId: number;
   userId: string;
-  className: string;
+  className?: string;
 }
 
-export default function FilmPoster({
-  src,
-  alt,
-  apiId,
-  userId,
-  className,
-}: Props) {
+export default function FilmPoster({ apiId, userId, className }: Props) {
   const router = useRouter();
   const [isWatched, setIsWatched] = useState<boolean>(false);
   const [toWatch, setToWatch] = useState<boolean>(false);
+  const [posterPath, setPosterPath] = useState<string>();
 
   useEffect(() => {
     fetch(
@@ -44,9 +37,23 @@ export default function FilmPoster({
           setToWatch(data.watchStatus.to_watch);
         }
       });
+    const url = `https://api.themoviedb.org/3/movie/${apiId}?language=en-US&append_to_response=credits`;
+    fetch(url, {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_TMDB_API_KEY}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.poster_path) {
+          setPosterPath(data.poster_path);
+        }
+      });
   }, []);
 
-  return src ? (
+  return posterPath ? (
     <>
       <div className="group">
         <div className="hidden flex-col justify-around px-2 py-2 gap-0.5 group-hover:flex absolute group-hover:bg-beeBrownLight/90 rounded-tl-md rounded-br-md ">
@@ -113,8 +120,10 @@ export default function FilmPoster({
             router.push(`/film_details/${String(apiId)}`);
           }}
           className={className}
-          src={src}
-          alt={alt}
+          src={
+            posterPath && `https://image.tmdb.org/t/p/original/${posterPath}`
+          }
+          alt=""
         />
       </div>
     </>
