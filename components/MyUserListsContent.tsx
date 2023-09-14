@@ -25,6 +25,7 @@ export default function MyUserListsComponent({ userId }: Props) {
           lists.map((list) => {
             return (
               <ListCard
+                userId={userId}
                 imageGap="gap-1"
                 imageWidth="w-24"
                 list={list}

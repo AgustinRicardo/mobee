@@ -18,7 +18,6 @@ export default function ListCard({
   imageWidth,
   list,
   apiIds,
-
   userId,
 }: Props) {
   const [savedList, setSavedList] = useState<boolean>(false);

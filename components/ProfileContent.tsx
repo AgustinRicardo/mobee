@@ -103,6 +103,7 @@ export default function ProfileContent({ userId }: Props) {
               lists.map((list) => {
                 return (
                   <ListCard
+                    userId={userId}
                     imageGap="gap-1"
                     imageWidth="w-20"
                     list={list}
