@@ -40,7 +40,6 @@ export default function FilmWatchStatusPanel({ userId, film }: Props) {
           setAverageRating(data.film.average_rating);
         }
       });
-    console.log(averageRating);
   }, []);
 
   return (

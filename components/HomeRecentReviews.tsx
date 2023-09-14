@@ -25,7 +25,6 @@ export default function HomeRecentReviews() {
     <>
       <div className="grid grid-cols-2 gap-4">
         {reviews.map(({ review, user, film }) => {
-          console.log(film);
           return (
             <ReviewCard
               key={review.id}

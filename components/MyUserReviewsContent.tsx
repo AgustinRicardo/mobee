@@ -16,7 +16,6 @@ export default function MyUserReviewsContent({ userId }: Props) {
       .then(({ reviews }) => {
         if (reviews) {
           setReviews(reviews);
-          console.log(reviews);
         }
       });
   }, []);

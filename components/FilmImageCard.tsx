@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { FilmSkeleton } from "./Skeleton";
+import { Skeleton } from "@mui/material";
 
 interface Props {
   apiId: number;
@@ -46,7 +46,7 @@ export default function FilmImageCard({ apiId, imageWidth }: Props) {
           <></>
         )
       ) : (
-        <FilmSkeleton className="h-[138px] w-24" />
+        <Skeleton className="h-[138px] w-24" />
       )}
     </>
   );

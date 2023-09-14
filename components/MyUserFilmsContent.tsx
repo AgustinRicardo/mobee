@@ -14,7 +14,6 @@ export default function MyUserFilmsContent({ userId }: Props) {
       .then((res) => res.json())
       .then(({ films }) => {
         setWatchedFilms(films);
-        console.log(films);
       });
   }, []);
 

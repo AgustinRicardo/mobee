@@ -8,6 +8,7 @@ import CrewList from "@/components/CrewList";
 import DetailsList from "@/components/DetailsList";
 import FilmSlider from "@/components/FilmSlider";
 import ReviewCard from "@/components/ReviewCard";
+import ReviewList from "@/components/ReviewList";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const user = await getUser();
@@ -84,7 +85,8 @@ export default async function Page({ params }: { params: { id: string } }) {
           <div className="recent-reviews flex flex-col">
             <span className="text-beeYellow pb-1">Recent reviews</span>
             <hr className="border-beeYellow" />
-            <ReviewCard />
+            <ReviewList apiId={film.id} />
+
             <section>
               <h1 className="text-beeYellow">SIMILAR FILMS</h1>
               <hr className="border-beeYellow" />

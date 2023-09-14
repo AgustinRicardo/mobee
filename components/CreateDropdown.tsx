@@ -66,7 +66,7 @@ export default function CreateDropdown({ userId }: Props) {
           console.error(e);
         })
         .finally(() => {
-          router.refresh();
+          location.reload();
         });
     }
   };

@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
         });
       }
     }
-    //console.log(filmOnList);
+
     return NextResponse.json({ filmOnList });
   } catch (e) {
     return NextResponse.error();

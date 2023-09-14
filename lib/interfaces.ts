@@ -78,6 +78,7 @@ export interface Review {
   review_description: string;
   watched_at: Date;
   film: FilmOnDB;
+  user: User;
 }
 
 export interface FilmOnDB {

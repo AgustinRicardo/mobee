@@ -22,8 +22,6 @@ export default function PopularLists({ userId }: Props) {
       });
   }, []);
 
-  console.log("Popular Lists", popularList);
-
   return (
     <>
       {popularList.map((list) => {

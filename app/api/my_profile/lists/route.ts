@@ -7,7 +7,6 @@ export async function POST(request: NextRequest) {
   const { listTitle, listDescription, filmIds, userId } = await request.json();
 
   try {
-    console.log(listTitle, listDescription, filmIds, userId);
     const filmIdsOnDB = await Promise.all(
       filmIds.map(async (apiId: number) => {
         return await getOrAddFilmToDB(apiId);
@@ -17,7 +16,7 @@ export async function POST(request: NextRequest) {
     const list = await prismaClient.list.create({
       data: { title: listTitle, user_id: userId, description: listDescription },
     });
-    console.log(list.id);
+
     await Promise.all(
       filmIdsOnDB.map(async (film: FilmOnDB) => {
         await prismaClient.filmsOnLists.create({
@@ -35,7 +34,7 @@ export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const userId = searchParams.get("userId");
   let lists;
-  console.log(userId);
+
   try {
     if (userId) {
       lists = await prismaClient.list.findMany({

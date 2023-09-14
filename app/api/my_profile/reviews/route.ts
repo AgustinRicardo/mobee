@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
         include: { film: true },
         orderBy: { created_at: "desc" },
       });
-      console.log(reviews);
+
       return NextResponse.json({ reviews });
     }
   } catch (error) {

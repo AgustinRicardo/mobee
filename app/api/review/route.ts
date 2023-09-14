@@ -4,7 +4,6 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   const { userId, apiId, date, review, ratingValue } = await request.json();
-  console.log(userId, apiId, date, review, ratingValue);
 
   try {
     const film = await getOrAddFilmToDB(apiId);
