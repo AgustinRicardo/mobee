@@ -24,6 +24,8 @@ import { DialogClose } from "@radix-ui/react-dialog";
 import { useToast } from "./ui/use-toast";
 import { Toaster } from "./ui/toaster";
 import { DialogReview } from "./DialogReview";
+import { useRouter } from "next/navigation";
+import AddReviewIcon from "./icons/AddReviewIcon";
 
 interface Props {
   userId: string;
@@ -35,6 +37,7 @@ export default function CreateDropdown({ userId }: Props) {
   const [listTitle, setListTitle] = useState<string>("");
   const [listDescription, setListDescription] = useState<string>("");
   const [filmToReview, setFilmToReview] = useState<Film | null>(null);
+  const router = useRouter();
 
   const handleFormSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
@@ -56,20 +59,24 @@ export default function CreateDropdown({ userId }: Props) {
         });
       }
     } else {
-      await fetch("/api/list", {
+      await fetch("/api/my_profile/lists", {
         method: "POST",
         body: JSON.stringify(listData),
-      }).catch((e) => {
-        console.error(e);
-      });
+      })
+        .catch((e) => {
+          console.error(e);
+        })
+        .finally(() => {
+          location.reload();
+        });
     }
   };
 
   return (
     <>
       <DropdownMenu>
-        <DropdownMenuTrigger className="bg-beeYellow rounded-md flex flex-row items-end px-2 py-1 text-beeBrownBackground">
-          Create <DropdownIcon className="w-4 h-4" />
+        <DropdownMenuTrigger className="bg-beeYellow rounded-md flex flex-row items-center px-2 py-1 text-beeBrownBackground">
+          Create <AddReviewIcon className="w-4 h-4" />
         </DropdownMenuTrigger>
         <DropdownMenuContent className="bg-beeBrownLight border-none text-beeBeig p-0 flex-col flex">
           {filmToReview ? (

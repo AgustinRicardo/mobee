@@ -13,7 +13,7 @@ export default async function UserProfile({ user }: Props) {
       <img
         src="/profile_photo.jpg"
         alt="user image"
-        className="w-8 h-8 rounded-full"
+        className="w-7 h-7 rounded-full"
       />
       <span className="flex flex-row items-end">
         {user ? user.username : "User"} <DropdownIcon className="w-4 h-4 " />

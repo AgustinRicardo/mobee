@@ -19,6 +19,7 @@ model User {
   user_reviews         Review[]
   film_status          FilmWatchStatus[]
   lists                ListSavedByUser[]
+  List                 List[]
 }
 
 model Film {
@@ -33,12 +34,13 @@ model Film {
 model List {
   id             String            @id @default(uuid())
   user_id        String
+  user           User              @relation(fields: [user_id], references: [id])
   title          String
   description    String?
   bookmark_count Int               @default(0)
   films          FilmsOnLists[]
   users          ListSavedByUser[]
-  created_at      DateTime          @default(now())
+  created_at     DateTime          @default(now())
 }
 
 model ListSavedByUser {
@@ -79,5 +81,5 @@ model Review {
   rating             Float?
   review_description String?
   watched_at         DateTime?
-  created_at          DateTime  @default(now())
+  created_at         DateTime  @default(now())
 }

@@ -4,7 +4,10 @@ import { List } from "@/lib/interfaces";
 import { useEffect, useState } from "react";
 import ListCard from "./ListCard";
 
-export default function RecentLists() {
+interface Props {
+  userId: string;
+}
+export default function RecentLists({ userId }: Props) {
   const [recentList, setRecentList] = useState<List[]>([]);
 
   useEffect(() => {
@@ -25,10 +28,10 @@ export default function RecentLists() {
         {recentList.map((list) => {
           return (
             <ListCard
+              userId={userId}
               imageGap="gap-1"
               imageWidth="w-20"
-              listTitle={list.title}
-              numberOfFilms={list.films.length}
+              list={list}
               apiIds={list.films.slice(0, 4).map((film) => film.film.tmdb_id)}
             />
           );

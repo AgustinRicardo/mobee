@@ -65,6 +65,8 @@ export function DialogReview({
         });
       } catch (e) {
         throw e;
+      } finally {
+        location.reload();
       }
     }
   };
@@ -136,7 +138,11 @@ export function DialogReview({
                 <div className="flex flex-row items-end">
                   <div className="flex flex-col">
                     <span>Rating</span>
-                    <RatingPicker emptyIconColor="text-beeBrownLight" setRatingValue={setRatingValue} ratingValue={ratingValue}/>
+                    <RatingPicker
+                      emptyIconColor="text-beeBrownLight"
+                      setRatingValue={setRatingValue}
+                      ratingValue={ratingValue}
+                    />
                   </div>
                   <DialogClose asChild>
                     <button

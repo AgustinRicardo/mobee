@@ -43,7 +43,7 @@ export default function FilmTabs({
             </TabsTrigger>
             <TabsTrigger
               className="data-[state=active]:bg-beeYellow data-[state=active]:text-beeBrownBackground"
-              value="recentReview"
+              value="recentReviews"
             >
               Recently reviewed
             </TabsTrigger>

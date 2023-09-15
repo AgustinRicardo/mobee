@@ -28,7 +28,9 @@ export default async function FilmsPage() {
               userId={userId}
             />
           }
-          recentReviews={<></>}
+          recentReviews={
+            <FilmList url="/api/recentlyReviewedFilms" userId={userId} ownDB />
+          }
           filter={<FilterFilmList userId={userId} />}
         ></FilmTabs>
       </section>

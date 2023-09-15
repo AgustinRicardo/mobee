@@ -3,8 +3,11 @@
 import { useEffect, useState } from "react";
 import ListCard from "./ListCard";
 import { List } from "@/lib/interfaces";
+interface Props {
+  userId: string;
+}
 
-export default function RecentLists() {
+export default function PopularLists({ userId }: Props) {
   const [popularList, setPopularList] = useState<List[]>([]);
 
   useEffect(() => {
@@ -19,18 +22,16 @@ export default function RecentLists() {
       });
   }, []);
 
-  console.log("Popular Lists", popularList);
-
   return (
     <>
       {popularList.map((list) => {
         return (
           <ListCard
+            userId={userId}
             key={list.id}
+            list={list}
             imageGap="gap-1"
             imageWidth="w-20"
-            listTitle={list.title}
-            numberOfFilms={list.films.length}
             apiIds={list.films.slice(0, 4).map((film) => film.film.tmdb_id)}
           />
         );

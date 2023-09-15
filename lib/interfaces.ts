@@ -31,6 +31,7 @@ export interface WatchStatus {
   film_id: string;
   to_watch: boolean;
   watched: boolean;
+  film: FilmOnDB;
 }
 
 export type Checked = DropdownMenuCheckboxItemProps["checked"];
@@ -66,6 +67,8 @@ export interface List {
   description: string;
   bookmark_count: number;
   films: FilmsOnLists[];
+  user_id: string;
+  user: User;
 }
 
 export interface Review {
@@ -75,6 +78,8 @@ export interface Review {
   rating: number;
   review_description: string;
   watched_at: Date;
+  film: FilmOnDB;
+  user: User;
 }
 
 export interface FilmOnDB {

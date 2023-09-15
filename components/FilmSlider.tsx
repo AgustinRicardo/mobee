@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 import FilmPoster from "./FilmPoster";
 import LeftArrow from "./icons/LeftArrow";
 import RightArrow from "./icons/RightArrow";
+import { Skeleton } from "@/components/ui/skeleton";
+import { usePathname } from "next/navigation";
+import { Film } from "@/lib/interfaces";
 
 interface Props {
   userId: string;
@@ -14,6 +17,7 @@ interface Props {
 export default function FilmSlider({ userId, url, numOfFilms }: Props) {
   const [films, setFilms] = useState<Array<any>>([]);
   const [slidePosition, setSlidePosition] = useState<number>(0);
+  const pathname = usePathname();
   const getFilms = async () => {
     const authorization = `Bearer ${process.env.NEXT_PUBLIC_TMDB_API_KEY}`;
     try {
@@ -27,7 +31,11 @@ export default function FilmSlider({ userId, url, numOfFilms }: Props) {
       const res = await fetch(url, options);
       const { results } = await res.json();
 
-      setFilms(results);
+      setFilms(
+        results.filter((film: Film) => {
+          return film.poster_path !== null;
+        })
+      );
     } catch (e) {
       console.log(e);
     }
@@ -40,8 +48,13 @@ export default function FilmSlider({ userId, url, numOfFilms }: Props) {
   return (
     <>
       {films && (
-        <ul className="flex flex-row pt-5 pb-2 gap-2">
+        <ul
+          className={`flex flex-row pt-5 pb-2 gap-2 h-80 justify-center ${
+            pathname.includes("/film_details") ? "max-h-48" : "max-h-80"
+          }`}
+        >
           {films
+
             .slice(
               numOfFilms * slidePosition,
               numOfFilms * slidePosition + numOfFilms
@@ -50,9 +63,9 @@ export default function FilmSlider({ userId, url, numOfFilms }: Props) {
               return (
                 <li key={film.id}>
                   <FilmPoster
-                    alt={film.title}
-                    src={`https://image.tmdb.org/t/p/w500/${film.poster_path}`}
-                    className=" rounded-md border-beeBrownLight border-2 hover:cursor-pointer basis-auto"
+                    className={`rounded-md border-beeBrownLight border-2 hover:cursor-pointer ${
+                      pathname.includes("/film_details") ? "w-24" : "w-48"
+                    } `}
                     userId={userId}
                     apiId={film.id}
                   />
@@ -66,7 +79,7 @@ export default function FilmSlider({ userId, url, numOfFilms }: Props) {
           className="bg-beeBrownHeader text-beeYellow rounded-sm h-4 flex items-center shadow-sm  hover:scale-105"
           onClick={() => {
             if (slidePosition === 0) {
-              setSlidePosition(3);
+              setSlidePosition(Math.floor(films.length / numOfFilms) - 1);
             } else {
               setSlidePosition(slidePosition - 1);
             }
@@ -77,7 +90,7 @@ export default function FilmSlider({ userId, url, numOfFilms }: Props) {
         <button
           className="bg-beeBrownHeader text-beeYellow rounded-sm h-4 flex items-center ml-auto shadow-sm hover:scale-105"
           onClick={() => {
-            if (slidePosition === 3) {
+            if (slidePosition === Math.floor(films.length / numOfFilms) - 1) {
               setSlidePosition(0);
             } else {
               setSlidePosition(slidePosition + 1);

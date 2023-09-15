@@ -23,11 +23,11 @@ export async function POST(request: NextRequest) {
 
       await prismaClient.list.update({
         where: { id: list.id },
-        data: { bookmark_count: list.bookmark_count++ },
+        data: { bookmark_count: list.bookmark_count + 1 },
       });
     }
 
-    return NextResponse.json({ message: "Successful" }, { status: 200 });
+    return NextResponse.json({ message: "Successful" });
   } catch (e) {
     return NextResponse.error();
   }
@@ -57,12 +57,35 @@ export async function DELETE(request: NextRequest) {
 
       await prismaClient.list.update({
         where: { id: list.id },
-        data: { bookmark_count: list.bookmark_count-- },
+        data: { bookmark_count: list.bookmark_count - 1 },
       });
     }
 
-    return NextResponse.json({ message: "Successful" }, { status: 200 });
+    return NextResponse.json({ message: "Successful" });
   } catch (e) {
+    return NextResponse.error();
+  }
+}
+
+export async function GET(request: NextRequest) {
+  const { searchParams } = new URL(request.url);
+  const userId = searchParams.get("userId");
+  const listId = searchParams.get("listId");
+
+  try {
+    if (userId && listId) {
+      const savedList = await prismaClient.listSavedByUser.findUnique({
+        where: {
+          list_id_user_id: {
+            list_id: listId,
+            user_id: userId,
+          },
+        },
+      });
+      const saved = savedList ? true : false;
+      return NextResponse.json({ saved });
+    }
+  } catch (error) {
     return NextResponse.error();
   }
 }

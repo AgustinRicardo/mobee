@@ -18,11 +18,8 @@ export async function POST(request: NextRequest) {
         });
       }
     }
-    //console.log(filmOnList);
-    return NextResponse.json(
-      { message: "Successful", filmOnList },
-      { status: 200 }
-    );
+
+    return NextResponse.json({ filmOnList });
   } catch (e) {
     return NextResponse.error();
   }

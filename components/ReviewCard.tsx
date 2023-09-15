@@ -4,15 +4,27 @@ import { usePathname } from "next/navigation";
 import FilmImageCard from "./FilmImageCard";
 import { useEffect, useState } from "react";
 import RatingPicker from "./RatingPicker";
+import DeleteIcon from "./icons/DeleteIcon";
+import { ToastAction } from "./ui/toast";
+import { Toaster } from "./ui/toaster";
+import { useToast } from "./ui/use-toast";
 
 interface Props {
   filmOnDB?: FilmOnDB;
   user?: User;
   review?: Review;
+  canDelete?: boolean;
 }
-export default function ReviewCard({ filmOnDB, user, review }: Props) {
+export default function ReviewCard({
+  filmOnDB,
+  user,
+  review,
+  canDelete = false,
+}: Props) {
   const pathname = usePathname();
   const [film, setFilm] = useState<Film>();
+  const { toast } = useToast();
+
   useEffect(() => {
     const url = `https://api.themoviedb.org/3/movie/${filmOnDB?.tmdb_id}?language=en-US&append_to_response=credits`;
     fetch(url, {
@@ -30,17 +42,51 @@ export default function ReviewCard({ filmOnDB, user, review }: Props) {
 
   return (
     <>
-      <div className="flex flex-row items-start py-4 gap-4">
+      <div className="flex flex-row items-start py-4 gap-4 group">
         {pathname.includes("/home") || pathname.includes("/my_profile") ? (
           <FilmImageCard imageWidth="w-20" apiId={filmOnDB?.tmdb_id!} />
         ) : null}
         <div className="review-info flex flex-col gap-2">
           {!pathname.includes("/film_details") && (
-            <div className="film-title flex flex-row items-end gap-3">
-              <span>{film?.title}</span>
-              <span className="opacity-50">
-                {film?.release_date ? film?.release_date.slice(0, 4) : "year"}
+            <div className="film-title flex flex-row items-center gap-3 ">
+              <span className="font-dmSerifDisplay text-lg font-bold">
+                {film?.title}
+                <span className="opacity-50 ml-2 font-openSans text-xs font-light">
+                  {film?.release_date ? film?.release_date.slice(0, 4) : "year"}
+                </span>
               </span>
+              {canDelete && (
+                <DeleteIcon
+                  className="w-5 h-5 text-beeBrownLight group-hover:block hidden ml-auto hover:cursor-pointer flex-shrink-0"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    toast({
+                      title: `Are you sure you want to delete the review?`,
+                      action: (
+                        <ToastAction
+                          className="hover:bg-beeRed"
+                          altText="Delete"
+                          onClick={() => {
+                            if (review) {
+                              fetch(`/api/review?reviewId=${review.id}`, {
+                                method: "DELETE",
+                              })
+                                .then(() => {
+                                  location.reload();
+                                })
+                                .catch((error) => {
+                                  console.log(error);
+                                });
+                            }
+                          }}
+                        >
+                          Delete
+                        </ToastAction>
+                      ),
+                    });
+                  }}
+                />
+              )}
             </div>
           )}
           <div className="user-rating-date flex flex-row items-center gap-3 align-middle">
@@ -61,14 +107,16 @@ export default function ReviewCard({ filmOnDB, user, review }: Props) {
               averageRating={review?.rating}
               size={"0.8rem"}
             />
-            {pathname.includes("/my_profile") && (
+            {pathname.includes("/my_profile") && review?.watched_at ? (
               <span className="opacity-50">
                 Watched at {review?.watched_at.getDate()}
               </span>
-            )}
+            ) : null}
           </div>
           <p className="review-description">{review?.review_description}</p>
         </div>
+
+        <Toaster />
       </div>
     </>
   );

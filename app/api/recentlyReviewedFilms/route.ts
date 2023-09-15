@@ -3,13 +3,19 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
   try {
-    const lists = await prismaClient.list.findMany({
-      take: 6,
-      include: { films: { include: { film: true } }, user: true },
+    const reviews = await prismaClient.review.findMany({
+      distinct: ["film_id"],
       orderBy: { created_at: "desc" },
+      take: 20,
+      include: {
+        film: true,
+      },
     });
 
-    return NextResponse.json({ lists });
+    const results = reviews.map((review) => {
+      return review.film;
+    });
+    return NextResponse.json({ results });
   } catch (e) {
     return NextResponse.error();
   }

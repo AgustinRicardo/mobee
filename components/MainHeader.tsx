@@ -33,14 +33,14 @@ export default function MainHeader({ children, userId }: Props) {
   return (
     <>
       <header
-        className={`flex relative flex-row items-center px-[16%]  bg-beeBrownHeader gap-12 h-16 font-switzer font-medium text-sm justify-evenly ${
+        className={`flex relative flex-row items-center px-[16%] bg-beeBrownHeader font-openSans gap-10 h-16 text-sm justify-evenly ${
           pathname.includes("/film_details") || pathname.includes("/my_profile")
             ? ""
             : "mb-8"
         }`}
       >
         <img src="/logo.png" alt="logo" className="w-24" />
-        <nav className="flex flex-row gap-10 uppercase ml-auto">
+        <nav className="flex flex-row gap-8 uppercase ml-auto font-medium tracking-wide">
           <Link
             href="/home"
             className={pathname === "/home" ? "" : "opacity-50"}
@@ -64,7 +64,7 @@ export default function MainHeader({ children, userId }: Props) {
 
         <DropdownMenu>
           <DropdownMenuTrigger>{children}</DropdownMenuTrigger>
-          <DropdownMenuContent className="bg-beeBrownLight border-none text-beeBeig p-0">
+          <DropdownMenuContent className="bg-beeBrownLight border-none text-beeBeig p-0 font-openSans">
             <DropdownMenuItem
               className="text-beeBrownBackground data-[highlighted]:bg-beeBrownLightDarker data-[highlighted]:text-beeBeig hover:cursor-pointer rounded-none"
               onClick={() => {
@@ -117,7 +117,7 @@ export default function MainHeader({ children, userId }: Props) {
           </DropdownMenuContent>
         </DropdownMenu>
 
-        {<CreateDropdown userId={userId} />}
+        <CreateDropdown userId={userId} />
       </header>
     </>
   );

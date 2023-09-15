@@ -4,7 +4,6 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   const { userId, apiId, date, review, ratingValue } = await request.json();
-  console.log(userId, apiId, date, review, ratingValue);
 
   try {
     const film = await getOrAddFilmToDB(apiId);
@@ -40,7 +39,7 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    return NextResponse.json({ message: "Successful" }, { status: 200 });
+    return NextResponse.json({ message: "Successful" });
   } catch (e) {
     return NextResponse.error();
   }
@@ -64,7 +63,7 @@ export async function GET(request: NextRequest) {
       })
     );
 
-    return NextResponse.json({ recentReviewsWithUserAndFilm }, { status: 200 });
+    return NextResponse.json({ recentReviewsWithUserAndFilm });
   } catch (error) {
     return NextResponse.error();
   }
@@ -73,6 +72,7 @@ export async function GET(request: NextRequest) {
 export async function DELETE(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const reviewId = searchParams.get("reviewId");
+
   let review;
   try {
     if (reviewId) {
@@ -95,10 +95,9 @@ export async function PUT(request: NextRequest) {
       where: { id: review.id },
       data: review,
     });
-    if(updatedReview){
+    if (updatedReview) {
       return NextResponse.json({ message: "Successful" }, { status: 200 });
     } else return NextResponse.json({ message: "BadRequest" }, { status: 400 });
-    
   } catch (e) {
     return NextResponse.error();
   }
