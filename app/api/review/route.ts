@@ -68,3 +68,37 @@ export async function GET(request: NextRequest) {
     return NextResponse.error();
   }
 }
+
+export async function DELETE(request: NextRequest) {
+  const { searchParams } = new URL(request.url);
+  const reviewId = searchParams.get("reviewId");
+  let review;
+  try {
+    if (reviewId) {
+      review = await prismaClient.review.delete({
+        where: { id: reviewId },
+      });
+    }
+    if (review) {
+      return NextResponse.json({ message: "Successful" }, { status: 200 });
+    } else return NextResponse.json({ message: "BadRequest" }, { status: 400 });
+  } catch (e) {
+    return NextResponse.error();
+  }
+}
+
+export async function PUT(request: NextRequest) {
+  const review = await request.json();
+  try {
+    const updatedReview = await prismaClient.review.update({
+      where: { id: review.id },
+      data: review,
+    });
+    if(updatedReview){
+      return NextResponse.json({ message: "Successful" }, { status: 200 });
+    } else return NextResponse.json({ message: "BadRequest" }, { status: 400 });
+    
+  } catch (e) {
+    return NextResponse.error();
+  }
+}
