@@ -42,7 +42,7 @@ model List {
 }
 
 model ListSavedByUser {
-  list    List   @relation(fields: [list_id], references: [id])
+  list    List   @relation(fields: [list_id], references: [id], onDelete: Cascade)
   list_id String
   user    User   @relation(fields: [user_id], references: [id])
   user_id String
@@ -51,7 +51,7 @@ model ListSavedByUser {
 }
 
 model FilmsOnLists {
-  list    List   @relation(fields: [list_id], references: [id])
+  list    List   @relation(fields: [list_id], references: [id], onDelete: Cascade)
   list_id String
   film    Film   @relation(fields: [film_id], references: [id])
   film_id String
