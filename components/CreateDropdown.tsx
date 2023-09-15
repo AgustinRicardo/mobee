@@ -25,6 +25,7 @@ import { useToast } from "./ui/use-toast";
 import { Toaster } from "./ui/toaster";
 import { DialogReview } from "./DialogReview";
 import { useRouter } from "next/navigation";
+import AddReviewIcon from "./icons/AddReviewIcon";
 
 interface Props {
   userId: string;
@@ -74,8 +75,8 @@ export default function CreateDropdown({ userId }: Props) {
   return (
     <>
       <DropdownMenu>
-        <DropdownMenuTrigger className="bg-beeYellow rounded-md flex flex-row items-end px-2 py-1 text-beeBrownBackground">
-          Create <DropdownIcon className="w-4 h-4" />
+        <DropdownMenuTrigger className="bg-beeYellow rounded-md flex flex-row items-center px-2 py-1 text-beeBrownBackground">
+          Create <AddReviewIcon className="w-4 h-4" />
         </DropdownMenuTrigger>
         <DropdownMenuContent className="bg-beeBrownLight border-none text-beeBeig p-0 flex-col flex">
           {filmToReview ? (

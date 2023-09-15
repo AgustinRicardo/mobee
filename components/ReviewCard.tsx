@@ -36,10 +36,12 @@ export default function ReviewCard({ filmOnDB, user, review }: Props) {
         ) : null}
         <div className="review-info flex flex-col gap-2">
           {!pathname.includes("/film_details") && (
-            <div className="film-title flex flex-row items-end gap-3">
-              <span>{film?.title}</span>
-              <span className="opacity-50">
-                {film?.release_date ? film?.release_date.slice(0, 4) : "year"}
+            <div className="film-title flex flex-row items-end gap-3 ">
+              <span className="font-dmSerifDisplay text-lg font-bold tracking-">
+                {film?.title}
+                <span className="opacity-50 ml-2 font-openSans text-xs font-light">
+                  {film?.release_date ? film?.release_date.slice(0, 4) : "year"}
+                </span>
               </span>
             </div>
           )}

@@ -10,7 +10,9 @@ export default async function Home() {
     <>
       <div className="flex flex-col gap-4">
         <section>
-          <h1 className="text-beeYellow">POPULAR FILMS</h1>
+          <h1 className="text-beeYellow font-openSans font-medium text-base tracking-wide uppercase">
+            Popular films
+          </h1>
           <hr className="border-beeYellow" />
           <FilmSlider
             userId={user?.id!}
@@ -21,13 +23,17 @@ export default async function Home() {
           />
         </section>
         <section>
-          <h1 className="text-beeYellow">RECENT REVIEWS</h1>
+          <h1 className="text-beeYellow font-openSans font-medium text-base tracking-wide uppercase">
+            RECENT REVIEWS
+          </h1>
           <hr className="border-beeYellow" />
 
           <HomeRecentReviews />
         </section>
         <section>
-          <h1 className="text-beeYellow">POPULAR LISTS</h1>
+          <h1 className="text-beeYellow font-openSans font-medium text-base tracking-wide uppercase">
+            POPULAR LISTS
+          </h1>
           <hr className="border-beeYellow" />
           <div className="grid grid-cols-3 justify-between gap-y-4 gap-x-2 py-4">
             <PopularLists userId={user?.id!} />
