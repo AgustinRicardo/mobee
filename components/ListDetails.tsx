@@ -1,5 +1,11 @@
 "use client";
-import { Film, FilmOnDB, FilmsOnLists, WatchStatus } from "@/lib/interfaces";
+import {
+  Film,
+  FilmOnDB,
+  FilmsOnLists,
+  List,
+  WatchStatus,
+} from "@/lib/interfaces";
 import FilmPoster from "./FilmPoster";
 import { useEffect, useState } from "react";
 
@@ -10,8 +16,7 @@ interface Props {
 
 export default function ListDetails({ url, userId }: Props) {
   const [films, setFilms] = useState<FilmOnDB[]>();
-  const [listTitle, setListTitle] = useState<string>();
-  const [listDescription, setListDescription] = useState<string>();
+  const [list, setList] = useState<List>();
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
@@ -19,8 +24,8 @@ export default function ListDetails({ url, userId }: Props) {
         if (watchlist) {
           setFilms(watchlist.map((status: WatchStatus) => status.film));
         } else {
-          setListTitle(list.title);
-          setListDescription;
+          setList(list);
+
           setFilms(
             list.films.map((filmOnList: FilmsOnLists) => filmOnList.film)
           );
@@ -30,14 +35,24 @@ export default function ListDetails({ url, userId }: Props) {
 
   return (
     <>
-      <h1>{listTitle}</h1>
-      <p>{listDescription}</p>
-      <div className="grid grid-cols-5">
-        {films &&
-          films.map((film) => {
-            return <FilmPoster apiId={film.tmdb_id} userId={userId} />;
-          })}
-      </div>
+      {list && (
+        <>
+          <h1>{list.title}</h1>
+          <p>{list.description}</p>
+          <div className="grid grid-cols-5">
+            {films &&
+              films.map((film) => {
+                return (
+                  <FilmPoster
+                    apiId={film.tmdb_id}
+                    userId={userId}
+                    canDelete={list.user_id === userId}
+                  />
+                );
+              })}
+          </div>
+        </>
+      )}
     </>
   );
 }

@@ -72,6 +72,7 @@ export async function GET(request: NextRequest) {
 export async function DELETE(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const reviewId = searchParams.get("reviewId");
+
   let review;
   try {
     if (reviewId) {
@@ -94,10 +95,9 @@ export async function PUT(request: NextRequest) {
       where: { id: review.id },
       data: review,
     });
-    if(updatedReview){
+    if (updatedReview) {
       return NextResponse.json({ message: "Successful" }, { status: 200 });
     } else return NextResponse.json({ message: "BadRequest" }, { status: 400 });
-    
   } catch (e) {
     return NextResponse.error();
   }

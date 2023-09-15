@@ -62,6 +62,7 @@ export default function MyUserListsComponent({ userId }: Props) {
                       return filmOnList.film.tmdb_id;
                     })}
                     hideUser
+                    canDelete
                   />
                 );
               })}

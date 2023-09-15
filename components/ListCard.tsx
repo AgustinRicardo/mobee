@@ -1,9 +1,13 @@
 "use client";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import FilmImageCard from "./FilmImageCard";
 import BookmarkIcon from "@/components/icons/BookmarkIcon";
 import { useEffect, useState } from "react";
 import { List } from "@/lib/interfaces";
+import DeleteIcon from "./icons/DeleteIcon";
+import { useToast } from "@/components/ui/use-toast";
+import { Toaster } from "@/components/ui/toaster";
+import { ToastAction } from "@/components/ui/toast";
 
 interface Props {
   imageGap: string;
@@ -12,6 +16,7 @@ interface Props {
   apiIds?: number[];
   userId?: string;
   hideUser?: boolean;
+  canDelete?: boolean;
 }
 
 export default function ListCard({
@@ -21,9 +26,11 @@ export default function ListCard({
   apiIds,
   userId,
   hideUser = false,
+  canDelete = false,
 }: Props) {
   const [savedList, setSavedList] = useState<boolean>(false);
   const router = useRouter();
+  const { toast } = useToast();
 
   useEffect(() => {
     if (userId && list) {
@@ -59,7 +66,7 @@ export default function ListCard({
           })}
         </div>
         {list && apiIds ? (
-          <div className="flex flex-row">
+          <div className="flex flex-row items-center">
             <div className="flex flex-col">
               <div className="flex flex-row">
                 <span className="pr-2">{list.title}</span>
@@ -105,6 +112,38 @@ export default function ListCard({
                 } `}
               />
             )}
+
+            {canDelete && (
+              <DeleteIcon
+                className="w-5 h-5 text-beeBrownLight group-hover:block hidden ml-auto hover:cursor-pointer"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  toast({
+                    title: `Are you sure you want to delete "${list.title}"?`,
+                    action: (
+                      <ToastAction
+                        className="hover:bg-beeRed"
+                        altText="Delete"
+                        onClick={() => {
+                          fetch(`/api/list?listId=${list.id}`, {
+                            method: "DELETE",
+                          })
+                            .then(() => {
+                              location.reload();
+                            })
+                            .catch((error) => {
+                              console.log(error);
+                            });
+                        }}
+                      >
+                        Delete
+                      </ToastAction>
+                    ),
+                  });
+                }}
+              />
+            )}
+            <Toaster />
           </div>
         ) : null}
       </div>

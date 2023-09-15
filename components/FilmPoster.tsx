@@ -13,25 +13,29 @@ import {
 } from "@/components/ui/tooltip";
 import { DialogAddToList } from "./DialogAddToList";
 import { Skeleton } from "./ui/skeleton";
+import DeleteIcon from "./icons/DeleteIcon";
+import { ToastAction } from "./ui/toast";
+import { useToast } from "./ui/use-toast";
 
 interface Props {
   apiId: number;
   userId: string;
   className?: string;
-  maxSize?: number;
+  canDelete?: boolean;
 }
 
 export default function FilmPoster({
   apiId,
   userId,
   className,
-  maxSize,
+  canDelete = false,
 }: Props) {
   const router = useRouter();
   const [isWatched, setIsWatched] = useState<boolean>(false);
   const [toWatch, setToWatch] = useState<boolean>(false);
   const [posterPath, setPosterPath] = useState<string>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const { toast } = useToast();
 
   useEffect(() => {
     fetch(
@@ -70,7 +74,7 @@ export default function FilmPoster({
       ) : (
         posterPath && (
           <div className={`group`}>
-            <div className="hidden flex-col justify-around px-2 py-2 gap-0.5 group-hover:flex absolute group-hover:bg-beeBrownLight/90 rounded-tl-md rounded-br-md">
+            <div className="hidden group-hover:flex-col justify-around px-2 py-2 gap-0.5 group-hover:flex absolute group-hover:bg-beeBrownLight/90 rounded-tl-md rounded-br-md">
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
@@ -128,6 +132,43 @@ export default function FilmPoster({
                     <p>Add film to a list</p>
                   </TooltipContent>
                 </Tooltip>
+                {canDelete && (
+                  <Tooltip>
+                    <TooltipTrigger>
+                      <DeleteIcon
+                        className="w-6 text-beeBrownBackground hover:cursor-pointer "
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          toast({
+                            title: `Are you sure you want to delete the review?`,
+                            action: (
+                              <ToastAction
+                                className="hover:bg-beeRed"
+                                altText="Delete"
+                                onClick={() => {
+                                  fetch("", {
+                                    method: "DELETE",
+                                  })
+                                    .then(() => {
+                                      location.reload();
+                                    })
+                                    .catch((error) => {
+                                      error;
+                                    });
+                                }}
+                              >
+                                Delete
+                              </ToastAction>
+                            ),
+                          });
+                        }}
+                      />
+                    </TooltipTrigger>
+                    <TooltipContent className="bg-beeBrownBackground text-beeBeig border-none text-xs">
+                      <p>Delete film from list</p>
+                    </TooltipContent>
+                  </Tooltip>
+                )}
               </TooltipProvider>
             </div>
 

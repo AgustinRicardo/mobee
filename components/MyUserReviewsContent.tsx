@@ -26,7 +26,7 @@ export default function MyUserReviewsContent({ userId }: Props) {
       <div className="grid grid-cols-2">
         {reviews &&
           reviews.map((review) => (
-            <ReviewCard review={review} filmOnDB={review.film} />
+            <ReviewCard review={review} filmOnDB={review.film} canDelete />
           ))}
       </div>
     </>
