@@ -7,13 +7,22 @@ export async function GET(request: NextRequest) {
   let listsSavedByUser;
   try {
     if (userId) {
-       listsSavedByUser = await prismaClient.listSavedByUser.findMany({
-        where: { user_id : userId },
-        include: { list: true }
+      listsSavedByUser = await prismaClient.listSavedByUser.findMany({
+        where: { user_id: userId },
+        include: {
+          list: {
+            include: {
+              films: { include: { film: true } },
+              user: true,
+            },
+          },
+        },
       });
     }
+
     if (listsSavedByUser) {
-      return NextResponse.json({ listsSavedByUser }, { status: 200 });
+      const savedLists = listsSavedByUser.map((entry) => entry.list);
+      return NextResponse.json({ savedLists });
     }
   } catch (e) {
     return NextResponse.error();

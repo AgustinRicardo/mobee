@@ -6,7 +6,7 @@ export async function GET(request: NextRequest) {
   try {
     const lists = await prismaClient.list.findMany({
       take: 6,
-      include: { films: { include: { film: true } } },
+      include: { films: { include: { film: true } }, user: true },
       orderBy: { bookmark_count: "asc" },
     });
 

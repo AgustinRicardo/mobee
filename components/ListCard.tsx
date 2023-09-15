@@ -1,5 +1,5 @@
 "use client";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import FilmImageCard from "./FilmImageCard";
 import BookmarkIcon from "@/components/icons/BookmarkIcon";
 import { useEffect, useState } from "react";
@@ -11,6 +11,7 @@ interface Props {
   list?: List;
   apiIds?: number[];
   userId?: string;
+  hideUser?: boolean;
 }
 
 export default function ListCard({
@@ -19,6 +20,7 @@ export default function ListCard({
   list,
   apiIds,
   userId,
+  hideUser = false,
 }: Props) {
   const [savedList, setSavedList] = useState<boolean>(false);
   const router = useRouter();
@@ -65,7 +67,18 @@ export default function ListCard({
                   {apiIds.length} {apiIds.length > 1 ? "films" : "film"}
                 </span>
               </div>
-              <span>user</span>
+              {!hideUser && (
+                <div className="flex flex-row gap-1 items-center">
+                  {list.user.profile_picture_path && (
+                    <img
+                      src={list.user.profile_picture_path}
+                      alt=""
+                      className="w-5 h-5 rounded-full"
+                    />
+                  )}
+                  <span>{list.user.username}</span>
+                </div>
+              )}
             </div>
 
             {!(list.user_id === userId) && (
