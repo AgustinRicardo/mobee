@@ -2,14 +2,34 @@
 import { useEffect, useState } from "react";
 import ListCard from "./ListCard";
 import ReviewCard from "./ReviewCard";
-import { WatchStatus, Review, List } from "@/lib/interfaces";
+import { WatchStatus, Review, List, User } from "@/lib/interfaces";
 import { useRouter } from "next/navigation";
 
 interface Props {
-  userId: string;
+  user: User;
 }
 
-export default function ProfileContent({ userId }: Props) {
+// const uploadAvatar = async (data) => {
+//   const file = data.infoAvatar;
+//   const fileName = data.avatar;
+
+//   let { error: uploadError } = await supabase.storage
+//     .from("avatars")
+//     .upload(fileName, file);
+
+//   if (uploadError) {
+//     throw uploadError;
+//   }
+
+//   const { data } = supabase
+//     .storage
+//     .from('avatars')
+//     .getPublicUrl(fileName)
+//   setImageUrl(data.publicUrl)
+
+// };
+
+export default function ProfileContent({ user }: Props) {
   const [watchlist, setWatchlist] = useState<WatchStatus[]>();
   const [reviews, setReviews] = useState<Review[]>();
   const [lists, setLists] = useState<List[]>();
@@ -17,7 +37,7 @@ export default function ProfileContent({ userId }: Props) {
   const router = useRouter();
 
   useEffect(() => {
-    fetch(`/api/my_profile?userId=${userId}`)
+    fetch(`/api/my_profile?userId=${user.id}`)
       .then((res) => res.json())
       .then(({ watchlist, reviews, lists, watchedFilms }) => {
         setWatchlist(watchlist);
@@ -47,12 +67,7 @@ export default function ProfileContent({ userId }: Props) {
               src="/profile_photo.jpg"
               alt="user"
             />
-            <div className="flex flex-col gap-2">
-              <span>user</span>
-              <button className="bg-beeBrownLight text-beeBrownBackground rounded-sm px-1 py-0.5 text-xs drop-shadow">
-                Edit profile
-              </button>
-            </div>
+            <span>user</span>
           </div>
 
           <div className="flex flex-col items-center ml-auto">
@@ -86,6 +101,7 @@ export default function ProfileContent({ userId }: Props) {
                 imageGap="gap-3"
                 imageWidth="w-28"
                 apiIds={watchlist.map((status) => status.film.tmdb_id)}
+                hideUser
               />
             )}
           </div>
@@ -103,7 +119,8 @@ export default function ProfileContent({ userId }: Props) {
               lists.map((list) => {
                 return (
                   <ListCard
-                    userId={userId}
+                    hideUser
+                    userId={user.id}
                     imageGap="gap-1"
                     imageWidth="w-20"
                     list={list}

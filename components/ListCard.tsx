@@ -65,14 +65,16 @@ export default function ListCard({
             );
           })}
         </div>
-        {list && apiIds ? (
+        {list ? (
           <div className="flex flex-row items-center">
             <div className="flex flex-col">
               <div className="flex flex-row">
                 <span className="pr-2">{list.title}</span>
-                <span className="opacity-50">
-                  {apiIds.length} {apiIds.length > 1 ? "films" : "film"}
-                </span>
+                {apiIds && (
+                  <span className="opacity-50">
+                    {apiIds.length} {apiIds.length > 1 ? "films" : "film"}
+                  </span>
+                )}
               </div>
               {!hideUser && (
                 <div className="flex flex-row gap-1 items-center">

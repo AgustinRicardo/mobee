@@ -14,7 +14,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import CreateDropdown from "./CreateDropdown";
 import { DropdownMenuArrow } from "@radix-ui/react-dropdown-menu";
-import { SearchBar } from "./SearchBar";
 
 interface Props {
   children: React.ReactNode;
@@ -60,7 +59,6 @@ export default function MainHeader({ children, userId }: Props) {
             Lists
           </Link>
         </nav>
-        <SearchBar />
 
         <DropdownMenu>
           <DropdownMenuTrigger>{children}</DropdownMenuTrigger>

@@ -22,6 +22,7 @@ interface Props {
   userId: string;
   className?: string;
   canDelete?: boolean;
+  listId?: string;
 }
 
 export default function FilmPoster({
@@ -29,6 +30,7 @@ export default function FilmPoster({
   userId,
   className,
   canDelete = false,
+  listId,
 }: Props) {
   const router = useRouter();
   const [isWatched, setIsWatched] = useState<boolean>(false);
@@ -146,9 +148,12 @@ export default function FilmPoster({
                                 className="hover:bg-beeRed"
                                 altText="Delete"
                                 onClick={() => {
-                                  fetch("", {
-                                    method: "DELETE",
-                                  })
+                                  fetch(
+                                    `/api/list/filmOnList?listId=${listId}&apiId=${apiId}`,
+                                    {
+                                      method: "DELETE",
+                                    }
+                                  )
                                     .then(() => {
                                       location.reload();
                                     })

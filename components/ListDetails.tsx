@@ -25,7 +25,6 @@ export default function ListDetails({ url, userId }: Props) {
           setFilms(watchlist.map((status: WatchStatus) => status.film));
         } else {
           setList(list);
-
           setFilms(
             list.films.map((filmOnList: FilmsOnLists) => filmOnList.film)
           );
@@ -35,7 +34,7 @@ export default function ListDetails({ url, userId }: Props) {
 
   return (
     <>
-      {list && (
+      {list ? (
         <>
           <h1>{list.title}</h1>
           <p>{list.description}</p>
@@ -44,14 +43,29 @@ export default function ListDetails({ url, userId }: Props) {
               films.map((film) => {
                 return (
                   <FilmPoster
+                    key={film.id}
                     apiId={film.tmdb_id}
                     userId={userId}
                     canDelete={list.user_id === userId}
+                    listId={list.id}
                   />
                 );
               })}
           </div>
         </>
+      ) : (
+        <div className="grid grid-cols-5">
+          {films &&
+            films.map((film) => {
+              return (
+                <FilmPoster
+                  key={film.id}
+                  apiId={film.tmdb_id}
+                  userId={userId}
+                />
+              );
+            })}
+        </div>
       )}
     </>
   );
