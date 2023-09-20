@@ -14,6 +14,7 @@ import {
   Dispatch,
   FormEventHandler,
   SetStateAction,
+  useEffect,
   useState,
 } from "react";
 import RatingPicker from "./RatingPicker";
@@ -67,6 +68,9 @@ export function DialogReview({
         throw e;
       } finally {
         location.reload();
+        toast({
+          title: "Review added successfully",
+        });
       }
     }
   };

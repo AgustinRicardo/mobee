@@ -67,8 +67,9 @@ export default function FilmsSearchBar({
                 <ul className="rounded-md flex flex-col ">
                   {films.map((film) => {
                     return (
-                      <button
-                        className="hover:text-beeBeig font-semibold hover:bg-beeBrownLightDarker text-beeBrownBackground font-openSans text-sm px-2 py-1 text-start"
+                      <li
+                        key={film.id}
+                        className="hover:text-beeBeig font-semibold hover:bg-beeBrownLightDarker text-beeBrownBackground font-openSans text-sm px-2 py-1 text-start hover:cursor-pointer"
                         onClick={
                           action === "addFilmToList"
                             ? () => {
@@ -97,13 +98,11 @@ export default function FilmsSearchBar({
                             : () => {}
                         }
                       >
-                        <li key={film.id}>
-                          <span>{film.title}</span>
-                          <span className="text-xs font-medium pl-2">
-                            {film.release_date.slice(0, 4)}
-                          </span>
-                        </li>
-                      </button>
+                        <span>{film.title}</span>
+                        <span className="text-xs font-medium pl-2">
+                          {film.release_date.slice(0, 4)}
+                        </span>
+                      </li>
                     );
                   })}
                 </ul>

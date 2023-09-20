@@ -53,9 +53,9 @@ export default function ListCard({
         }}
       >
         <div
-          className={`film-posters flex flex-row items-center ${imageGap}  hover:cursor-pointer  hover:border-beeBeig border-2 border-transparent rounded-sm`}
+          className={`film-posters flex flex-row items-center ${imageGap} hover:cursor-pointer  hover:border-beeBeig border-2 border-transparent rounded-sm`}
         >
-          {apiIds?.map((apiId) => {
+          {apiIds?.slice(0, 4).map((apiId) => {
             return (
               <FilmImageCard
                 key={apiId}

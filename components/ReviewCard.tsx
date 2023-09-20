@@ -113,7 +113,9 @@ export default function ReviewCard({
               </span>
             ) : null}
           </div>
-          <p className="review-description">{review?.review_description}</p>
+          <p className="review-description max-w-sm break-words">
+            {review?.review_description}
+          </p>
         </div>
 
         <Toaster />

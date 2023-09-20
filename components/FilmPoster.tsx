@@ -183,7 +183,6 @@ export default function FilmPoster({
               }}
               className={className}
               src={`https://image.tmdb.org/t/p/w500${posterPath}`}
-              width="100%"
             />
           </div>
         )
