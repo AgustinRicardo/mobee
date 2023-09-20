@@ -8,7 +8,7 @@ export async function GET(request: NextRequest) {
   try {
     if (listId) {
       const list = await prismaClient.list.findUnique({
-        include: { films: { include: { film: true } } },
+        include: { films: { include: { film: true } }, user: true },
         where: { id: listId },
       });
       return NextResponse.json({ list });
@@ -25,13 +25,12 @@ export async function DELETE(request: NextRequest) {
   try {
     if (listId) {
       list = await prismaClient.list.delete({
-        where: { id: listId }
+        where: { id: listId },
       });
     }
     if (list) {
       return NextResponse.json({ message: "Successful" }, { status: 200 });
-    }
-    else return NextResponse.json({ message: "BadRequest" }, { status: 400 });
+    } else return NextResponse.json({ message: "BadRequest" }, { status: 400 });
   } catch (e) {
     return NextResponse.error();
   }

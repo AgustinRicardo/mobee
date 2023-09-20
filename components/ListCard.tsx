@@ -53,7 +53,7 @@ export default function ListCard({
         }}
       >
         <div
-          className={`film-posters flex flex-row items-center ${imageGap} pb-2`}
+          className={`film-posters flex flex-row items-center ${imageGap}  hover:cursor-pointer  hover:border-beeBeig border-2 border-transparent rounded-sm`}
         >
           {apiIds?.map((apiId) => {
             return (
@@ -69,7 +69,7 @@ export default function ListCard({
           <div className="flex flex-row items-center">
             <div className="flex flex-col">
               <div className="flex flex-row">
-                <span className="pr-2">{list.title}</span>
+                <span className="pr-2 hover:cursor-pointer">{list.title}</span>
                 {apiIds && (
                   <span className="opacity-50">
                     {apiIds.length} {apiIds.length > 1 ? "films" : "film"}

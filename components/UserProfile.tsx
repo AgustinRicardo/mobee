@@ -10,11 +10,11 @@ interface Props {
 }
 export default async function UserProfile({ user }: Props) {
   return (
-    <div className="flex flex-row gap-2 items-center object-cover">
+    <div className="flex flex-row gap-2 items-center">
       <img
         src={user.profile_picture_path}
         alt="user image"
-        className="w-7 h-7 rounded-full"
+        className="w-7 h-7 rounded-full object-cover"
       />
       <span className="flex flex-row items-end">
         {user ? user.username : "User"} <DropdownIcon className="w-4 h-4 " />
