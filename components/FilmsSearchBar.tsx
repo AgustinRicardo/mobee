@@ -62,7 +62,7 @@ export default function FilmsSearchBar({
             }}
           />
           {films && (
-            <div className="absolute bg-beeBrownLight rounded-md overflow-hidden">
+            <div className="absolute bg-beeBrownLight rounded-md overflow-hidden z-20">
               <ScrollArea className="h-28">
                 <ul className="rounded-md flex flex-col ">
                   {films.map((film) => {

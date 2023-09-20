@@ -48,7 +48,11 @@ export default function FilmSlider({ userId, url, numOfFilms }: Props) {
   return (
     <>
       {films && (
-        <ul className={`flex flex-row pt-5 pb-2 gap-2 h-80 justify-center`}>
+        <ul
+          className={`flex flex-row pt-5 pb-2 gap-2 justify-center ${
+            pathname.includes("/film_details") ? "h-44" : "h-80"
+          }`}
+        >
           {films
 
             .slice(

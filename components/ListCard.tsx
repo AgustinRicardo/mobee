@@ -100,12 +100,16 @@ export default function ListCard({
                       method: "DELETE",
                       body: JSON.stringify(saveListData),
                     });
+                    toast({ title: "List removed from your saved lists" });
+
                     setSavedList(!savedList);
                   } else {
                     fetch(`/api/listSavedByUser`, {
                       method: "POST",
                       body: JSON.stringify(saveListData),
                     });
+                    toast({ title: "List added to your saved lists" });
+
                     setSavedList(!savedList);
                   }
                 }}

@@ -86,6 +86,13 @@ export default function FilmPoster({
                           method: "POST",
                           body: JSON.stringify({ apiId, userId, isWatched }),
                         });
+                        if (isWatched) {
+                          toast({
+                            title: "Film removed from your watched films",
+                          });
+                        } else {
+                          toast({ title: "Film added to your watched films" });
+                        }
                         setIsWatched(!isWatched);
                       }}
                     >
@@ -110,6 +117,11 @@ export default function FilmPoster({
                           method: "POST",
                           body: JSON.stringify({ apiId, userId, toWatch }),
                         });
+                        if (toWatch) {
+                          toast({ title: "Film removed from your watchlist" });
+                        } else {
+                          toast({ title: "Film added to your watchlist" });
+                        }
                         setToWatch(!toWatch);
                       }}
                     >

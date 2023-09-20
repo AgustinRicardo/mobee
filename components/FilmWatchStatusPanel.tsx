@@ -8,6 +8,7 @@ import { Film } from "@/lib/interfaces";
 import AddReviewIcon from "./icons/AddReviewIcon";
 import RatingPicker from "./RatingPicker";
 import { DialogAddToList } from "./DialogAddToList";
+import { toast } from "./ui/use-toast";
 
 interface Props {
   userId: string;
@@ -53,6 +54,12 @@ export default function FilmWatchStatusPanel({ userId, film }: Props) {
                 method: "POST",
                 body: JSON.stringify({ apiId: film.id, userId, isWatched }),
               });
+              if (isWatched) {
+                toast({ title: "Film removed from your watched films" });
+              } else {
+                toast({ title: "Film added to your watched films" });
+              }
+
               setIsWatched(!isWatched);
             }}
           >
@@ -75,6 +82,11 @@ export default function FilmWatchStatusPanel({ userId, film }: Props) {
                 method: "POST",
                 body: JSON.stringify({ apiId: film.id, userId, toWatch }),
               });
+              if (toWatch) {
+                toast({ title: "Film removed from your watchlist" });
+              } else {
+                toast({ title: "Film added to your watchlist" });
+              }
               setToWatch(!toWatch);
             }}
           >

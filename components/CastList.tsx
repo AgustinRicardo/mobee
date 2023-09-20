@@ -1,6 +1,13 @@
 "use client";
-import { Tooltip } from "@mui/material";
+
 import { useState } from "react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { TooltipArrow } from "@radix-ui/react-tooltip";
 
 interface Props {
   cast: [{ name: string; character: string }];
@@ -15,21 +22,24 @@ export default function CastList({ cast }: Props) {
         {cast.slice(0, numberOfItems).map((cast) => {
           return (
             <li key={cast.name}>
-              <Tooltip
-                title={cast.character}
-                placement="top"
-                className="bg-beeBrownLight text-beeBeig"
-                arrow
-              >
-                <div className="bg-beeBrownLightText text-beeBeig rounded-md text-center w-fit m-1 p-1">
-                  {cast.name}
-                </div>
-              </Tooltip>
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger>
+                    <div className="bg-beeBrownLight text-beeBrownHeader rounded-md text-center w-fit m-1 py-1 px-2 hover:cursor-default">
+                      {cast.name}
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent className="bg-beeBrownLight">
+                    {cast.character}
+                    <TooltipArrow className="fill-beeBrownLight text-beeBrownBackground font-openSans" />
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
             </li>
           );
         })}
         <button
-          className="bg-beeBrownLightText text-beeBeig rounded-md text-center w-fit m-1 p-1 hover:bg-beeBeig hover:text-beeBrownLightText"
+          className="bg-beeBrownLightText text-beeBeig rounded-md text-center w-fit m-1 py-1 px-2 hover:bg-beeBeig hover:text-beeBrownLightText font-openSans"
           onClick={() => {
             if (showMore) {
               setShowMore(false);
