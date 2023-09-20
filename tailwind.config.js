@@ -19,6 +19,9 @@ module.exports = {
         "2xl": "1400px",
       },
     },
+    variants: {
+      extend: { text: ["disabled"] },
+    },
     extend: {
       display: ["group-hover"],
       backgroundImage: {
