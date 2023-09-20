@@ -1,50 +1,46 @@
 "use client";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import ListCard from "./ListCard";
 import ReviewCard from "./ReviewCard";
 import { WatchStatus, Review, List, User } from "@/lib/interfaces";
 import { useRouter } from "next/navigation";
+import EditIcon from "./icons/EditIcon";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 interface Props {
   user: User;
 }
 
-// const uploadAvatar = async (data) => {
-//   const file = data.infoAvatar;
-//   const fileName = data.avatar;
-
-//   let { error: uploadError } = await supabase.storage
-//     .from("avatars")
-//     .upload(fileName, file);
-
-//   if (uploadError) {
-//     throw uploadError;
-//   }
-
-//   const { data } = supabase
-//     .storage
-//     .from('avatars')
-//     .getPublicUrl(fileName)
-//   setImageUrl(data.publicUrl)
-
-// };
-
 export default function ProfileContent({ user }: Props) {
+  const supabase = createClientComponentClient();
   const [watchlist, setWatchlist] = useState<WatchStatus[]>();
   const [reviews, setReviews] = useState<Review[]>();
   const [lists, setLists] = useState<List[]>();
   const [watchedFilms, setWatchFilms] = useState<number>();
+  const [photoPath, setPhotoPath] = useState<string>();
   const router = useRouter();
 
   useEffect(() => {
     fetch(`/api/my_profile?userId=${user.id}`)
       .then((res) => res.json())
-      .then(({ watchlist, reviews, lists, watchedFilms }) => {
+      .then(({ watchlist, reviews, lists, watchedFilms, photoPath }) => {
         setWatchlist(watchlist);
         setReviews(reviews);
         setLists(lists);
         setWatchFilms(watchedFilms);
+        setPhotoPath(photoPath);
       });
+
+    const { data } = supabase.storage
+      .from("profile-images")
+      .getPublicUrl("public/default.jpg");
+    console.log(data.publicUrl);
   }, []);
 
   return (
@@ -61,12 +57,60 @@ export default function ProfileContent({ user }: Props) {
       </div>
       <div className="content relative bottom-40 flex flex-col">
         <div className="profile-info flex flex-row text-beeBeig px-20 pb-10">
-          <div className="flex flex-row gap-4">
-            <img
-              className="rounded-full w-14 h-14"
-              src="/profile_photo.jpg"
-              alt="user"
-            />
+          <div className="flex flex-row gap-4 items-center">
+            <div className="wrapper relative group">
+              <img
+                className="rounded-full w-14 h-14 object-cover"
+                src={photoPath}
+                alt="user"
+              />
+              <label htmlFor="upload-photo">
+                <EditIcon className="hidden group-hover:block absolute top-[75%] left-[75%] bg-beeBrownHeader text-beeBeig rounded-full w-5 h-5 p-0.5" />
+              </label>
+              <input
+                accept="image/jpeg"
+                type="file"
+                name="photo"
+                id="upload-photo"
+                className="hidden"
+                onChange={async (e) => {
+                  const { files } = e.target;
+                  if (files) {
+                    if (
+                      user.profile_picture_path?.includes("default") &&
+                      user.profile_picture_path !== null
+                    ) {
+                      console.log("hola");
+                      const { error: e1 } = await supabase.storage
+                        .from("profile-images")
+                        .remove([user.profile_picture_path]);
+                      if (e1) {
+                        console.log(e1);
+                      }
+                    }
+                    const { error: e2 } = await supabase.storage
+                      .from("profile-images")
+                      .upload(`public/${user.id}/${files[0].name}`, files[0]);
+                    if (e2) {
+                      console.log(e2);
+                    }
+
+                    const { data } = supabase.storage
+                      .from("profile-images")
+                      .getPublicUrl(`public/${user.id}/${files[0].name}`);
+
+                    setPhotoPath(data.publicUrl);
+                    fetch("/api/my_profile", {
+                      method: "PUT",
+                      body: JSON.stringify({
+                        profilePathname: data.publicUrl,
+                        userId: user.id,
+                      }),
+                    });
+                  }
+                }}
+              />
+            </div>
             <span>user</span>
           </div>
 
@@ -119,6 +163,7 @@ export default function ProfileContent({ user }: Props) {
               lists.map((list) => {
                 return (
                   <ListCard
+                    key={list.id}
                     hideUser
                     userId={user.id}
                     imageGap="gap-1"
@@ -141,7 +186,13 @@ export default function ProfileContent({ user }: Props) {
           <div className="grid grid-cols-2">
             {reviews &&
               reviews.map((review) => {
-                return <ReviewCard review={review} filmOnDB={review.film} />;
+                return (
+                  <ReviewCard
+                    key={review.id}
+                    review={review}
+                    filmOnDB={review.film}
+                  />
+                );
               })}
           </div>
         </div>

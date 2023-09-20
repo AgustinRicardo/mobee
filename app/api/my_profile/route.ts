@@ -36,8 +36,38 @@ export async function GET(request: NextRequest) {
         orderBy: { created_at: "desc" },
         take: 3,
       });
-      return NextResponse.json({ watchlist, reviews, lists, watchedFilms });
+
+      const user = await prismaClient.user.findUnique({
+        where: { id: userId },
+      });
+      let photoPath;
+      if (user) {
+        photoPath = user.profile_picture_path;
+      }
+      return NextResponse.json({
+        watchlist,
+        reviews,
+        lists,
+        watchedFilms,
+        photoPath,
+      });
     }
+  } catch (error) {
+    return NextResponse.error();
+  }
+}
+
+export async function PUT(request: NextRequest) {
+  const { profilePathname, userId } = await request.json();
+  console.log(profilePathname, userId);
+  try {
+    if (userId) {
+      await prismaClient.user.update({
+        where: { id: userId },
+        data: { profile_picture_path: profilePathname },
+      });
+    }
+    return NextResponse.json({});
   } catch (error) {
     return NextResponse.error();
   }

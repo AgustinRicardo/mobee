@@ -82,7 +82,7 @@ export default function ListCard({
                     <img
                       src={list.user.profile_picture_path}
                       alt=""
-                      className="w-5 h-5 rounded-full"
+                      className="w-5 h-5 rounded-full object-cover"
                     />
                   )}
                   <span>{list.user.username}</span>

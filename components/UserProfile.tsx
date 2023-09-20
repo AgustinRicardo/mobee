@@ -1,6 +1,7 @@
 import { User } from "@/lib/interfaces";
 import { getUser } from "../lib/functions";
 import DropdownIcon from "./icons/DropdownIcon";
+import prismaClient from "@/lib/prisma-client";
 
 export const revalidate = 1000;
 
@@ -9,9 +10,9 @@ interface Props {
 }
 export default async function UserProfile({ user }: Props) {
   return (
-    <div className="flex flex-row gap-2 items-center">
+    <div className="flex flex-row gap-2 items-center object-cover">
       <img
-        src="/profile_photo.jpg"
+        src={user.profile_picture_path}
         alt="user image"
         className="w-7 h-7 rounded-full"
       />

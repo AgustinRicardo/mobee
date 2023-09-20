@@ -22,7 +22,7 @@ export interface User {
   id: string;
   username: string;
   email: string;
-  profile_picture_path: string | null;
+  profile_picture_path: string;
   created_at: Date;
 }
 

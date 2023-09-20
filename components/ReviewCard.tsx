@@ -95,7 +95,7 @@ export default function ReviewCard({
                 <img
                   src={user?.profile_picture_path!}
                   alt=""
-                  className="w-6 h-6 rounded-full"
+                  className="w-6 h-6 rounded-full object-cover"
                 />
                 <span>{user?.username}</span>
               </div>
