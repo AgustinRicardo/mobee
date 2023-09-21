@@ -1,7 +1,5 @@
 "use client";
 import { FilmOnDB, WatchStatus } from "@/lib/interfaces";
-import { FilmsOnLists } from "@prisma/client";
-
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import FilmPoster from "./FilmPoster";
 import Pagination from "./Pagination";

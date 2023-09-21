@@ -44,16 +44,14 @@ export default function ListCard({
 
   return (
     <>
-      <div
-        className="flex flex-col group w-fit"
-        onClick={() => {
-          if (list) {
-            router.push(`/list_details/${list.id}`);
-          }
-        }}
-      >
+      <div className="flex flex-col group w-fit">
         <div
           className={`film-posters flex flex-row items-center ${imageGap} hover:cursor-pointer  hover:border-beeBeig border-2 border-transparent rounded-sm`}
+          onClick={() => {
+            if (list) {
+              router.push(`/list_details/${list.id}`);
+            }
+          }}
         >
           {apiIds?.slice(0, 4).map((apiId) => {
             return (
@@ -69,7 +67,16 @@ export default function ListCard({
           <div className="flex flex-row items-center">
             <div className="flex flex-col">
               <div className="flex flex-row">
-                <span className="pr-2 hover:cursor-pointer">{list.title}</span>
+                <span
+                  className="pr-2 hover:cursor-pointer"
+                  onClick={() => {
+                    if (list) {
+                      router.push(`/list_details/${list.id}`);
+                    }
+                  }}
+                >
+                  {list.title}
+                </span>
                 {apiIds && (
                   <span className="opacity-50">
                     {apiIds.length} {apiIds.length > 1 ? "films" : "film"}

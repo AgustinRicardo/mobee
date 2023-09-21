@@ -25,7 +25,7 @@ export default function FilmsSearchBar({
   const [films, setFilms] = useState<Film[]>([]);
 
   useEffect(() => {
-    const url = `https://api.themoviedb.org/3/search/movie?language=en-US&page=1&include_adult=false&query=${query}`;
+    const url = `https://api.themoviedb.org/3/search/movie?include_adult=false&language=en-US&page=1&query=${query}&region=ES`;
     const authorization = `Bearer ${process.env.NEXT_PUBLIC_TMDB_API_KEY}`;
     const options = {
       mehtod: "GET",
@@ -62,7 +62,7 @@ export default function FilmsSearchBar({
             }}
           />
           {films && (
-            <div className="absolute bg-beeBrownLight rounded-md overflow-hidden z-20">
+            <div className="absolute bg-beeBrownLight rounded-md overflow-hidden z-20 ">
               <ScrollArea className="h-28">
                 <ul className="rounded-md flex flex-col ">
                   {films.map((film) => {
