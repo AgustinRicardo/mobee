@@ -1,6 +1,5 @@
 import prismaClient from "@/lib/prisma-client";
 import { NextRequest, NextResponse } from "next/server";
-import { useId } from "react";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);

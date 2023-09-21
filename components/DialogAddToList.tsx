@@ -1,15 +1,8 @@
 "use client";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { Film, List } from "@/lib/interfaces";
-import {
-  Dispatch,
-  FormEventHandler,
-  SetStateAction,
-  useEffect,
-  useState,
-} from "react";
+import { List } from "@/lib/interfaces";
+import { FormEventHandler, useEffect, useState } from "react";
 import { DialogClose, DialogTitle } from "@radix-ui/react-dialog";
-import { Toaster } from "./ui/toaster";
 import { useToast } from "./ui/use-toast";
 import { ScrollArea } from "./ui/scroll-area";
 

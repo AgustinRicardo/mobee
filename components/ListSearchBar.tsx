@@ -46,12 +46,13 @@ export default function ListSearchBar() {
                   {lists.map((list) => {
                     return (
                       <button
+                        key={list.id}
                         className="hover:text-beeBeig hover:bg-beeBrownLightDarker text-beeBrownBackground font-openSans text-sm px-2 py-1 text-start"
                         onClick={() => {
                           router.push(`/list_details/${list.id}`);
                         }}
                       >
-                        <li key={list.id}>
+                        <li>
                           <span>{list.title}</span>
                           <span className="text-xs font-medium pl-2">
                             {list.films.length} films

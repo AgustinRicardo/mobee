@@ -13,7 +13,7 @@ export default async function Lists() {
       </div>
       <div className="lists-section text-beeYellow">
         <div className="flex flex-row py-1">
-          <span className="text-beeYellow">Recent Lists</span>
+          <span className="text-beeYellow">RECENT LISTS</span>
         </div>
         <hr className="border-beeYellow" />
         <div className="grid grid-cols-3 gap-3 py-4">
@@ -22,7 +22,7 @@ export default async function Lists() {
       </div>
       <div className="lists-section text-beeYellow">
         <div className="flex flex-row py-1">
-          <span className="text-beeYellow">Popular Lists</span>
+          <span className="text-beeYellow">POPULAR LISTS</span>
         </div>
         <hr className="border-beeYellow" />
         <div className="grid grid-cols-3 gap-3 py-4">

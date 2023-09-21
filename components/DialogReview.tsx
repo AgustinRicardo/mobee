@@ -152,7 +152,7 @@ export function DialogReview({
                     htmlFor="watchedOn"
                     className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                   >
-                    {checkedDateWatched ? "Watched on" : "Add to diary?"}
+                    {checkedDateWatched ? "Watched on" : "Add watched date?"}
                   </label>
                   {checkedDateWatched && (
                     <CalendarForm date={date} setDate={setDate} />

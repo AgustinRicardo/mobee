@@ -1,10 +1,8 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import FilmPoster from "./FilmPoster";
 import LeftArrow from "./icons/LeftArrow";
 import RightArrow from "./icons/RightArrow";
-import { Skeleton } from "@/components/ui/skeleton";
 import { usePathname } from "next/navigation";
 import { Film } from "@/lib/interfaces";
 

@@ -1,7 +1,6 @@
 import {
   Dialog,
   DialogContent,
-  DialogFooter,
   DialogTrigger,
   DialogTitle,
 } from "@/components/ui/dialog";
@@ -9,14 +8,9 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
-
-import DropdownIcon from "./icons/DropdownIcon";
-import { FormEventHandler, useEffect, useState } from "react";
+import { FormEventHandler, useState } from "react";
 import FilmsSearchBar from "./FilmsSearchBar";
 import { Film } from "@/lib/interfaces";
 import RemoveIcon from "./icons/RemoveIcon";
@@ -24,7 +18,6 @@ import { DialogClose } from "@radix-ui/react-dialog";
 import { useToast } from "./ui/use-toast";
 import { Toaster } from "./ui/toaster";
 import { DialogReview } from "./DialogReview";
-import { useRouter } from "next/navigation";
 import AddReviewIcon from "./icons/AddReviewIcon";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
@@ -38,8 +31,6 @@ export default function CreateDropdown({ userId }: Props) {
   const [listTitle, setListTitle] = useState<string>("");
   const [listDescription, setListDescription] = useState<string>("");
   const [filmToReview, setFilmToReview] = useState<Film | null>(null);
-
-  const router = useRouter();
 
   const handleFormSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();

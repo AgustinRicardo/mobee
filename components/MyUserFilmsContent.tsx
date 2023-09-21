@@ -24,20 +24,13 @@ export default function MyUserFilmsContent({ userId }: Props) {
   return (
     <>
       <h1>Your watched films</h1>
-      <div className="wrapper flex flex-col gap-5 py-5">
-        <div className="grid grid-cols-5">
-          {watchedFilms &&
-            watchedFilms.map((film) => {
-              return (
-                <FilmPoster
-                  key={film.id}
-                  apiId={film.tmdb_id}
-                  userId={userId}
-                />
-              );
-            })}
-        </div>
-        <Pagination page={page} setPage={setPage} maxPage={maxPage} />
+      <div className="grid grid-cols-5">
+        {watchedFilms &&
+          watchedFilms.map((film) => {
+            return (
+              <FilmPoster key={film.id} apiId={film.tmdb_id} userId={userId} />
+            );
+          })}
       </div>
     </>
   );

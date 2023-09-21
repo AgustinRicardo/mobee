@@ -1,7 +1,7 @@
 interface Props {
   className: string;
 }
-export default function ToWatchIcon({ className }: Props) {
+export default function AddToListIcon({ className }: Props) {
   return (
     <svg
       className={className}

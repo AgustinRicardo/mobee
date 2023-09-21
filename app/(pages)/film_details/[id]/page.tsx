@@ -7,7 +7,6 @@ import GenreList from "@/components/GenreList";
 import CrewList from "@/components/CrewList";
 import DetailsList from "@/components/DetailsList";
 import FilmSlider from "@/components/FilmSlider";
-import ReviewCard from "@/components/ReviewCard";
 import ReviewList from "@/components/ReviewList";
 
 export default async function Page({ params }: { params: { id: string } }) {
@@ -90,7 +89,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           <div className="recent-reviews flex flex-col font-openSans gap-4">
             <section>
               <span className="text-beeYellow pb-1 uppercase">
-                Recent reviews
+                RECENT REVIEWS
               </span>
               <hr className="border-beeYellow" />
               <ReviewList apiId={film.id} />

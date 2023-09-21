@@ -1,9 +1,6 @@
 "use client";
-
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { Film } from "@/lib/interfaces";
-import { ScrollAreaThumb } from "@radix-ui/react-scroll-area";
 import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 interface Props {

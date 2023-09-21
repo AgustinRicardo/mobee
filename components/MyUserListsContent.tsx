@@ -1,9 +1,8 @@
 "use client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { FilmOnList, List } from "@/lib/interfaces";
-import { SetStateAction, useEffect, useState } from "react";
+import { List } from "@/lib/interfaces";
+import { useEffect, useState } from "react";
 import ListCard from "./ListCard";
-import FilmTabs from "./FilmTabs";
 import Pagination from "./Pagination";
 interface Props {
   userId: string;

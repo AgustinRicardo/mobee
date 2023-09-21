@@ -6,7 +6,6 @@ export async function DELETE(request: NextRequest) {
   const apiId = searchParams.get("apiId");
   const listId = searchParams.get("listId");
   let filmOnList;
-  console.log("hello", apiId, listId);
   try {
     if (listId && apiId) {
       const film = await prismaClient.film.findUnique({

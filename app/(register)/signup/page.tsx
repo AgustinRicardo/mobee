@@ -1,7 +1,7 @@
 //TODO: completar funcionalidad del signup
 "use client";
 import { FormEventHandler, useState } from "react";
-import { toast, useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/components/ui/use-toast";
 import Link from "next/link";
 import { Toaster } from "@/components/ui/toaster";
 import { useRouter } from "next/navigation";

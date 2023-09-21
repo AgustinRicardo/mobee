@@ -1,6 +1,5 @@
 "use client";
-import { Dispatch, SetStateAction, useState } from "react";
-import FilmList from "./FilmList";
+import { Dispatch, SetStateAction } from "react";
 import LeftArrow from "./icons/LeftArrow";
 import RightArrow from "./icons/RightArrow";
 

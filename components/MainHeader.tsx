@@ -8,12 +8,10 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import CreateDropdown from "./CreateDropdown";
-import { DropdownMenuArrow } from "@radix-ui/react-dropdown-menu";
 
 interface Props {
   children: React.ReactNode;

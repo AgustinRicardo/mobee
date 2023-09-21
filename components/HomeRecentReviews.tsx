@@ -1,5 +1,5 @@
 "use client";
-import { FilmOnDB, Review, User } from "@/lib/interfaces";
+import { Review } from "@/lib/interfaces";
 import { useEffect, useState } from "react";
 import ReviewCard from "./ReviewCard";
 

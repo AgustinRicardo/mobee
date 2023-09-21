@@ -1,5 +1,4 @@
 import { MouseEventHandler } from "react";
-
 interface Props {
   className: string;
   onClick?: MouseEventHandler<SVGSVGElement>;

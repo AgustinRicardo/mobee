@@ -1,4 +1,3 @@
-import ListDetails from "@/components/ListDetails";
 import ListDetailsContent from "@/components/ListDetailsContent";
 import { getUser } from "@/lib/functions";
 

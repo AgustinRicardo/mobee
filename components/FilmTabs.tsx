@@ -1,9 +1,7 @@
 "use client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import FilmsSearchBar from "./FilmsSearchBar";
-import { Film } from "@/lib/interfaces";
 import { Dispatch, SetStateAction } from "react";
-import { setPriority } from "os";
 
 interface Props {
   popular: React.ReactNode;

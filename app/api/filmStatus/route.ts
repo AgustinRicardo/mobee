@@ -13,7 +13,7 @@ export async function updateToWatchStatus(filmId: string, userId: string) {
       },
     });
     if (filmWatchStatus) {
-      const data = await prismaClient.filmWatchStatus.update({
+      await prismaClient.filmWatchStatus.update({
         where: {
           user_id_film_id: {
             user_id: userId,
@@ -25,7 +25,7 @@ export async function updateToWatchStatus(filmId: string, userId: string) {
         },
       });
     } else {
-      const data = await prismaClient.filmWatchStatus.create({
+      await prismaClient.filmWatchStatus.create({
         data: {
           film_id: filmId,
           user_id: userId,
@@ -46,7 +46,7 @@ export async function updateWatchedStatus(filmId: string, userId: string) {
       },
     });
     if (filmWatchStatus) {
-      const data = await prismaClient.filmWatchStatus.update({
+      await prismaClient.filmWatchStatus.update({
         where: {
           user_id_film_id: {
             user_id: userId,
@@ -58,7 +58,7 @@ export async function updateWatchedStatus(filmId: string, userId: string) {
         },
       });
     } else {
-      const data = await prismaClient.filmWatchStatus.create({
+      await prismaClient.filmWatchStatus.create({
         data: {
           film_id: filmId,
           user_id: userId,

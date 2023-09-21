@@ -1,11 +1,5 @@
 "use client";
-import {
-  Film,
-  FilmOnDB,
-  FilmsOnLists,
-  List,
-  WatchStatus,
-} from "@/lib/interfaces";
+import { FilmOnDB, FilmsOnLists, List } from "@/lib/interfaces";
 import FilmPoster from "./FilmPoster";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Pagination from "./Pagination";

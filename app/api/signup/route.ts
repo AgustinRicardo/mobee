@@ -16,7 +16,7 @@ type Credentials = {
 async function createSupabaseUser(credentials: Credentials) {
   try {
     const supabase = createServerComponentClient({ cookies });
-    const { data, error } = await supabase.auth.signUp({
+    const { error } = await supabase.auth.signUp({
       email: credentials.email,
       password: credentials.password,
     });

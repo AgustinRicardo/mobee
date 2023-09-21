@@ -1,16 +1,10 @@
 "use client";
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ListCard from "./ListCard";
 import ReviewCard from "./ReviewCard";
 import { WatchStatus, Review, List, User } from "@/lib/interfaces";
 import { useRouter } from "next/navigation";
 import EditIcon from "./icons/EditIcon";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 interface Props {

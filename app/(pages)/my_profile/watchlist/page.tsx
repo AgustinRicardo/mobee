@@ -1,4 +1,3 @@
-import WatchlistDetails from "@/components/WatchlistDetails";
 import WatchlistPageContent from "@/components/WatchlistPageContent";
 import { getUser } from "@/lib/functions";
 

@@ -26,7 +26,10 @@ export default function MyUserReviewsContent({ userId }: Props) {
 
   return (
     <>
-      <h1>Your reviews</h1>
+      <h1 className="text-beeYellow font-openSans font-medium text-base tracking-wide uppercase mt-5">
+        YOUR REVIEWS
+      </h1>
+      <hr className="border-beeYellow" />
       <div className="wrapper flex flex-col pb-5">
         <div className="grid grid-cols-2">
           {reviews &&
