@@ -2,7 +2,7 @@ import { MouseEventHandler } from "react";
 
 interface Props {
   className: string;
-  onClick: MouseEventHandler<SVGSVGElement>;
+  onClick?: MouseEventHandler<SVGSVGElement>;
 }
 export default function BookmarkIcon({ className, onClick }: Props) {
   return (

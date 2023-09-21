@@ -1,6 +1,6 @@
 "use client";
 import { FilmOnDB, Review, User, Film } from "@/lib/interfaces";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import FilmImageCard from "./FilmImageCard";
 import { useEffect, useState } from "react";
 import RatingPicker from "./RatingPicker";
@@ -8,22 +8,27 @@ import DeleteIcon from "./icons/DeleteIcon";
 import { ToastAction } from "./ui/toast";
 import { Toaster } from "./ui/toaster";
 import { useToast } from "./ui/use-toast";
+import { DialogReview } from "./DialogReview";
+import EditIcon from "./icons/EditIcon";
 
 interface Props {
   filmOnDB?: FilmOnDB;
   user?: User;
   review?: Review;
   canDelete?: boolean;
+  canEdit?: boolean;
 }
 export default function ReviewCard({
   filmOnDB,
   user,
   review,
   canDelete = false,
+  canEdit = false,
 }: Props) {
   const pathname = usePathname();
   const [film, setFilm] = useState<Film>();
   const { toast } = useToast();
+  const router = useRouter();
 
   useEffect(() => {
     const url = `https://api.themoviedb.org/3/movie/${filmOnDB?.tmdb_id}?language=en-US&append_to_response=credits`;
@@ -49,7 +54,12 @@ export default function ReviewCard({
         <div className="review-info flex flex-col gap-2">
           {!pathname.includes("/film_details") && (
             <div className="film-title flex flex-row items-center gap-3">
-              <span className="font-lora text-lg font-semibold">
+              <span
+                className="font-lora text-lg"
+                onClick={() => {
+                  router.push(`/film_details/${String(filmOnDB?.tmdb_id!)}`);
+                }}
+              >
                 {film?.title}
                 <span className="opacity-50 ml-2 font-openSans text-xs font-light">
                   {film?.release_date ? film?.release_date.slice(0, 4) : "year"}
@@ -86,6 +96,18 @@ export default function ReviewCard({
                     });
                   }}
                 />
+              )}
+              {canEdit && film && (
+                <DialogReview
+                  film={film}
+                  isEditing={true}
+                  reviewFromDb={review}
+                  userId={user?.id!}
+                >
+                  <span>
+                    <EditIcon className="w-5 h-5 text-beeBrownLight group-hover:block hidden ml-auto hover:cursor-pointer flex-shrink-0" />
+                  </span>
+                </DialogReview>
               )}
             </div>
           )}

@@ -1,6 +1,6 @@
 "use client";
 import { Review } from "@/lib/interfaces";
-import { SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ReviewCard from "./ReviewCard";
 import Pagination from "./Pagination";
 
@@ -36,6 +36,7 @@ export default function MyUserReviewsContent({ userId }: Props) {
                 review={review}
                 filmOnDB={review.film}
                 canDelete
+                canEdit
               />
             ))}
         </div>
