@@ -38,7 +38,7 @@ export function DialogReview({
   children,
   defaultOpen,
   setFilmToReview,
-  isEditing = true,
+  isEditing = false,
   reviewFromDb,
 }: Props) {
   const { toast } = useToast();

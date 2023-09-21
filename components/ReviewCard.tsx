@@ -1,6 +1,6 @@
 "use client";
 import { FilmOnDB, Review, User, Film } from "@/lib/interfaces";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import FilmImageCard from "./FilmImageCard";
 import { useEffect, useState } from "react";
 import RatingPicker from "./RatingPicker";
@@ -28,6 +28,7 @@ export default function ReviewCard({
   const pathname = usePathname();
   const [film, setFilm] = useState<Film>();
   const { toast } = useToast();
+  const router = useRouter();
 
   useEffect(() => {
     const url = `https://api.themoviedb.org/3/movie/${filmOnDB?.tmdb_id}?language=en-US&append_to_response=credits`;
@@ -53,7 +54,12 @@ export default function ReviewCard({
         <div className="review-info flex flex-col gap-2">
           {!pathname.includes("/film_details") && (
             <div className="film-title flex flex-row items-center gap-3">
-              <span className="font-lora text-lg">
+              <span
+                className="font-lora text-lg"
+                onClick={() => {
+                  router.push(`/film_details/${String(filmOnDB?.tmdb_id!)}`);
+                }}
+              >
                 {film?.title}
                 <span className="opacity-50 ml-2 font-openSans text-xs font-light">
                   {film?.release_date ? film?.release_date.slice(0, 4) : "year"}
@@ -94,7 +100,7 @@ export default function ReviewCard({
               {canEdit && film && (
                 <DialogReview
                   film={film}
-                  isEditing
+                  isEditing={true}
                   reviewFromDb={review}
                   userId={user?.id!}
                 >
