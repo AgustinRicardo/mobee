@@ -3,6 +3,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Film } from "@/lib/interfaces";
 import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import SearchIcon from "./icons/SearchIcon";
 interface Props {
   className?: string;
   action: string;
@@ -46,18 +47,22 @@ export default function FilmsSearchBar({
   return (
     <>
       <div className={`flex ${className}`}>
-        <span className="pr-2">Find a film</span>
+        <span className="pr-2 py-1">Find a film</span>
         <div className="relative">
-          <input
-            className="bg-beeBeig text-beeBrownBackground rounded-sm px-2 py-1 w-[30ch]"
-            type="text"
-            onChange={(e) => {
-              if (e.target.value === "") {
-                setFilms([]);
-              }
-              setQuery(e.target.value);
-            }}
-          />
+          <div className="flex flex-row items-center">
+            <input
+              className="bg-beeBeig text-beeBrownBackground rounded-sm px-2 py-1 w-[30ch]"
+              type="text"
+              placeholder="Search"
+              onChange={(e) => {
+                if (e.target.value === "") {
+                  setFilms([]);
+                }
+                setQuery(e.target.value);
+              }}
+            />
+            <SearchIcon />
+          </div>
           {films && (
             <div className="absolute bg-beeBrownLight rounded-md overflow-hidden z-20 ">
               <ScrollArea className="h-28">

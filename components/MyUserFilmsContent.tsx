@@ -2,7 +2,6 @@
 import { FilmOnDB } from "@/lib/interfaces";
 import { useEffect, useState } from "react";
 import FilmPoster from "./FilmPoster";
-import Pagination from "./Pagination";
 
 interface Props {
   userId: string;
