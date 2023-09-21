@@ -8,18 +8,22 @@ import DeleteIcon from "./icons/DeleteIcon";
 import { ToastAction } from "./ui/toast";
 import { Toaster } from "./ui/toaster";
 import { useToast } from "./ui/use-toast";
+import { DialogReview } from "./DialogReview";
+import EditIcon from "./icons/EditIcon";
 
 interface Props {
   filmOnDB?: FilmOnDB;
   user?: User;
   review?: Review;
   canDelete?: boolean;
+  canEdit?: boolean;
 }
 export default function ReviewCard({
   filmOnDB,
   user,
   review,
   canDelete = false,
+  canEdit = false,
 }: Props) {
   const pathname = usePathname();
   const [film, setFilm] = useState<Film>();
@@ -86,6 +90,18 @@ export default function ReviewCard({
                     });
                   }}
                 />
+              )}
+              {canEdit && film && (
+                <DialogReview
+                  film={film}
+                  isEditing
+                  reviewFromDb={review}
+                  userId={user?.id!}
+                >
+                  <span>
+                    <EditIcon className="w-5 h-5 text-beeBrownLight group-hover:block hidden ml-auto hover:cursor-pointer flex-shrink-0" />
+                  </span>
+                </DialogReview>
               )}
             </div>
           )}

@@ -89,7 +89,11 @@ export async function PUT(request: NextRequest) {
   try {
     const updatedReview = await prismaClient.review.update({
       where: { id: review.id },
-      data: review,
+      data: {
+        rating: review.ratingValue,
+        review_description: review.review,
+        watched_at: review.date ? review.date : null,
+      },
     });
     if (updatedReview) {
       return NextResponse.json({ message: "Successful" }, { status: 200 });
