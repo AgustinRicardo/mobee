@@ -22,6 +22,7 @@ interface Props {
   userId: string;
   className?: string;
   canDelete?: boolean;
+  listId?: string;
 }
 
 export default function FilmPoster({
@@ -29,6 +30,7 @@ export default function FilmPoster({
   userId,
   className,
   canDelete = false,
+  listId,
 }: Props) {
   const router = useRouter();
   const [isWatched, setIsWatched] = useState<boolean>(false);
@@ -84,6 +86,13 @@ export default function FilmPoster({
                           method: "POST",
                           body: JSON.stringify({ apiId, userId, isWatched }),
                         });
+                        if (isWatched) {
+                          toast({
+                            title: "Film removed from your watched films",
+                          });
+                        } else {
+                          toast({ title: "Film added to your watched films" });
+                        }
                         setIsWatched(!isWatched);
                       }}
                     >
@@ -108,6 +117,11 @@ export default function FilmPoster({
                           method: "POST",
                           body: JSON.stringify({ apiId, userId, toWatch }),
                         });
+                        if (toWatch) {
+                          toast({ title: "Film removed from your watchlist" });
+                        } else {
+                          toast({ title: "Film added to your watchlist" });
+                        }
                         setToWatch(!toWatch);
                       }}
                     >
@@ -146,9 +160,12 @@ export default function FilmPoster({
                                 className="hover:bg-beeRed"
                                 altText="Delete"
                                 onClick={() => {
-                                  fetch("", {
-                                    method: "DELETE",
-                                  })
+                                  fetch(
+                                    `/api/list/filmOnList?listId=${listId}&apiId=${apiId}`,
+                                    {
+                                      method: "DELETE",
+                                    }
+                                  )
                                     .then(() => {
                                       location.reload();
                                     })
@@ -178,7 +195,6 @@ export default function FilmPoster({
               }}
               className={className}
               src={`https://image.tmdb.org/t/p/w500${posterPath}`}
-              width="100%"
             />
           </div>
         )

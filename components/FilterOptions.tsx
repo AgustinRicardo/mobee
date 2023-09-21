@@ -18,6 +18,7 @@ interface Props {
   setYears: Dispatch<SetStateAction<Year[]>>;
   genres: Genre[];
   years: Year[];
+  setPage: Dispatch<SetStateAction<number>>;
 }
 
 export default function FilterOptions({
@@ -25,6 +26,7 @@ export default function FilterOptions({
   genres,
   years,
   setYears,
+  setPage,
 }: Props) {
   useEffect(() => {
     const url = "https://api.themoviedb.org/3/genre/movie/list";
@@ -45,24 +47,22 @@ export default function FilterOptions({
         setGenres(genres);
       });
   }, []);
-  const triggerClass =
-    "bg-beeYellow rounded-sm text-beeBrownBackground items-center px-2 py-1";
-  const iconClass = "inline w-5 h-5";
-  const contentStyle = "bg-beeBrownLight border-none";
 
   return (
     <div className="filters flex flex-row items-center gap-1">
       <span>Browse by</span>
       <DropdownMenu>
-        <DropdownMenuTrigger className={triggerClass}>
-          Year <DropdownIcon className={iconClass} />
+        <DropdownMenuTrigger className="bg-beeYellow rounded-sm text-beeBrownBackground items-center px-2 py-1">
+          Year <DropdownIcon className="inline w-5 h-5" />
         </DropdownMenuTrigger>
-        <DropdownMenuContent className={contentStyle}>
+        <DropdownMenuContent className="bg-beeBrownLight border-none text-beeBeig p-0 font-openSans">
           {years.map((selectYear) => {
             return (
               <DropdownMenuCheckboxItem
+                className="text-beeBrownBackground data-[highlighted]:bg-beeBrownLightDarker data-[highlighted]:text-beeBeig hover:cursor-pointer rounded-none py-0.5"
                 checked={selectYear.checked}
                 onCheckedChange={() => {
+                  setPage(1);
                   setYears(
                     years.map((year) => {
                       if (selectYear.id === year.id) {
@@ -73,7 +73,6 @@ export default function FilterOptions({
                     })
                   );
                 }}
-                className="text-beeBeig data-[highlighted]:bg-beeBeig data-[highlighted]:text-beeBrownBackground py-0"
                 key={selectYear.id}
               >
                 {selectYear.name}
@@ -83,15 +82,17 @@ export default function FilterOptions({
         </DropdownMenuContent>
       </DropdownMenu>
       <DropdownMenu>
-        <DropdownMenuTrigger className={triggerClass}>
-          Genre <DropdownIcon className={iconClass} />
+        <DropdownMenuTrigger className="bg-beeYellow rounded-sm text-beeBrownBackground items-center px-2 py-1">
+          Genre <DropdownIcon className="inline w-5 h-5" />
         </DropdownMenuTrigger>
-        <DropdownMenuContent className={contentStyle}>
+        <DropdownMenuContent className="bg-beeBrownLight border-none text-beeBeig p-0 font-openSans">
           {genres.map((selectGenre) => {
             return (
               <DropdownMenuCheckboxItem
+                className="text-beeBrownBackground data-[highlighted]:bg-beeBrownLightDarker data-[highlighted]:text-beeBeig hover:cursor-pointer rounded-none py-0.5"
                 checked={selectGenre.checked}
                 onCheckedChange={() => {
+                  setPage(1);
                   setGenres(
                     genres.map((genre) => {
                       if (selectGenre.id === genre.id) {
@@ -102,7 +103,6 @@ export default function FilterOptions({
                     })
                   );
                 }}
-                className="text-beeBeig data-[highlighted]:bg-beeBeig data-[highlighted]:text-beeBrownBackground py-0"
                 key={selectGenre.id}
               >
                 {selectGenre.name}

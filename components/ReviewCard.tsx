@@ -48,8 +48,8 @@ export default function ReviewCard({
         ) : null}
         <div className="review-info flex flex-col gap-2">
           {!pathname.includes("/film_details") && (
-            <div className="film-title flex flex-row items-center gap-3 ">
-              <span className="font-dmSerifDisplay text-lg font-bold">
+            <div className="film-title flex flex-row items-center gap-3">
+              <span className="font-lora text-lg">
                 {film?.title}
                 <span className="opacity-50 ml-2 font-openSans text-xs font-light">
                   {film?.release_date ? film?.release_date.slice(0, 4) : "year"}
@@ -95,7 +95,7 @@ export default function ReviewCard({
                 <img
                   src={user?.profile_picture_path!}
                   alt=""
-                  className="w-6 h-6 rounded-full"
+                  className="w-6 h-6 rounded-full object-cover"
                 />
                 <span>{user?.username}</span>
               </div>
@@ -113,7 +113,9 @@ export default function ReviewCard({
               </span>
             ) : null}
           </div>
-          <p className="review-description">{review?.review_description}</p>
+          <p className="review-description max-w-sm break-words">
+            {review?.review_description}
+          </p>
         </div>
 
         <Toaster />

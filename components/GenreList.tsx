@@ -11,7 +11,7 @@ export default function GenreList({ genres }: Props) {
         {genres.map((genre) => {
           return (
             <li key={genre.id}>
-              <div className="bg-beeBrownLightText text-beeBeig rounded-md text-center w-fit m-1 p-1">
+              <div className="bg-beeBrownLight text-beeBrownBackground rounded-md text-center w-fit m-1 p-1">
                 {genre.name}
               </div>
             </li>

@@ -18,7 +18,7 @@ export default function TabGroup({ category, title }: Props) {
         {category.map((item) => {
           return (
             <li key={uuidv4()}>
-              <div className="bg-beeBrownLightText text-beeBeig rounded-md text-center w-fit m-1 p-1">
+              <div className="bg-beeBrownLight text-beeBrownBackground rounded-md text-center w-fit m-1 p-1">
                 {item.name}
               </div>
             </li>

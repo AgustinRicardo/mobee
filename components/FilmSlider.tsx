@@ -49,8 +49,8 @@ export default function FilmSlider({ userId, url, numOfFilms }: Props) {
     <>
       {films && (
         <ul
-          className={`flex flex-row pt-5 pb-2 gap-2 h-80 justify-center ${
-            pathname.includes("/film_details") ? "max-h-48" : "max-h-80"
+          className={`flex flex-row pt-5 pb-2 gap-2 justify-center ${
+            pathname.includes("/film_details") ? "h-44" : "h-80"
           }`}
         >
           {films
@@ -63,7 +63,7 @@ export default function FilmSlider({ userId, url, numOfFilms }: Props) {
               return (
                 <li key={film.id}>
                   <FilmPoster
-                    className={`rounded-md border-beeBrownLight border-2 hover:cursor-pointer ${
+                    className={`rounded-md border-beeBrownLight border-2 hover:cursor-pointer object-cover ${
                       pathname.includes("/film_details") ? "w-24" : "w-48"
                     } `}
                     userId={userId}

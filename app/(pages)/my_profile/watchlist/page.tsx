@@ -1,4 +1,5 @@
-import ListDetails from "@/components/ListDetails";
+import WatchlistDetails from "@/components/WatchlistDetails";
+import WatchlistPageContent from "@/components/WatchlistPageContent";
 import { getUser } from "@/lib/functions";
 
 export default async function MyUserWatchlistPage() {
@@ -6,10 +7,7 @@ export default async function MyUserWatchlistPage() {
   return (
     <>
       <h1>Your watchlist</h1>
-      <ListDetails
-        url={`/api/my_profile/watchlist?userId=${user?.id}`}
-        userId={user?.id!}
-      />
+      {user && <WatchlistPageContent user={user} />}
     </>
   );
 }

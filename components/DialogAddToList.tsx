@@ -53,7 +53,17 @@ export function DialogAddToList({ apiId, userId, children }: Props) {
         toast({
           title: "Film already added to the current list",
           description: "This film has been already added to the current list",
+          variant: "destructive",
         });
+      } else {
+        if (lists) {
+          console.log("hello");
+          toast({
+            title: `Film added to ${
+              lists.find((list) => list.id === selectedList)?.title
+            }`,
+          });
+        }
       }
     } catch (e) {
       throw e;
@@ -65,32 +75,29 @@ export function DialogAddToList({ apiId, userId, children }: Props) {
       <Dialog onOpenChange={() => {}}>
         <DialogTrigger asChild>{children}</DialogTrigger>
         <DialogContent className="border-none w-24">
-          <DialogTitle>Add film to a list</DialogTitle>
+          <DialogTitle>Select a list</DialogTitle>
           <form
-            className="flex flex-col justify-start w-full gap-6"
+            className="flex flex-col justify-start w-full gap-6 h-52"
             onSubmit={handleSubmit}
           >
-            <ScrollArea className=" rounded-sm">
+            <ScrollArea className="rounded-sm h-full">
               <ul className="flex flex-col bg-beeBrownHeader">
                 {lists &&
                   lists.map((list: List) => {
                     return (
-                      <span
+                      <li
                         onClick={() => {
                           setSelectedList(list.id);
                         }}
                         key={list.id}
+                        className={
+                          list.id === selectedList
+                            ? "bg-beeBrownLight text-beeBrownBackground hover:cursor-pointer p-1"
+                            : "hover:cursor-pointer p-1"
+                        }
                       >
-                        <li
-                          className={
-                            list.id === selectedList
-                              ? "bg-beeBrownLight text-beeBrownBackground"
-                              : ""
-                          }
-                        >
-                          {list.title}
-                        </li>
-                      </span>
+                        {list.title}
+                      </li>
                     );
                   })}
               </ul>
@@ -98,7 +105,7 @@ export function DialogAddToList({ apiId, userId, children }: Props) {
             <DialogClose asChild>
               <button
                 type="submit"
-                className="bg-beeYellow text-beeBrownBackground self-end px-2 py-0.5 rounded-md"
+                className="bg-beeYellow text-beeBrownBackground self-end px-2 py-0.5 rounded-md my-0"
               >
                 Save
               </button>
@@ -106,7 +113,6 @@ export function DialogAddToList({ apiId, userId, children }: Props) {
           </form>
         </DialogContent>
       </Dialog>
-      <Toaster />
     </>
   );
 }

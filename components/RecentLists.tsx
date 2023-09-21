@@ -24,19 +24,18 @@ export default function RecentLists({ userId }: Props) {
 
   return (
     <>
-      <>
-        {recentList.map((list) => {
-          return (
-            <ListCard
-              userId={userId}
-              imageGap="gap-1"
-              imageWidth="w-20"
-              list={list}
-              apiIds={list.films.slice(0, 4).map((film) => film.film.tmdb_id)}
-            />
-          );
-        })}
-      </>
+      {recentList.map((list) => {
+        return (
+          <ListCard
+            key={list.id}
+            userId={userId}
+            imageGap="gap-1"
+            imageWidth="w-20"
+            list={list}
+            apiIds={list.films.map((film) => film.film.tmdb_id)}
+          />
+        );
+      })}
     </>
   );
 }

@@ -53,9 +53,9 @@ export default function ListCard({
         }}
       >
         <div
-          className={`film-posters flex flex-row items-center ${imageGap} pb-2`}
+          className={`film-posters flex flex-row items-center ${imageGap} hover:cursor-pointer  hover:border-beeBeig border-2 border-transparent rounded-sm`}
         >
-          {apiIds?.map((apiId) => {
+          {apiIds?.slice(0, 4).map((apiId) => {
             return (
               <FilmImageCard
                 key={apiId}
@@ -65,14 +65,16 @@ export default function ListCard({
             );
           })}
         </div>
-        {list && apiIds ? (
+        {list ? (
           <div className="flex flex-row items-center">
             <div className="flex flex-col">
               <div className="flex flex-row">
-                <span className="pr-2">{list.title}</span>
-                <span className="opacity-50">
-                  {apiIds.length} {apiIds.length > 1 ? "films" : "film"}
-                </span>
+                <span className="pr-2 hover:cursor-pointer">{list.title}</span>
+                {apiIds && (
+                  <span className="opacity-50">
+                    {apiIds.length} {apiIds.length > 1 ? "films" : "film"}
+                  </span>
+                )}
               </div>
               {!hideUser && (
                 <div className="flex flex-row gap-1 items-center">
@@ -80,7 +82,7 @@ export default function ListCard({
                     <img
                       src={list.user.profile_picture_path}
                       alt=""
-                      className="w-5 h-5 rounded-full"
+                      className="w-5 h-5 rounded-full object-cover"
                     />
                   )}
                   <span>{list.user.username}</span>
@@ -98,12 +100,16 @@ export default function ListCard({
                       method: "DELETE",
                       body: JSON.stringify(saveListData),
                     });
+                    toast({ title: "List removed from your saved lists" });
+
                     setSavedList(!savedList);
                   } else {
                     fetch(`/api/listSavedByUser`, {
                       method: "POST",
                       body: JSON.stringify(saveListData),
                     });
+                    toast({ title: "List added to your saved lists" });
+
                     setSavedList(!savedList);
                   }
                 }}
