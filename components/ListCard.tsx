@@ -29,6 +29,7 @@ export default function ListCard({
   canDelete = false,
 }: Props) {
   const [savedList, setSavedList] = useState<boolean>(false);
+  const [count, setCount] = useState<number>(list?.bookmark_count!);
   const router = useRouter();
   const { toast } = useToast();
 
@@ -76,18 +77,24 @@ export default function ListCard({
                   </span>
                 )}
               </div>
-              {!hideUser && (
-                <div className="flex flex-row gap-1 items-center">
-                  {list.user.profile_picture_path && (
-                    <img
-                      src={list.user.profile_picture_path}
-                      alt=""
-                      className="w-5 h-5 rounded-full object-cover"
-                    />
-                  )}
-                  <span>{list.user.username}</span>
+              <div className="flex flex-row gap-2">
+                {!hideUser && (
+                  <div className="flex gap-1 items-center">
+                    {list.user.profile_picture_path && (
+                      <img
+                        src={list.user.profile_picture_path}
+                        alt=""
+                        className="w-5 h-5 rounded-full object-cover"
+                      />
+                    )}
+                    <span>{list.user.username}</span>
+                  </div>
+                )}
+                <div className="flex gap-1 items-center">
+                  <span>{count}</span>
+                  <BookmarkIcon className="text-beeBrownLight h-3 w-3 mt-0.5" />
                 </div>
-              )}
+              </div>
             </div>
 
             {!(list.user_id === userId) && (
@@ -103,6 +110,9 @@ export default function ListCard({
                     toast({ title: "List removed from your saved lists" });
 
                     setSavedList(!savedList);
+                    if (count !== 0) {
+                      setCount(count - 1);
+                    }
                   } else {
                     fetch(`/api/listSavedByUser`, {
                       method: "POST",
@@ -111,6 +121,7 @@ export default function ListCard({
                     toast({ title: "List added to your saved lists" });
 
                     setSavedList(!savedList);
+                    setCount(count + 1);
                   }
                 }}
                 className={`hidden group-hover:inline ml-auto w-5 h-5 hover:cursor-pointer hover:scale-110 ${
