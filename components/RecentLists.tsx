@@ -32,7 +32,7 @@ export default function RecentLists({ userId }: Props) {
             imageGap="gap-1"
             imageWidth="w-20"
             list={list}
-            apiIds={list.films.slice(0, 4).map((film) => film.film.tmdb_id)}
+            apiIds={list.films.map((film) => film.film.tmdb_id)}
           />
         );
       })}

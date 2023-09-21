@@ -4,14 +4,38 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const listId = searchParams.get("listId");
+  const page = searchParams.get("page");
+  const pageResults = 20;
+  let skip;
+  if (page) {
+    skip = pageResults * (Number(page) - 1);
+  }
 
   try {
     if (listId) {
-      const list = await prismaClient.list.findUnique({
-        include: { films: { include: { film: true } }, user: true },
-        where: { id: listId },
+      const listWithFilmCount = await prismaClient.list.findUnique({
+        where: {
+          id: listId,
+        },
+        include: {
+          _count: {
+            select: {
+              films: true,
+            },
+          },
+        },
       });
-      return NextResponse.json({ list });
+      if (listWithFilmCount) {
+        const maxPage = Math.ceil(listWithFilmCount._count.films / pageResults);
+        const list = await prismaClient.list.findUnique({
+          include: {
+            films: { include: { film: true }, skip, take: pageResults },
+            user: true,
+          },
+          where: { id: listId },
+        });
+        return NextResponse.json({ list, maxPage });
+      }
     }
   } catch (error) {
     return NextResponse.error();

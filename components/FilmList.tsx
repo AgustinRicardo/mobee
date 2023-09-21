@@ -20,6 +20,7 @@ export default function FilmList({
   setPage,
 }: Props) {
   const [filmList, setFilmList] = useState<Film[] | FilmOnDB[]>([]);
+  const [maxPage, setMaxPage] = useState<number>();
 
   useEffect(() => {
     const options = {
@@ -32,9 +33,9 @@ export default function FilmList({
     if (ownDB) {
       fetch(url)
         .then((res) => res.json())
-        .then(({ results }) => {
+        .then(({ results, maxPage }) => {
           setFilmList(results);
-          console.log(results);
+          setMaxPage(maxPage);
         });
     } else {
       console.log(url);
@@ -66,7 +67,7 @@ export default function FilmList({
               );
             })}
         </ul>
-        <Pagination page={page} setPage={setPage} />
+        <Pagination page={page} setPage={setPage} maxPage={maxPage} />
       </div>
     </>
   );

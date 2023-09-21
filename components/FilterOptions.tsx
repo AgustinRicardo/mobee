@@ -18,6 +18,7 @@ interface Props {
   setYears: Dispatch<SetStateAction<Year[]>>;
   genres: Genre[];
   years: Year[];
+  setPage: Dispatch<SetStateAction<number>>;
 }
 
 export default function FilterOptions({
@@ -25,6 +26,7 @@ export default function FilterOptions({
   genres,
   years,
   setYears,
+  setPage,
 }: Props) {
   useEffect(() => {
     const url = "https://api.themoviedb.org/3/genre/movie/list";
@@ -60,6 +62,7 @@ export default function FilterOptions({
                 className="text-beeBrownBackground data-[highlighted]:bg-beeBrownLightDarker data-[highlighted]:text-beeBeig hover:cursor-pointer rounded-none py-0.5"
                 checked={selectYear.checked}
                 onCheckedChange={() => {
+                  setPage(1);
                   setYears(
                     years.map((year) => {
                       if (selectYear.id === year.id) {
@@ -89,6 +92,7 @@ export default function FilterOptions({
                 className="text-beeBrownBackground data-[highlighted]:bg-beeBrownLightDarker data-[highlighted]:text-beeBeig hover:cursor-pointer rounded-none py-0.5"
                 checked={selectGenre.checked}
                 onCheckedChange={() => {
+                  setPage(1);
                   setGenres(
                     genres.map((genre) => {
                       if (selectGenre.id === genre.id) {
