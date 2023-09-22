@@ -31,16 +31,23 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   return (
     <>
-      <div className="relative z-0 mx-[-2%]">
-        <div className="absolute z-10 bg-gradientOverlay w-full h-full"></div>
+      {film.poster_path !== null ? (
+        <div className="relative z-0 mx-[-2%]">
+          <div className="absolute z-10 bg-gradientOverlay w-full h-full"></div>
 
-        <img
-          src={`https://image.tmdb.org/t/p/original/${film.backdrop_path}`}
-          alt="backdrop"
-          className="z-0 "
-        />
-      </div>
-      <div className="flex flex-row gap-4 z-20 relative bottom-32 overflow-visible px-4">
+          <img
+            src={`https://image.tmdb.org/t/p/original/${film.backdrop_path}`}
+            alt=""
+            className="z-0"
+          />
+        </div>
+      ) : null}
+
+      <div
+        className={`flex flex-row gap-4 z-20 overflow-visible px-4 ${
+          film.poster_path !== null ? "py-4" : " relative bottom-32"
+        }`}
+      >
         <img
           src={`https://image.tmdb.org/t/p/w500/${film.poster_path}`}
           alt="poster"
@@ -87,13 +94,7 @@ export default async function Page({ params }: { params: { id: string } }) {
             <FilmWatchStatusPanel userId={user?.id!} film={film} />
           </div>
           <div className="recent-reviews flex flex-col font-openSans gap-4">
-            <section>
-              <span className="text-beeYellow pb-1 uppercase">
-                RECENT REVIEWS
-              </span>
-              <hr className="border-beeYellow" />
-              <ReviewList apiId={film.id} />
-            </section>
+            <ReviewList apiId={film.id} />
 
             <section>
               <h1 className="text-beeYellow font-openSans">SIMILAR FILMS</h1>

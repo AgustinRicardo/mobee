@@ -118,14 +118,16 @@ export default function ProfileContent({ user }: Props) {
             <div className="wrapper">
               <div className="flex flex-row py-1">
                 <span className="text-beeYellow">WATCHLIST</span>
-                <button
-                  className="inline ml-auto text-beeYellow hover:bg-beeYellow hover:text-beeBrownBackground hover:rounded-sm px-1 "
-                  onClick={() => {
-                    router.push("/my_profile/watchlist");
-                  }}
-                >
-                  More
-                </button>
+                {watchlist ? (
+                  <button
+                    className="inline ml-auto text-beeYellow hover:bg-beeYellow hover:text-beeBrownBackground hover:rounded-sm px-1 "
+                    onClick={() => {
+                      router.push("/my_profile/watchlist");
+                    }}
+                  >
+                    More
+                  </button>
+                ) : null}
               </div>
 
               <hr className="border-beeYellow" />
@@ -143,13 +145,15 @@ export default function ProfileContent({ user }: Props) {
         <div className="lists-section text-beeYellow pb-5">
           <div className="flex flex-row py-1">
             <span className="text-beeYellow">LISTS</span>
-            <button className="inline ml-auto text-beeYellow hover:bg-beeYellow hover:text-beeBrownBackground hover:rounded-sm px-1 py-0.5">
-              More
-            </button>
+            {lists ? (
+              <button className="inline ml-auto text-beeYellow hover:bg-beeYellow hover:text-beeBrownBackground hover:rounded-sm px-1 py-0.5">
+                More
+              </button>
+            ) : null}
           </div>
           <hr className="border-beeYellow pb-5" />
           <div className="flex flex-row justify-between">
-            {lists &&
+            {lists ? (
               lists.map((list) => {
                 return (
                   <ListCard
@@ -162,19 +166,24 @@ export default function ProfileContent({ user }: Props) {
                     apiIds={list.films.map((item) => item.film.tmdb_id)}
                   />
                 );
-              })}
+              })
+            ) : (
+              <span>No created lists</span>
+            )}
           </div>
         </div>
         <div className="reviews-section">
           <div className="flex flex-row ">
             <span className="text-beeYellow">RECENT ACTIVITY</span>
-            <button className="inline ml-auto text-beeYellow hover:bg-beeYellow hover:text-beeBrownBackground hover:rounded-sm px-1 py-0.5">
-              More
-            </button>
+            {reviews ? (
+              <button className="inline ml-auto text-beeYellow hover:bg-beeYellow hover:text-beeBrownBackground hover:rounded-sm px-1 py-0.5">
+                More
+              </button>
+            ) : null}
           </div>
           <hr className="border-beeYellow pb-3" />
           <div className="grid grid-cols-2">
-            {reviews &&
+            {reviews ? (
               reviews.map((review) => {
                 return (
                   <ReviewCard
@@ -183,7 +192,10 @@ export default function ProfileContent({ user }: Props) {
                     filmOnDB={review.film}
                   />
                 );
-              })}
+              })
+            ) : (
+              <span>No reviews</span>
+            )}
           </div>
         </div>
       </div>

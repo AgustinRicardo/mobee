@@ -1,5 +1,6 @@
 "use client";
 
+import { spawn } from "child_process";
 import CrewGroup from "./TabGroup";
 
 interface Props {
@@ -57,62 +58,79 @@ export default function CrewList({ crew }: Props) {
   const hair = crew.filter((crew) => crew.job.includes("Hair"));
 
   return (
-    <div className="mb-5">
-      {directors.length !== 0 && (
-        <CrewGroup category={directors} title={"DIRECTOR"} />
-      )}
-      {addDirector && (
-        <CrewGroup category={addDirector} title={"ADD. DIRECTING"} />
-      )}
-      {producers.length !== 0 && (
-        <CrewGroup category={producers} title={"PRODUCERS"} />
-      )}
-      {execProducers && (
-        <CrewGroup category={execProducers} title={"EXEC. PRODUCERS"} />
-      )}
-      {writers.length !== 0 && (
-        <CrewGroup category={writers} title={"WRITERS"} />
-      )}
-      {casting.length !== 0 && (
-        <CrewGroup category={casting} title={"CASTING"} />
-      )}
+    <>
+      {crew.length ? (
+        <div className="mb-5">
+          {directors.length !== 0 && (
+            <CrewGroup category={directors} title={"DIRECTOR"} />
+          )}
+          {addDirector && (
+            <CrewGroup category={addDirector} title={"ADD. DIRECTING"} />
+          )}
+          {producers.length !== 0 && (
+            <CrewGroup category={producers} title={"PRODUCERS"} />
+          )}
+          {execProducers && (
+            <CrewGroup category={execProducers} title={"EXEC. PRODUCERS"} />
+          )}
+          {writers.length !== 0 && (
+            <CrewGroup category={writers} title={"WRITERS"} />
+          )}
+          {casting.length !== 0 && (
+            <CrewGroup category={casting} title={"CASTING"} />
+          )}
 
-      {editor.length !== 0 && <CrewGroup category={editor} title={"EDITORS"} />}
-      {photoDirectors && (
-        <CrewGroup category={photoDirectors} title={"CINEMATOGRAPHY"} />
+          {editor.length !== 0 && (
+            <CrewGroup category={editor} title={"EDITORS"} />
+          )}
+          {photoDirectors && (
+            <CrewGroup category={photoDirectors} title={"CINEMATOGRAPHY"} />
+          )}
+          {photo.length !== 0 && (
+            <CrewGroup category={photo} title={"ADD. PHOTOGRAPHY"} />
+          )}
+          {productionDesign.length !== 0 && (
+            <CrewGroup
+              category={productionDesign}
+              title={"PRODUCTION DESIGN"}
+            />
+          )}
+          {artDirection.length !== 0 && (
+            <CrewGroup category={artDirection} title={"ART DIRECTION"} />
+          )}
+          {setDecoration.length !== 0 && (
+            <CrewGroup category={setDecoration} title={"SET DECORATION"} />
+          )}
+          {specialEffects.length !== 0 && (
+            <CrewGroup category={specialEffects} title={"SPECIAL EFFECTS"} />
+          )}
+          {visualEffects.length !== 0 && (
+            <CrewGroup category={visualEffects} title={"VISUAL EFFECTS"} />
+          )}
+          {stunts.length !== 0 && (
+            <CrewGroup category={stunts} title={"STUNTS"} />
+          )}
+          {coreographer.length !== 0 && (
+            <CrewGroup category={coreographer} title={"CHOREOGRAPHY"} />
+          )}
+          {compose.length !== 0 && (
+            <CrewGroup category={compose} title={"COMPOSER"} />
+          )}
+          {songs.length !== 0 && <CrewGroup category={songs} title={"SONGS"} />}
+          {sound.length !== 0 && <CrewGroup category={sound} title={"SOUND"} />}
+          {costume.length !== 0 && (
+            <CrewGroup category={costume} title={"COSTUME DESIGN"} />
+          )}
+          {makeup.length !== 0 && (
+            <CrewGroup category={makeup} title={"MAKEUP"} />
+          )}
+          {hair.length !== 0 && (
+            <CrewGroup category={hair} title={"HAIRSTYLING"} />
+          )}
+        </div>
+      ) : (
+        <span>No details</span>
       )}
-      {photo.length !== 0 && (
-        <CrewGroup category={photo} title={"ADD. PHOTOGRAPHY"} />
-      )}
-      {productionDesign.length !== 0 && (
-        <CrewGroup category={productionDesign} title={"PRODUCTION DESIGN"} />
-      )}
-      {artDirection.length !== 0 && (
-        <CrewGroup category={artDirection} title={"ART DIRECTION"} />
-      )}
-      {setDecoration.length !== 0 && (
-        <CrewGroup category={setDecoration} title={"SET DECORATION"} />
-      )}
-      {specialEffects.length !== 0 && (
-        <CrewGroup category={specialEffects} title={"SPECIAL EFFECTS"} />
-      )}
-      {visualEffects.length !== 0 && (
-        <CrewGroup category={visualEffects} title={"VISUAL EFFECTS"} />
-      )}
-      {stunts.length !== 0 && <CrewGroup category={stunts} title={"STUNTS"} />}
-      {coreographer.length !== 0 && (
-        <CrewGroup category={coreographer} title={"CHOREOGRAPHY"} />
-      )}
-      {compose.length !== 0 && (
-        <CrewGroup category={compose} title={"COMPOSER"} />
-      )}
-      {songs.length !== 0 && <CrewGroup category={songs} title={"SONGS"} />}
-      {sound.length !== 0 && <CrewGroup category={sound} title={"SOUND"} />}
-      {costume.length !== 0 && (
-        <CrewGroup category={costume} title={"COSTUME DESIGN"} />
-      )}
-      {makeup.length !== 0 && <CrewGroup category={makeup} title={"MAKEUP"} />}
-      {hair.length !== 0 && <CrewGroup category={hair} title={"HAIRSTYLING"} />}
-    </div>
+    </>
   );
 }

@@ -16,7 +16,7 @@ export default function FilmImageCard({ apiId, imageWidth }: Props) {
   const imageStyle = `${imageWidth} rounded-sm border-beeBrownLight border-2 `;
 
   useEffect(() => {
-    const url = `https://api.themoviedb.org/3/movie/${apiId}?language=en-US&append_to_response=credits`;
+    const url = `https://api.themoviedb.org/3/movie/${apiId}?language=en-US`;
     fetch(url, {
       method: "GET",
       headers: {
