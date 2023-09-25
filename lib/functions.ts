@@ -20,7 +20,7 @@ export async function getUser(): Promise<User | null> {
       },
     });
 
-    return user;
+    return user as User;
   };
 
   const userSupabase = await getUserAuth();

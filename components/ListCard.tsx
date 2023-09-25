@@ -68,7 +68,7 @@ export default function ListCard({
         {list ? (
           <div className="flex flex-row items-center">
             <div className="flex flex-col">
-              <div className="flex flex-row">
+              <div className="flex flex-row items-baseline">
                 <span
                   className="pr-2 hover:cursor-pointer font-openSans text-lg"
                   onClick={() => {
@@ -95,12 +95,14 @@ export default function ListCard({
                         className="w-5 h-5 rounded-full object-cover"
                       />
                     )}
-                    <span>{list.user.username}</span>
+                    <span className="font-openSans text-xs opacity-80">
+                      {list.user.username}
+                    </span>
                   </div>
                 )}
                 <div className="flex gap-1 items-center">
-                  <span>{count}</span>
-                  <BookmarkIcon className="text-beeBrownLight h-3 w-3 mt-0.5" />
+                  <span className="text-xs font-openSans">{count}</span>
+                  <BookmarkIcon className="text-beeBrownLight h-3 w-3 mt-0.5 opacity-80" />
                 </div>
               </div>
             </div>
