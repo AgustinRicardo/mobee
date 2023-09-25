@@ -18,6 +18,7 @@ export default function ReviewList({ apiId }: Props) {
       .then(({ reviews }) => {
         setReviews(reviews);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

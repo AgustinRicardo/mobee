@@ -35,6 +35,7 @@ export default function ProfileContent({ user }: Props) {
       .from("profile-images")
       .getPublicUrl("public/default.jpg");
     console.log(data.publicUrl);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

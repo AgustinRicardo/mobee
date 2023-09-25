@@ -41,6 +41,7 @@ export default function FilmSlider({ userId, url, numOfFilms }: Props) {
 
   useEffect(() => {
     getFilms();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

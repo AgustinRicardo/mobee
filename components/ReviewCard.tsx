@@ -43,6 +43,7 @@ export default function ReviewCard({
       .then((data) => {
         setFilm(data);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -41,6 +41,7 @@ export default function FilmWatchStatusPanel({ userId, film }: Props) {
           setAverageRating(data.film.average_rating);
         }
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

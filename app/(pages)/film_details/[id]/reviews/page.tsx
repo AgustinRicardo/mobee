@@ -1,5 +1,4 @@
 "use client";
-import FilmImageCard from "@/components/FilmImageCard";
 import Pagination from "@/components/Pagination";
 import ReviewCard from "@/components/ReviewCard";
 import { Film } from "@/lib/interfaces";
@@ -37,6 +36,7 @@ export default function FilmReviewsPage({
         setReviews(reviews);
         setMaxPage(maxPage);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

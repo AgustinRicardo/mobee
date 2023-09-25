@@ -28,6 +28,7 @@ export default function ListDetails({ url, userId, page, setPage }: Props) {
           setMaxPage(maxPage);
         }
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -32,6 +32,7 @@ export default function MyUserListsComponent({ userId }: Props) {
           setMaxPage(maxPage);
         }
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
   return (

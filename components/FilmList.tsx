@@ -45,6 +45,7 @@ export default function FilmList({
           setFilmList(results);
         });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [url, page]);
   console.log(filmList);
 

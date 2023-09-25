@@ -2,94 +2,77 @@ import prismaClient from "@/lib/prisma-client";
 import { getOrAddFilmToDB } from "@/lib/functions";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function updateToWatchStatus(filmId: string, userId: string) {
-  try {
-    const filmWatchStatus = await prismaClient.filmWatchStatus.findUnique({
-      where: {
-        user_id_film_id: {
-          user_id: userId,
-          film_id: filmId,
-        },
-      },
-    });
-    if (filmWatchStatus) {
-      await prismaClient.filmWatchStatus.update({
-        where: {
-          user_id_film_id: {
-            user_id: userId,
-            film_id: filmId,
-          },
-        },
-        data: {
-          to_watch: !filmWatchStatus.to_watch,
-        },
-      });
-    } else {
-      await prismaClient.filmWatchStatus.create({
-        data: {
-          film_id: filmId,
-          user_id: userId,
-          to_watch: true,
-        },
-      });
-    }
-  } catch (e) {}
-}
-export async function updateWatchedStatus(filmId: string, userId: string) {
-  try {
-    const filmWatchStatus = await prismaClient.filmWatchStatus.findUnique({
-      where: {
-        user_id_film_id: {
-          user_id: userId,
-          film_id: filmId,
-        },
-      },
-    });
-    if (filmWatchStatus) {
-      await prismaClient.filmWatchStatus.update({
-        where: {
-          user_id_film_id: {
-            user_id: userId,
-            film_id: filmId,
-          },
-        },
-        data: {
-          watched: !filmWatchStatus.watched,
-        },
-      });
-    } else {
-      await prismaClient.filmWatchStatus.create({
-        data: {
-          film_id: filmId,
-          user_id: userId,
-          watched: true,
-        },
-      });
-    }
-  } catch (e) {
-    console.log(e);
-  }
-}
-
-const getFilmInfoFromUser = async (userId: string, filmId: string) => {
-  try {
-    const data = await prismaClient.filmWatchStatus.findUnique({
-      where: {
-        user_id_film_id: {
-          user_id: userId,
-          film_id: filmId,
-        },
-      },
-    });
-    return data;
-  } catch (e) {
-    console.log(e);
-  }
-};
-
 export async function POST(request: NextRequest) {
+  async function updateToWatchStatus(filmId: string, userId: string) {
+    try {
+      const filmWatchStatus = await prismaClient.filmWatchStatus.findUnique({
+        where: {
+          user_id_film_id: {
+            user_id: userId,
+            film_id: filmId,
+          },
+        },
+      });
+      if (filmWatchStatus) {
+        await prismaClient.filmWatchStatus.update({
+          where: {
+            user_id_film_id: {
+              user_id: userId,
+              film_id: filmId,
+            },
+          },
+          data: {
+            to_watch: !filmWatchStatus.to_watch,
+          },
+        });
+      } else {
+        await prismaClient.filmWatchStatus.create({
+          data: {
+            film_id: filmId,
+            user_id: userId,
+            to_watch: true,
+          },
+        });
+      }
+    } catch (e) {}
+  }
+  async function updateWatchedStatus(filmId: string, userId: string) {
+    try {
+      const filmWatchStatus = await prismaClient.filmWatchStatus.findUnique({
+        where: {
+          user_id_film_id: {
+            user_id: userId,
+            film_id: filmId,
+          },
+        },
+      });
+      if (filmWatchStatus) {
+        await prismaClient.filmWatchStatus.update({
+          where: {
+            user_id_film_id: {
+              user_id: userId,
+              film_id: filmId,
+            },
+          },
+          data: {
+            watched: !filmWatchStatus.watched,
+          },
+        });
+      } else {
+        await prismaClient.filmWatchStatus.create({
+          data: {
+            film_id: filmId,
+            user_id: userId,
+            watched: true,
+          },
+        });
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   const { apiId, userId, isWatched, toWatch } = await request.json();
-  let statusToUpdate;
 
   try {
     if (apiId) {
@@ -98,7 +81,6 @@ export async function POST(request: NextRequest) {
         if (isWatched !== undefined) {
           await updateWatchedStatus(film.id, userId);
         } else if (toWatch !== undefined) {
-          statusToUpdate = "toWatch";
           await updateToWatchStatus(film.id, userId);
         }
       }
@@ -110,6 +92,21 @@ export async function POST(request: NextRequest) {
 }
 
 export async function GET(request: NextRequest) {
+  const getFilmInfoFromUser = async (userId: string, filmId: string) => {
+    try {
+      const data = await prismaClient.filmWatchStatus.findUnique({
+        where: {
+          user_id_film_id: {
+            user_id: userId,
+            film_id: filmId,
+          },
+        },
+      });
+      return data;
+    } catch (e) {
+      console.log(e);
+    }
+  };
   const { searchParams } = new URL(request.url);
   const apiId = Number(searchParams.get("apiId"));
   const userId = searchParams.get("userId");

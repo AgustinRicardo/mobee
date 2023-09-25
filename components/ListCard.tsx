@@ -41,6 +41,7 @@ export default function ListCard({
           setSavedList(saved);
         });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

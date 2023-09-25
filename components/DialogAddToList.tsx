@@ -27,6 +27,7 @@ export function DialogAddToList({ apiId, userId, children }: Props) {
           setLists(data.lists);
         }
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
