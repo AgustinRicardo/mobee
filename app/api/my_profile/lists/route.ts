@@ -2,6 +2,7 @@ import { getOrAddFilmToDB } from "@/lib/functions";
 import { NextRequest, NextResponse } from "next/server";
 import prismaClient from "../../../../lib/prisma-client";
 import { FilmOnDB } from "@/lib/interfaces";
+export const dynamic = "force-dynamic";
 
 export async function POST(request: NextRequest) {
   const { listTitle, listDescription, filmIds, userId } = await request.json();

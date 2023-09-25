@@ -3,6 +3,7 @@ import prismaClient from "../../../lib/prisma-client";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { Credentials, UserDBInfo } from "@/lib/interfaces";
+export const dynamic = "force-dynamic";
 
 export async function POST(request: NextRequest) {
   const { username, email, password } = await request.json();

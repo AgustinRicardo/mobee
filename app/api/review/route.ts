@@ -1,6 +1,7 @@
 import { getOrAddFilmToDB } from "@/lib/functions";
 import prismaClient from "../../../lib/prisma-client";
 import { NextRequest, NextResponse } from "next/server";
+export const dynamic = "force-dynamic";
 
 export async function POST(request: NextRequest) {
   const { userId, apiId, date, review, ratingValue } = await request.json();
@@ -79,7 +80,7 @@ export async function PUT(request: NextRequest) {
         watched_at: review.date ? review.date : null,
       },
     });
-    
+
     if (updatedReview) {
       await calculateRating(updatedReview.film_id);
       return NextResponse.json({ message: "Successful" }, { status: 200 });
@@ -89,7 +90,7 @@ export async function PUT(request: NextRequest) {
   }
 }
 
-async function calculateRating (filmId: string) {
+async function calculateRating(filmId: string) {
   const allReviews = await prismaClient.review.findMany({
     where: {
       film_id: filmId,
