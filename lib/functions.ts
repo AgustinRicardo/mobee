@@ -1,4 +1,3 @@
-"use server";
 import prismaClient from "./prisma-client";
 import { User } from "./interfaces";
 import { cookies } from "next/headers";
