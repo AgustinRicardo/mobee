@@ -1,7 +1,6 @@
 import {
   Dialog,
   DialogContent,
-  DialogFooter,
   DialogTrigger,
   DialogTitle,
 } from "@/components/ui/dialog";
@@ -9,13 +8,8 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
-
-import DropdownIcon from "./icons/DropdownIcon";
 import { FormEventHandler, useState } from "react";
 import FilmsSearchBar from "./FilmsSearchBar";
 import { Film } from "@/lib/interfaces";
@@ -24,8 +18,8 @@ import { DialogClose } from "@radix-ui/react-dialog";
 import { useToast } from "./ui/use-toast";
 import { Toaster } from "./ui/toaster";
 import { DialogReview } from "./DialogReview";
-import { useRouter } from "next/navigation";
 import AddReviewIcon from "./icons/AddReviewIcon";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface Props {
   userId: string;
@@ -37,7 +31,6 @@ export default function CreateDropdown({ userId }: Props) {
   const [listTitle, setListTitle] = useState<string>("");
   const [listDescription, setListDescription] = useState<string>("");
   const [filmToReview, setFilmToReview] = useState<Film | null>(null);
-  const router = useRouter();
 
   const handleFormSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
@@ -68,6 +61,9 @@ export default function CreateDropdown({ userId }: Props) {
         })
         .finally(() => {
           location.reload();
+          toast({
+            title: "New list created successfully",
+          });
         });
     }
   };
@@ -137,6 +133,7 @@ export default function CreateDropdown({ userId }: Props) {
                   <div className="flex flex-col gap-1">
                     <label htmlFor="listTitle">List title</label>
                     <input
+                      autoComplete="off"
                       type="text"
                       id="listTitle"
                       value={listTitle}
@@ -164,32 +161,39 @@ export default function CreateDropdown({ userId }: Props) {
                       setFilmsOnNewList={setFilmsOnNewList}
                     />
                   </div>
-                  <div className="bg-beeBrownHeader min-w-[15rem]">
-                    <ul>
-                      {filmsOnNewList.map((film) => {
-                        return (
-                          <li
-                            className="text-beeBeig flex flex-row gap-2 group"
-                            key={film.id}
-                          >
-                            <span>{film.title}</span>
-                            <span> {film.release_date.slice(0, 4)}</span>
-                            <button
-                              className="invisible group-hover:visible"
-                              onClick={() => {
-                                setFilmsOnNewList(
-                                  filmsOnNewList.filter((filmOnList) => {
-                                    return filmOnList.id !== film.id;
-                                  })
-                                );
-                              }}
+                  <div className="bg-beeBrownHeader min-w-[15rem] rounded-sm w-[40ch] p-2 overflow-hidden h-72">
+                    <ScrollArea className="h-full">
+                      <ul className="flex flex-col gap-2">
+                        {filmsOnNewList.map((film) => {
+                          return (
+                            <li
+                              className="text-beeBeig flex flex-row gap-2 group"
+                              key={film.id}
                             >
-                              <RemoveIcon className="w-4 h-4 self-center" />
-                            </button>
-                          </li>
-                        );
-                      })}
-                    </ul>
+                              <span>
+                                {film.title}{" "}
+                                <span className="text-xs opacity-70">
+                                  {film.release_date.slice(0, 4)}
+                                </span>
+                              </span>
+
+                              <button
+                                className="invisible group-hover:visible"
+                                onClick={() => {
+                                  setFilmsOnNewList(
+                                    filmsOnNewList.filter((filmOnList) => {
+                                      return filmOnList.id !== film.id;
+                                    })
+                                  );
+                                }}
+                              >
+                                <RemoveIcon className="w-4 h-4 self-center" />
+                              </button>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </ScrollArea>
                   </div>
                 </div>
                 <DialogClose asChild>

@@ -3,26 +3,35 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
-  const userId = searchParams.get("userId");
-  const page = searchParams.get("page");
+  const apiId = Number(searchParams.get("apiId"));
+  const page = Number(searchParams.get("page"));
   const pageResults = 10;
   let skip;
   if (page) {
-    skip = (Number(page) - 1) * pageResults;
+    skip = pageResults * (page - 1);
   }
-
   try {
-    if (userId) {
+    const film = await prismaClient.film.findUnique({
+      where: {
+        tmdb_id: apiId,
+      },
+    });
+
+    if (film) {
       const total = await prismaClient.review.count({
-        where: { user_id: userId },
+        where: { film_id: film.id },
       });
       const maxPage = Math.ceil(total / pageResults);
       const reviews = await prismaClient.review.findMany({
-        take: pageResults,
         skip,
-        where: { user_id: userId },
-        include: { film: true },
-        orderBy: { created_at: "desc" },
+        take: pageResults,
+        orderBy: {
+          created_at: "desc",
+        },
+        where: { film_id: film.id },
+        include: {
+          user: true,
+        },
       });
 
       return NextResponse.json({ reviews, maxPage });

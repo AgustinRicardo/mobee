@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Skeleton } from "@mui/material";
+import { useRouter } from "next/navigation";
 
 interface Props {
   apiId: number;
@@ -10,11 +11,12 @@ interface Props {
 export default function FilmImageCard({ apiId, imageWidth }: Props) {
   const [filmPath, setFilmPath] = useState("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const router = useRouter();
 
   const imageStyle = `${imageWidth} rounded-sm border-beeBrownLight border-2 `;
 
   useEffect(() => {
-    const url = `https://api.themoviedb.org/3/movie/${apiId}?language=en-US&append_to_response=credits`;
+    const url = `https://api.themoviedb.org/3/movie/${apiId}?language=en-US`;
     fetch(url, {
       method: "GET",
       headers: {
@@ -41,6 +43,9 @@ export default function FilmImageCard({ apiId, imageWidth }: Props) {
             className={imageStyle}
             src={filmPath && `https://image.tmdb.org/t/p/original/${filmPath}`}
             alt="backdrop"
+            onClick={() => {
+              router.push(`/film_details/${String(apiId)}`);
+            }}
           />
         ) : (
           <></>

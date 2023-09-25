@@ -14,7 +14,7 @@ model User {
   id                   String            @id @default(uuid())
   username             String
   email                String            @unique
-  profile_picture_path String?
+  profile_picture_path String?           @default("https://vakufdtmmftfxdwxhhzu.supabase.co/storage/v1/object/public/profile-images/public/default.jpg")
   created_at           DateTime          @default(now())
   user_reviews         Review[]
   film_status          FilmWatchStatus[]

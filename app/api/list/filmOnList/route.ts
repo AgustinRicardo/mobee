@@ -3,15 +3,21 @@ import prismaClient from "../../../../lib/prisma-client";
 
 export async function DELETE(request: NextRequest) {
   const { searchParams } = new URL(request.url);
-  const filmId = searchParams.get("filmId");
+  const apiId = searchParams.get("apiId");
   const listId = searchParams.get("listId");
   let filmOnList;
-
   try {
-    if (listId && filmId) {
-      filmOnList = await prismaClient.filmsOnLists.delete({
-        where: { list_id_film_id: { list_id: listId, film_id: filmId } },
+    if (listId && apiId) {
+      const film = await prismaClient.film.findUnique({
+        where: {
+          tmdb_id: Number(apiId),
+        },
       });
+      if (film) {
+        filmOnList = await prismaClient.filmsOnLists.delete({
+          where: { list_id_film_id: { list_id: listId, film_id: film.id } },
+        });
+      }
     }
     if (filmOnList) {
       return NextResponse.json({ message: "Successful" }, { status: 200 });

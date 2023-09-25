@@ -29,6 +29,7 @@ export default function ListCard({
   canDelete = false,
 }: Props) {
   const [savedList, setSavedList] = useState<boolean>(false);
+  const [count, setCount] = useState<number>(list?.bookmark_count!);
   const router = useRouter();
   const { toast } = useToast();
 
@@ -44,18 +45,16 @@ export default function ListCard({
 
   return (
     <>
-      <div
-        className="flex flex-col group w-fit"
-        onClick={() => {
-          if (list) {
-            router.push(`/list_details/${list.id}`);
-          }
-        }}
-      >
+      <div className="flex flex-col group w-fit">
         <div
-          className={`film-posters flex flex-row items-center ${imageGap} pb-2`}
+          className={`film-posters flex flex-row items-center ${imageGap} hover:cursor-pointer  hover:border-beeBeig border-2 border-transparent rounded-sm`}
+          onClick={() => {
+            if (list) {
+              router.push(`/list_details/${list.id}`);
+            }
+          }}
         >
-          {apiIds?.map((apiId) => {
+          {apiIds?.slice(0, 4).map((apiId) => {
             return (
               <FilmImageCard
                 key={apiId}
@@ -65,27 +64,44 @@ export default function ListCard({
             );
           })}
         </div>
-        {list && apiIds ? (
+        {list ? (
           <div className="flex flex-row items-center">
             <div className="flex flex-col">
               <div className="flex flex-row">
-                <span className="pr-2">{list.title}</span>
-                <span className="opacity-50">
-                  {apiIds.length} {apiIds.length > 1 ? "films" : "film"}
+                <span
+                  className="pr-2 hover:cursor-pointer"
+                  onClick={() => {
+                    if (list) {
+                      router.push(`/list_details/${list.id}`);
+                    }
+                  }}
+                >
+                  {list.title}
                 </span>
+                {apiIds && (
+                  <span className="opacity-50">
+                    {apiIds.length} {apiIds.length > 1 ? "films" : "film"}
+                  </span>
+                )}
               </div>
-              {!hideUser && (
-                <div className="flex flex-row gap-1 items-center">
-                  {list.user.profile_picture_path && (
-                    <img
-                      src={list.user.profile_picture_path}
-                      alt=""
-                      className="w-5 h-5 rounded-full"
-                    />
-                  )}
-                  <span>{list.user.username}</span>
+              <div className="flex flex-row gap-2">
+                {!hideUser && (
+                  <div className="flex gap-1 items-center">
+                    {list.user.profile_picture_path && (
+                      <img
+                        src={list.user.profile_picture_path}
+                        alt=""
+                        className="w-5 h-5 rounded-full object-cover"
+                      />
+                    )}
+                    <span>{list.user.username}</span>
+                  </div>
+                )}
+                <div className="flex gap-1 items-center">
+                  <span>{count}</span>
+                  <BookmarkIcon className="text-beeBrownLight h-3 w-3 mt-0.5" />
                 </div>
-              )}
+              </div>
             </div>
 
             {!(list.user_id === userId) && (
@@ -98,13 +114,21 @@ export default function ListCard({
                       method: "DELETE",
                       body: JSON.stringify(saveListData),
                     });
+                    toast({ title: "List removed from your saved lists" });
+
                     setSavedList(!savedList);
+                    if (count !== 0) {
+                      setCount(count - 1);
+                    }
                   } else {
                     fetch(`/api/listSavedByUser`, {
                       method: "POST",
                       body: JSON.stringify(saveListData),
                     });
+                    toast({ title: "List added to your saved lists" });
+
                     setSavedList(!savedList);
+                    setCount(count + 1);
                   }
                 }}
                 className={`hidden group-hover:inline ml-auto w-5 h-5 hover:cursor-pointer hover:scale-110 ${

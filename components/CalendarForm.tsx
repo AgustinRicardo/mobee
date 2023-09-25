@@ -1,27 +1,15 @@
 "use client";
-
-import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
-import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
 import CalendarIcon from "./icons/CalendarIcon";
-import { Dispatch, SetStateAction, useState } from "react";
-import { SelectSingleEventHandler } from "react-day-picker";
-
-const FormSchema = z.object({
-  dob: z.date({
-    required_error: "A date is required.",
-  }),
-});
+import { Dispatch, SetStateAction } from "react";
 
 interface Props {
   date: Date | undefined;

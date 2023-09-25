@@ -11,11 +11,15 @@ export default async function PagesLayout({
   const user = await getUser();
   return (
     <>
-      <MainHeader userId={user?.id!}>
-        <UserProfile user={user!} />
-      </MainHeader>
-      <main className="text-beeBeig px-[16%]">{children}</main>
-      <footer className="bg-beeBrownHeader h-12"></footer>
+      {user && (
+        <>
+          <MainHeader userId={user.id}>
+            <UserProfile user={user} />
+          </MainHeader>
+          <main className="text-beeBeig px-[16%] flex-1">{children}</main>
+          <footer className="bg-beeBrownHeader h-12"></footer>
+        </>
+      )}
     </>
   );
 }

@@ -32,7 +32,7 @@ export default function PopularLists({ userId }: Props) {
             list={list}
             imageGap="gap-1"
             imageWidth="w-20"
-            apiIds={list.films.slice(0, 4).map((film) => film.film.tmdb_id)}
+            apiIds={list.films.map((film) => film.film.tmdb_id)}
           />
         );
       })}

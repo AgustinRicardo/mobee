@@ -8,14 +8,17 @@ interface Props {
 }
 export default function MyUserFilmsContent({ userId }: Props) {
   const [watchedFilms, setWatchedFilms] = useState<FilmOnDB[]>();
+  const [page, setPage] = useState<number>(1);
+  const [maxPage, setMaxPage] = useState<number>();
 
   useEffect(() => {
-    fetch(`/api/my_profile/films?userId=${userId}`)
+    fetch(`/api/my_profile/films?userId=${userId}&page=${page}`)
       .then((res) => res.json())
-      .then(({ films }) => {
+      .then(({ films, maxPage }) => {
         setWatchedFilms(films);
+        setMaxPage(maxPage);
       });
-  }, []);
+  }, [page]);
 
   return (
     <>
@@ -23,7 +26,9 @@ export default function MyUserFilmsContent({ userId }: Props) {
       <div className="grid grid-cols-5">
         {watchedFilms &&
           watchedFilms.map((film) => {
-            return <FilmPoster apiId={film.tmdb_id} userId={userId} />;
+            return (
+              <FilmPoster key={film.id} apiId={film.tmdb_id} userId={userId} />
+            );
           })}
       </div>
     </>

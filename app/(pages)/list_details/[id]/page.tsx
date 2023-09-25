@@ -1,4 +1,4 @@
-import ListDetails from "@/components/ListDetails";
+import ListDetailsContent from "@/components/ListDetailsContent";
 import { getUser } from "@/lib/functions";
 
 export default async function ListDetailsPage({
@@ -8,7 +8,5 @@ export default async function ListDetailsPage({
 }) {
   const user = await getUser();
 
-  return (
-    <ListDetails url={`/api/list?listId=${params.id}`} userId={user?.id!} />
-  );
+  return <>{user && <ListDetailsContent listId={params.id} user={user} />}</>;
 }

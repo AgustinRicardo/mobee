@@ -7,7 +7,6 @@ import GenreList from "@/components/GenreList";
 import CrewList from "@/components/CrewList";
 import DetailsList from "@/components/DetailsList";
 import FilmSlider from "@/components/FilmSlider";
-import ReviewCard from "@/components/ReviewCard";
 import ReviewList from "@/components/ReviewList";
 
 export default async function Page({ params }: { params: { id: string } }) {
@@ -32,16 +31,23 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   return (
     <>
-      <div className="relative z-0 mx-[-2%]">
-        <div className="absolute z-10 bg-gradientOverlay w-full h-full"></div>
+      {film.poster_path !== null ? (
+        <div className="relative z-0 mx-[-2%]">
+          <div className="absolute z-10 bg-gradientOverlay w-full h-full"></div>
 
-        <img
-          src={`https://image.tmdb.org/t/p/original/${film.backdrop_path}`}
-          alt="backdrop"
-          className="z-0 "
-        />
-      </div>
-      <div className="flex flex-row gap-4 z-20 relative bottom-32 overflow-visible px-4">
+          <img
+            src={`https://image.tmdb.org/t/p/original/${film.backdrop_path}`}
+            alt=""
+            className="z-0"
+          />
+        </div>
+      ) : null}
+
+      <div
+        className={`flex flex-row gap-4 z-20 overflow-visible px-4 ${
+          film.poster_path !== null ? "py-4" : " relative bottom-32"
+        }`}
+      >
         <img
           src={`https://image.tmdb.org/t/p/w500/${film.poster_path}`}
           alt="poster"
@@ -49,25 +55,30 @@ export default async function Page({ params }: { params: { id: string } }) {
         />
         <div className="flex flex-col gap-4 w-full">
           <div className="flex flex-row gap-4 w-full justify-between">
-            <div className="film_details flex flex-col w-[34rem] gap-2">
-              <div className="title flex flex-row">
-                <h1 className="mr-auto text-[48px] font-lora font-medium">
-                  {film.title}
-                </h1>
-                <span className="text-[24px] font-lora font-thin mt-[20px]">
-                  {film.release_date.slice(0, 4)}
+            <div className="film_details flex flex-col w-[34rem] gap-8">
+              <div className="flex flex-col">
+                <div className="title flex flex-row gap-5 items-baseline py-0">
+                  <h1 className="text-[48px] font-lora font-bold">
+                    {film.title}
+                  </h1>
+                  <span className="text-[24px] font-openSans font-normal opacity-50">
+                    {film.release_date.slice(0, 4)}
+                  </span>
+                </div>
+                <span className="text-md font-openSans opacity-80">
+                  {`Directed by ${
+                    film.credits.crew.find((person) => {
+                      return person.job === "Director";
+                    })?.name || "Unknown"
+                  }, `}
+                  <span className="italic">{`${film.runtime} min`}</span>
                 </span>
               </div>
-              <span className="text-[20px] font-switzer">{`Directed by ${
-                film.credits.crew.find((person) => {
-                  return person.job === "Director";
-                })?.name || "Unknown"
-              }`}</span>
-              <span className="text-[20px] font-switzer mb-[20px]">{`${film.runtime} min`}</span>
-              <span className="italic">{film.tagline.toUpperCase()}</span>
-              <p className="font-semibold font-lora text-[20px]">
-                {film.overview}
-              </p>
+
+              <span className="italic font-thin">
+                {film.tagline.toUpperCase()}
+              </span>
+              <p className="font-normal font-lora text-xl">{film.overview}</p>
               <FilmDetailsTabs
                 cast={<CastList cast={film.credits.cast} />}
                 crew={<CrewList crew={film.credits.crew} />}
@@ -82,13 +93,11 @@ export default async function Page({ params }: { params: { id: string } }) {
             </div>
             <FilmWatchStatusPanel userId={user?.id!} film={film} />
           </div>
-          <div className="recent-reviews flex flex-col">
-            <span className="text-beeYellow pb-1">Recent reviews</span>
-            <hr className="border-beeYellow" />
+          <div className="recent-reviews flex flex-col font-openSans gap-4">
             <ReviewList apiId={film.id} />
 
             <section>
-              <h1 className="text-beeYellow">SIMILAR FILMS</h1>
+              <h1 className="text-beeYellow font-openSans">SIMILAR FILMS</h1>
               <hr className="border-beeYellow" />
               <FilmSlider
                 userId={user?.id!}
@@ -99,8 +108,6 @@ export default async function Page({ params }: { params: { id: string } }) {
           </div>
         </div>
       </div>
-
-      <div className="h-96"></div>
     </>
   );
 }

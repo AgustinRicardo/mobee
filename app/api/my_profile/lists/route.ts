@@ -33,21 +33,32 @@ export async function POST(request: NextRequest) {
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const userId = searchParams.get("userId");
+  const page = searchParams.get("page");
   let lists;
-
+  const pageResults = 10;
+  let skip;
+  if (page) {
+    skip = (Number(page) - 1) * pageResults;
+  }
   try {
     if (userId) {
+      const total = await prismaClient.list.count({
+        where: { user_id: userId },
+      });
+      const maxPage = Math.ceil(total / pageResults);
+
       lists = await prismaClient.list.findMany({
         where: { user_id: userId },
+        skip,
+        take: pageResults,
         include: {
           films: { include: { film: true } },
           user: true,
         },
       });
-    }
-
-    if (lists) {
-      return NextResponse.json({ lists });
+      if (lists) {
+        return NextResponse.json({ lists, maxPage });
+      }
     }
   } catch (e) {
     return NextResponse.error();

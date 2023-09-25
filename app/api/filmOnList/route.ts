@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
       });
 
       if (!filmOnList) {
-        const list = await prismaClient.filmsOnLists.create({
+        await prismaClient.filmsOnLists.create({
           data: { list_id: listId, film_id: filmOnDb.id },
         });
       }

@@ -6,7 +6,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import AddReviewIcon from "./icons/AddReviewIcon";
-import { Film } from "@/lib/interfaces";
+import { Film, Review } from "@/lib/interfaces";
 import { Checkbox } from "./ui/checkbox";
 import { CalendarForm } from "./CalendarForm";
 import {
@@ -14,6 +14,7 @@ import {
   Dispatch,
   FormEventHandler,
   SetStateAction,
+  useEffect,
   useState,
 } from "react";
 import RatingPicker from "./RatingPicker";
@@ -27,6 +28,8 @@ interface Props {
   children: React.ReactNode;
   defaultOpen?: boolean;
   setFilmToReview?: Dispatch<SetStateAction<Film | null>>;
+  isEditing?: boolean;
+  reviewFromDb?: Review;
 }
 
 export function DialogReview({
@@ -35,12 +38,22 @@ export function DialogReview({
   children,
   defaultOpen,
   setFilmToReview,
+  isEditing = false,
+  reviewFromDb,
 }: Props) {
   const { toast } = useToast();
-  const [checkedDateWatched, setCheckDateWatched] = useState<boolean>(false);
-  const [ratingValue, setRatingValue] = useState<number | null>(null);
-  const [date, setDate] = useState<Date>();
-  const [review, setReview] = useState<string>("");
+  const [checkedDateWatched, setCheckDateWatched] = useState<boolean>(
+    isEditing && reviewFromDb?.watched_at! ? true : false
+  );
+  const [ratingValue, setRatingValue] = useState<number | null>(
+    isEditing ? reviewFromDb?.rating! : null
+  );
+  const [date, setDate] = useState<Date | undefined>(
+    isEditing ? reviewFromDb?.watched_at! : undefined
+  );
+  const [review, setReview] = useState<string>(
+    isEditing ? reviewFromDb?.review_description! : ""
+  );
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
@@ -51,22 +64,40 @@ export function DialogReview({
         variant: "destructive",
       });
     } else {
-      const reviewData = {
+      const reviewDataToPost = {
         userId,
         apiId: film.id,
         date,
         review,
         ratingValue,
       };
+      const reviewDataToPut = {
+        id: reviewFromDb?.id,
+        date,
+        review,
+        ratingValue,
+      };
       try {
-        await fetch("/api/review", {
-          method: "POST",
-          body: JSON.stringify(reviewData),
-        });
+        if (isEditing) {
+          await fetch("/api/review", {
+            method: "PUT",
+            body: JSON.stringify(reviewDataToPut),
+          });
+        } else {
+          await fetch("/api/review", {
+            method: "POST",
+            body: JSON.stringify(reviewDataToPost),
+          });
+        }
       } catch (e) {
         throw e;
       } finally {
         location.reload();
+        toast({
+          title: isEditing
+            ? "Review edited successfully"
+            : "Review added successfully",
+        });
       }
     }
   };
@@ -75,10 +106,12 @@ export function DialogReview({
     <>
       <Dialog
         onOpenChange={() => {
-          setCheckDateWatched(false);
-          setDate(undefined);
-          setRatingValue(null);
-          setReview("");
+          setCheckDateWatched(
+            isEditing && reviewFromDb?.watched_at! ? true : false
+          );
+          setDate(isEditing ? reviewFromDb?.watched_at! : undefined);
+          setRatingValue(isEditing ? reviewFromDb?.rating! : null);
+          setReview(isEditing ? reviewFromDb?.review_description! : "");
           if (setFilmToReview) {
             setFilmToReview(null);
           }
@@ -119,7 +152,7 @@ export function DialogReview({
                     htmlFor="watchedOn"
                     className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                   >
-                    {checkedDateWatched ? "Watched on" : "Add to diary?"}
+                    {checkedDateWatched ? "Watched on" : "Add watched date?"}
                   </label>
                   {checkedDateWatched && (
                     <CalendarForm date={date} setDate={setDate} />
