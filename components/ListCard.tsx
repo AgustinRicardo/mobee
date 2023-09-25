@@ -70,7 +70,7 @@ export default function ListCard({
             <div className="flex flex-col">
               <div className="flex flex-row">
                 <span
-                  className="pr-2 hover:cursor-pointer"
+                  className="pr-2 hover:cursor-pointer font-openSans text-lg"
                   onClick={() => {
                     if (list) {
                       router.push(`/list_details/${list.id}`);

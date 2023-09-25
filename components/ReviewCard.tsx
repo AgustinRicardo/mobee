@@ -56,7 +56,7 @@ export default function ReviewCard({
           {!pathname.includes("/film_details") && (
             <div className="film-title flex flex-row items-center gap-3">
               <span
-                className="font-lora text-lg"
+                className="font-lora text-lg font-semibold"
                 onClick={() => {
                   router.push(`/film_details/${String(filmOnDB?.tmdb_id!)}`);
                 }}
@@ -114,7 +114,7 @@ export default function ReviewCard({
           )}
           <div className="user-rating-date flex flex-row items-center gap-3 align-middle">
             {!pathname.includes("/my_profile") && (
-              <div className="user-handle flex flex-row items-center gap-1 font-switzer font-light text-sm">
+              <div className="user-handle flex flex-row items-center gap-1 font-openSans font-normal opacity-80 text-xs">
                 <img
                   src={user?.profile_picture_path!}
                   alt=""
@@ -136,7 +136,7 @@ export default function ReviewCard({
               </span>
             ) : null}
           </div>
-          <p className="review-description max-w-sm break-words">
+          <p className="review-description max-w-sm break-words font-openSans">
             {review?.review_description}
           </p>
         </div>

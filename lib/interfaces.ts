@@ -87,3 +87,13 @@ export interface FilmOnDB {
   tmdb_id: number;
   average_rating: number;
 }
+
+export interface UserDBInfo {
+  username: string;
+  email: string;
+}
+
+export type Credentials = {
+  email: string;
+  password: string;
+};
