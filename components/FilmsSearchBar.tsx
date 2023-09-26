@@ -55,7 +55,7 @@ export default function FilmsSearchBar({
         <div className="relative">
           <div className="flex flex-row items-center">
             <input
-              className="bg-beeBeig text-beeBrownBackground rounded-sm px-2 py-1 w-[30ch]"
+              className="bg-beeBeig text-beeBrownBackground rounded-sm px-2 py-1 w-[30ch] placeholder:text-beeBrownBackground placeholder:text-opacity-80"
               type="text"
               placeholder="Search"
               onChange={(e) => {

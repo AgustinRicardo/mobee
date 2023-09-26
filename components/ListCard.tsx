@@ -70,7 +70,7 @@ export default function ListCard({
             <div className="flex flex-col gap-1">
               <div className="flex flex-row items-baseline">
                 <p
-                  className="block pr-2 hover:cursor-pointer font-openSans text-base max-w-xs text-ellipsis overflow-hidden"
+                  className="block pr-2 hover:cursor-pointer font-openSans text-base max-w-xs text-ellipsis overflow-hidden font-medium"
                   onClick={() => {
                     if (list) {
                       router.push(`/list_details/${list.id}`);

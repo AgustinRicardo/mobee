@@ -102,7 +102,7 @@ export default function Login() {
         </form>
         <span className="text-center w-max">
           Don't have an account?
-          <Link href="/signup" className="pl-2">
+          <Link href="/signup" className="pl-2 underline">
             Sign up
           </Link>
         </span>

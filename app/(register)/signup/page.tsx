@@ -150,7 +150,10 @@ export default function SignUp() {
           </button>
         </form>
         <span className="text-center w-max">
-          Already have an account? <Link href="/login">Log in</Link>
+          Already have an account?
+          <Link href="/login" className="underline pl-2">
+            Log in
+          </Link>
         </span>
       </div>
       <Toaster />

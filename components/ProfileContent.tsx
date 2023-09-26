@@ -87,21 +87,21 @@ export default function ProfileContent({ user }: Props) {
       )}
 
       <div
-        className={`content relative flex flex-col gap-4 ${
+        className={`content relative flex flex-col font-openSans gap-4 ${
           backdropPath !== null ? "bottom-40" : ""
         }`}
       >
-        <div className="flex flex-row text-beeYellow">
-          <div className="profile-info flex flex-row text-beeBeig px-20 pb-10 gap-5 items-center">
-            <div className="flex flex-row gap-2 items-center">
+        <div className="flex flex-row text-beeYellow items-center">
+          <div className="profile-info flex flex-row text-beeBeig p-5 gap-5 bg-beeBrownLight rounded-md mx-auto  border-beeBrownBackground justify-evenly">
+            <div className="flex flex-row gap-2 items-center ">
               <div className="wrapper relative group">
                 <img
-                  className="rounded-full w-14 h-14 object-cover"
+                  className="rounded-full w-12 h-12 object-cover"
                   src={photoPath}
                   alt="user"
                 />
                 <label htmlFor="upload-photo">
-                  <EditIcon className="hidden group-hover:block absolute top-[75%] left-[75%] bg-beeBrownHeader text-beeBeig rounded-full w-5 h-5 p-0.5" />
+                  <EditIcon className="hidden group-hover:block absolute top-[65%] left-[65%] bg-beeBrownHeader text-beeBeig rounded-full w-5 h-5 p-0.5 hover:cursor-pointer" />
                 </label>
                 <input
                   accept="image/jpeg"
@@ -147,18 +147,19 @@ export default function ProfileContent({ user }: Props) {
                   }}
                 />
               </div>
+
               <span>{user.username}</span>
             </div>
             <div className="flex flex-col items-center ml-auto">
-              <span>{watchedFilms}</span>
+              <span className="text- font-bold">{watchedFilms}</span>
               <span className="text-center">Watched films</span>
             </div>
           </div>
 
-          <div className="watchlist ml-auto flex flex-col gap-5">
+          <div className="watchlist flex flex-col gap-5">
             <div className="wrapper">
               <div className="flex flex-row py-1">
-                <span className="text-beeYellow">WATCHLIST</span>
+                <span className="text-beeYellow font-openSans">WATCHLIST</span>
                 {watchlist ? (
                   <button
                     className="inline ml-auto text-beeYellow hover:bg-beeYellow hover:text-beeBrownBackground hover:rounded-sm px-1 "
@@ -183,9 +184,9 @@ export default function ProfileContent({ user }: Props) {
             )}
           </div>
         </div>
-        <div className="lists-section text-beeYellow pb-5">
+        <div className="lists-section  pb-5">
           <div className="flex flex-row py-1">
-            <span className="text-beeYellow">LISTS</span>
+            <span className="text-beeYellow font-openSans">LISTS</span>
             {lists ? (
               <button className="inline ml-auto text-beeYellow hover:bg-beeYellow hover:text-beeBrownBackground hover:rounded-sm px-1 py-0.5">
                 More
