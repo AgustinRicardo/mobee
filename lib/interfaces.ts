@@ -24,6 +24,7 @@ export interface User {
   email: string;
   profile_picture_path: string;
   created_at: Date;
+  backdrop_path: string;
 }
 
 export interface WatchStatus {

@@ -10,6 +10,8 @@ interface Props {
   setFilmsOnNewList?: Dispatch<SetStateAction<Film[]>>;
   filmsOnNewList?: Film[];
   setFilmToReview?: Dispatch<SetStateAction<Film | null>>;
+  setBackdropPath?: Dispatch<SetStateAction<string>>;
+  userId?: string;
 }
 export default function FilmsSearchBar({
   className,
@@ -17,6 +19,8 @@ export default function FilmsSearchBar({
   setFilmsOnNewList,
   filmsOnNewList,
   setFilmToReview,
+  setBackdropPath,
+  userId,
 }: Props) {
   const router = useRouter();
   const [query, setQuery] = useState<string>("");
@@ -96,6 +100,21 @@ export default function FilmsSearchBar({
                             : action === "goToFilmDetails"
                             ? () => {
                                 router.push(`/film_details/${film.id}`);
+                              }
+                            : action === "setBackdrop"
+                            ? async () => {
+                                if (setBackdropPath) {
+                                  const backdropPath = `https://image.tmdb.org/t/p/original${film.backdrop_path}`;
+                                  setBackdropPath(backdropPath);
+
+                                  await fetch("/api/my_profile/backdropPath", {
+                                    method: "PUT",
+                                    body: JSON.stringify({
+                                      backdropPath,
+                                      userId,
+                                    }),
+                                  });
+                                }
                               }
                             : () => {}
                         }

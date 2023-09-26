@@ -16,6 +16,7 @@ model User {
   email                String            @unique
   profile_picture_path String?           @default("https://vakufdtmmftfxdwxhhzu.supabase.co/storage/v1/object/public/profile-images/public/default.jpg")
   created_at           DateTime          @default(now())
+  backdrop_path        String?
   user_reviews         Review[]
   film_status          FilmWatchStatus[]
   lists                ListSavedByUser[]

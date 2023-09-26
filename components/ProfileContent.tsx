@@ -6,6 +6,8 @@ import { WatchStatus, Review, List, User } from "@/lib/interfaces";
 import { useRouter } from "next/navigation";
 import EditIcon from "./icons/EditIcon";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
+import FilmsSearchBar from "./FilmsSearchBar";
 
 interface Props {
   user: User;
@@ -18,6 +20,7 @@ export default function ProfileContent({ user }: Props) {
   const [lists, setLists] = useState<List[]>();
   const [watchedFilms, setWatchFilms] = useState<number>();
   const [photoPath, setPhotoPath] = useState<string>();
+  const [backdropPath, setBackdropPath] = useState<string>(user.backdrop_path);
   const router = useRouter();
 
   useEffect(() => {
@@ -34,23 +37,60 @@ export default function ProfileContent({ user }: Props) {
     const { data } = supabase.storage
       .from("profile-images")
       .getPublicUrl("public/default.jpg");
-    console.log(data.publicUrl);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <>
-      <div className="relative z-0 mx-[-2%]">
-        <div className="absolute z-10 bg-gradientOverlay w-full h-full"></div>
+      {backdropPath !== null ? (
+        <div className="relative z-0 mx-[-2%]">
+          <Dialog>
+            <DialogTrigger className="flex flex-row items-center gap-1 opacity-80 absolute z-30 top-[65%] left-[80%] hover:opacity-100">
+              <EditIcon className="inline w-4 h-4" />
+              Set backdrop photo
+            </DialogTrigger>
+            <DialogContent className="border-none justify-center">
+              <FilmsSearchBar
+                action="setBackdrop"
+                setBackdropPath={setBackdropPath}
+                userId={user.id}
+              />
+            </DialogContent>
+          </Dialog>
 
-        <img
-          src="https://a.ltrbxd.com/resized/sm/upload/xm/8h/pb/zl/princess-mononoke-1200-1200-675-675-crop-000000.jpg?v=f1534e069c"
-          alt="Profile Background"
-          width="100%"
-          className="z-0 relative"
-        />
-      </div>
-      <div className="content relative bottom-40 flex flex-col gap-4">
+          <div className="absolute z-10 bg-gradientOverlay w-full h-full"></div>
+
+          <img
+            src={backdropPath}
+            alt="Profile Background"
+            width="100%"
+            className="z-0 relative"
+          />
+        </div>
+      ) : (
+        <div className="relative z-0 mx-[-2%] h-16">
+          <Dialog>
+            <DialogTrigger className="flex flex-row items-center gap-1 opacity-80 absolute z-30 top-[65%] left-[80%] hover:opacity-100">
+              <EditIcon className="inline w-4 h-4" />
+              Set backdrop photo
+            </DialogTrigger>
+            <DialogContent className="border-none justify-center">
+              <FilmsSearchBar
+                action="setBackdrop"
+                setBackdropPath={setBackdropPath}
+                userId={user.id}
+              />
+            </DialogContent>
+          </Dialog>
+        </div>
+      )}
+
+      <div
+        className={`content relative flex flex-col gap-4 ${
+          backdropPath !== null ? "bottom-40" : ""
+        }`}
+      >
         <div className="flex flex-row text-beeYellow">
           <div className="profile-info flex flex-row text-beeBeig px-20 pb-10 gap-5 items-center">
             <div className="flex flex-row gap-2 items-center">
