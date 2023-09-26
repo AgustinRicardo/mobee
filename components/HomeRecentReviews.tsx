@@ -17,18 +17,26 @@ export default function HomeRecentReviews() {
 
   return (
     <>
-      <div className="grid grid-cols-2 gap-4">
-        {reviews.map((review) => {
-          return (
-            <ReviewCard
-              key={review.id}
-              review={review}
-              user={review.user}
-              filmOnDB={review.film}
-            />
-          );
-        })}
-      </div>
+      {reviews.length ? (
+        <div className="grid grid-cols-2 gap-4">
+          {reviews.map((review) => {
+            return (
+              <ReviewCard
+                key={review.id}
+                review={review}
+                user={review.user}
+                filmOnDB={review.film}
+              />
+            );
+          })}
+        </div>
+      ) : (
+        <>
+          <div className="flex flex-col items-center py-6">
+            <span>No recent reviews</span>
+          </div>
+        </>
+      )}
     </>
   );
 }

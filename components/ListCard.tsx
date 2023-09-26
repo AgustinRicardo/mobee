@@ -46,9 +46,9 @@ export default function ListCard({
 
   return (
     <>
-      <div className="flex flex-col group w-fit">
+      <div className="flex flex-col group">
         <div
-          className={`film-posters flex flex-row items-center ${imageGap} hover:cursor-pointer  hover:border-beeBeig border-2 border-transparent rounded-sm`}
+          className={`film-posters flex flex-row items-center ${imageGap} hover:cursor-pointer  hover:border-beeBeig border-2 border-transparent rounded-sm w-fit`}
           onClick={() => {
             if (list) {
               router.push(`/list_details/${list.id}`);
@@ -67,10 +67,10 @@ export default function ListCard({
         </div>
         {list ? (
           <div className="flex flex-row items-center">
-            <div className="flex flex-col">
+            <div className="flex flex-col gap-1">
               <div className="flex flex-row items-baseline">
-                <span
-                  className="pr-2 hover:cursor-pointer font-openSans text-lg"
+                <p
+                  className="block pr-2 hover:cursor-pointer font-openSans text-base max-w-xs text-ellipsis overflow-hidden"
                   onClick={() => {
                     if (list) {
                       router.push(`/list_details/${list.id}`);
@@ -78,14 +78,10 @@ export default function ListCard({
                   }}
                 >
                   {list.title}
-                </span>
-                {apiIds && (
-                  <span className="opacity-50">
-                    {apiIds.length} {apiIds.length > 1 ? "films" : "film"}
-                  </span>
-                )}
+                </p>
               </div>
-              <div className="flex flex-row gap-2">
+
+              <div className="flex flex-row gap-4 items-center">
                 {!hideUser && (
                   <div className="flex gap-1 items-center">
                     {list.user.profile_picture_path && (
@@ -95,14 +91,23 @@ export default function ListCard({
                         className="w-5 h-5 rounded-full object-cover"
                       />
                     )}
-                    <span className="font-openSans text-xs opacity-80">
+                    <span className="font-openSans text-xs">
                       {list.user.username}
                     </span>
                   </div>
                 )}
-                <div className="flex gap-1 items-center">
-                  <span className="text-xs font-openSans">{count}</span>
-                  <BookmarkIcon className="text-beeBrownLight h-3 w-3 mt-0.5 opacity-80" />
+                <div className="flex gap-2 items-center">
+                  <div className="wrapper flex flex-row gap-1">
+                    <span className="text-xs font-openSans opacity-60">
+                      {count}
+                    </span>
+                    <BookmarkIcon className="text-beeBeig h-3 w-3 mt-0.5 opacity-60" />
+                  </div>
+                  {apiIds && (
+                    <span className="opacity-60 text-xs">
+                      {apiIds.length} {apiIds.length > 1 ? "films" : "film"}
+                    </span>
+                  )}
                 </div>
               </div>
             </div>
@@ -134,7 +139,7 @@ export default function ListCard({
                     setCount(count + 1);
                   }
                 }}
-                className={`hidden group-hover:inline ml-auto w-5 h-5 hover:cursor-pointer hover:scale-110 ${
+                className={`hidden group-hover:inline ml-2 w-5 h-5 hover:cursor-pointer hover:scale-110 ${
                   savedList ? "text-beeYellow" : "text-beeBrownHeader"
                 } `}
               />

@@ -1,5 +1,6 @@
 import prismaClient from "@/lib/prisma-client";
 import { NextRequest, NextResponse } from "next/server";
+export const dynamic = "force-dynamic";
 
 export async function PUT(request: NextRequest) {
   const { backdropPath, userId } = await request.json();

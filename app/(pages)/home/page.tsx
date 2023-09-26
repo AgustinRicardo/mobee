@@ -35,9 +35,8 @@ export default async function Home() {
             POPULAR LISTS
           </h1>
           <hr className="border-beeYellow" />
-          <div className="grid grid-cols-3 justify-between gap-y-8 gap-x-4 py-4">
-            <PopularLists userId={user?.id!} />
-          </div>
+
+          <PopularLists userId={user?.id!} />
         </section>
       </div>
     </>
