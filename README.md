@@ -1,5 +1,21 @@
 # Mobee
 
+Mobee es una plataforma que permite a los usuarios llevar un registro de sus películas favoritas, escribir reseñas y calificarlas, hacer listas de películas según su propósito o temática, leer reviews de otros entusiastas del cine y descubrir nuevas obras para ver.
+
+[Mobee](https://mobee-films.vercel.app/login)
+
+## Stack Tecnológico
+
+- Frontend: Next.js
+- Estilos: TailwindCSS
+- Librería de componentes: Shadcn/ui
+- Bases de Datos: PostgreSQL
+- Auth, File Storage y host de datos: Supabase
+- APIs: [TMDB](https://www.themoviedb.org/).
+- Deploy: Vercel.
+
+## Instalación Local
+
 ## Pre-requisitos
 
 1. Necesitarás tener Node.js y npm instalados en tu máquina. Puedes descargarlos desde [aquí](https://nodejs.org/es/).
@@ -10,7 +26,7 @@
 
 3. Necesitarás tener Docker instalado en tu máquina. Puedes descargarlo desde [aquí](https://www.docker.com/products/docker-desktop).
 
-## Instalación Local
+```
 
 1. Clona el repositorio en tu máquina local utilizando `git clone`.
 
