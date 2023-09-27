@@ -74,11 +74,7 @@ export default function MyUserListsComponent({ userId }: Props) {
                 <ListSkeleton />
                 <ListSkeleton />
               </div>
-            ) : lists?.length === 0 ? (
-              <span className="w-full h-[100vh] justify-center items-center">
-                You haven't created any list
-              </span>
-            ) : (
+            ) : lists?.length ? (
               <div className="wrapper flex flex-col py-2">
                 <div className="grid grid-cols-2 gap-6">
                   {lists &&
@@ -106,6 +102,10 @@ export default function MyUserListsComponent({ userId }: Props) {
                   setIsLoading={setIsLoading}
                 />
               </div>
+            ) : (
+              <div className="flex flex-col items-center py-4 w-full h-[60vh] justify-center font-openSans">
+                <span>No list has been created</span>
+              </div>
             )}
           </TabsContent>
           <TabsContent value="savedLists">
@@ -118,11 +118,7 @@ export default function MyUserListsComponent({ userId }: Props) {
                 <ListSkeleton />
                 <ListSkeleton />
               </div>
-            ) : savedLists?.length === 0 ? (
-              <span className="flex flex-col w-full h-[50vh] justify-center items-center font-openSans">
-                No bookmarked lists
-              </span>
-            ) : (
+            ) : savedLists?.length ? (
               <>
                 <div className="wrapper flex flex-col py-2">
                   <div className="grid grid-cols-2">
@@ -150,9 +146,11 @@ export default function MyUserListsComponent({ userId }: Props) {
                   />
                 </div>
               </>
+            ) : (
+              <span className="flex flex-col w-full h-[60vh] justify-center items-center font-openSans">
+                No list has been bookmarked
+              </span>
             )}
-
-            {}
           </TabsContent>
         </Tabs>
       </div>

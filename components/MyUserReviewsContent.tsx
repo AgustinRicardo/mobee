@@ -10,7 +10,7 @@ interface Props {
 }
 
 export default function MyUserReviewsContent({ userId }: Props) {
-  const [reviews, setReviews] = useState<Review[]>();
+  const [reviews, setReviews] = useState<Review[]>([]);
   const [page, setPage] = useState<number>(1);
   const [maxPage, setMaxPage] = useState<number>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -46,7 +46,7 @@ export default function MyUserReviewsContent({ userId }: Props) {
           <ReviewSkeleton />
           <ReviewSkeleton />
         </div>
-      ) : (
+      ) : reviews?.length !== 0 ? (
         <div className="wrapper flex flex-col py-4">
           <div className="grid grid-cols-2 gap-6">
             {reviews &&
@@ -66,6 +66,10 @@ export default function MyUserReviewsContent({ userId }: Props) {
             maxPage={maxPage}
             setIsLoading={setIsLoading}
           />
+        </div>
+      ) : (
+        <div className="flex flex-col items-center py-4 w-full h-[60vh] justify-center font-openSans">
+          <span>No film has been reviewed</span>
         </div>
       )}
     </>

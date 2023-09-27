@@ -36,23 +36,23 @@ export default function WatchlistDetails({
 
   return (
     <div className="flex flex-col py-4">
-      <div className="grid grid-cols-5 gap-4">
-        {isLoading ? (
-          <>
-            <Skeleton className="w-48 h-72" />
-            <Skeleton className="w-48 h-72" />
-            <Skeleton className="w-48 h-72" />
-            <Skeleton className="w-48 h-72" />
-            <Skeleton className="w-48 h-72" />
-            <Skeleton className="w-48 h-72" />
-            <Skeleton className="w-48 h-72" />
-            <Skeleton className="w-48 h-72" />
-            <Skeleton className="w-48 h-72" />
-            <Skeleton className="w-48 h-72" />
-          </>
-        ) : (
-          films && (
-            <>
+      {isLoading ? (
+        <div className="grid grid-cols-5 gap-4">
+          <Skeleton className="w-48 h-72" />
+          <Skeleton className="w-48 h-72" />
+          <Skeleton className="w-48 h-72" />
+          <Skeleton className="w-48 h-72" />
+          <Skeleton className="w-48 h-72" />
+          <Skeleton className="w-48 h-72" />
+          <Skeleton className="w-48 h-72" />
+          <Skeleton className="w-48 h-72" />
+          <Skeleton className="w-48 h-72" />
+          <Skeleton className="w-48 h-72" />
+        </div>
+      ) : films?.length ? (
+        films && (
+          <div className="flex flex-col">
+            <div className="grid grid-cols-5 gap-4">
               {films.map((film) => {
                 return (
                   <FilmPoster
@@ -63,12 +63,14 @@ export default function WatchlistDetails({
                   />
                 );
               })}
-            </>
-          )
-        )}
-      </div>
-      {!isLoading && (
-        <Pagination setPage={setPage} page={page} maxPage={maxPage} />
+            </div>
+            <Pagination setPage={setPage} page={page} maxPage={maxPage} />
+          </div>
+        )
+      ) : (
+        <span className="flex flex-col w-full h-[60vh] justify-center items-center font-openSans">
+          No film has been saved to the watchlist
+        </span>
       )}
     </div>
   );

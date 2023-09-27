@@ -18,7 +18,7 @@ export function DialogAddToList({ apiId, userId, children }: Props) {
   const [selectedList, setSelectedList] = useState<string>();
 
   useEffect(() => {
-    fetch("/api/my_profile/lists?" + new URLSearchParams({ userId }))
+    fetch("/api/my_profile/lists_listing?" + new URLSearchParams({ userId }))
       .then((res) => {
         return res.json();
       })
@@ -71,11 +71,11 @@ export function DialogAddToList({ apiId, userId, children }: Props) {
         <DialogContent className="border-none w-24">
           <DialogTitle>Select a list</DialogTitle>
           <form
-            className="flex flex-col justify-start w-full gap-6 h-52"
+            className="flex flex-col justify-start w-full gap-6 h-52 "
             onSubmit={handleSubmit}
           >
-            <ScrollArea className="rounded-sm h-full">
-              <ul className="flex flex-col bg-beeBrownHeader">
+            <ScrollArea className="rounded-sm h-full w-[29rem]">
+              <ul className="flex flex-col bg-beeBrownHeader overflow-hidden text-ellipsis">
                 {lists &&
                   lists.map((list: List) => {
                     return (
@@ -86,8 +86,8 @@ export function DialogAddToList({ apiId, userId, children }: Props) {
                         key={list.id}
                         className={
                           list.id === selectedList
-                            ? "bg-beeBrownLight text-beeBrownBackground hover:cursor-pointer p-1"
-                            : "hover:cursor-pointer p-1"
+                            ? "bg-beeBrownLight text-beeBrownBackground hover:cursor-pointer p-1 w-full "
+                            : "hover:cursor-pointer p-1 w-full"
                         }
                       >
                         {list.title}

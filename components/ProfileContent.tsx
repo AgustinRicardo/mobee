@@ -254,7 +254,9 @@ export default function ProfileContent({ user }: Props) {
                 );
               })
             ) : (
-              <span>No created lists</span>
+              <div className="flex flex-col items-center py-4">
+                <span>No list hsa been created</span>
+              </div>
             )}
           </div>
         </section>
@@ -287,7 +289,9 @@ export default function ProfileContent({ user }: Props) {
                 );
               })
             ) : (
-              <span>No reviews</span>
+              <div className="flex flex-col items-center py-4">
+                <span>No film has been reviewed</span>
+              </div>
             )}
           </div>
         </section>

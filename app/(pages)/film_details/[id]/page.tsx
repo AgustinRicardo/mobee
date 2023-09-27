@@ -28,7 +28,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   };
 
   const film: Film = await getFilmAndCrewDetails();
-
+  console.log("hello", film.backdrop_path);
   return (
     <>
       {film.poster_path !== null ? (
@@ -45,7 +45,7 @@ export default async function Page({ params }: { params: { id: string } }) {
 
       <div
         className={`flex flex-row gap-4 z-20 overflow-visible px-4 ${
-          film.poster_path !== null ? "relative bottom-32" : "py-4"
+          film.backdrop_path !== null ? "relative bottom-32" : "py-4"
         }`}
       >
         <img
