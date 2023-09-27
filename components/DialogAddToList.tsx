@@ -14,7 +14,7 @@ interface Props {
 
 export function DialogAddToList({ apiId, userId, children }: Props) {
   const { toast } = useToast();
-  const [lists, setLists] = useState<List[]>();
+  const [lists, setLists] = useState<List[]>([]);
   const [selectedList, setSelectedList] = useState<string>();
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export function DialogAddToList({ apiId, userId, children }: Props) {
       })
       .then((data) => {
         if (data.lists) {
-          //setLists(data.lists);
+          setLists(data.lists);
         }
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -104,8 +104,8 @@ export function DialogAddToList({ apiId, userId, children }: Props) {
             <DialogClose asChild>
               <button
                 type="submit"
-                disabled={lists?.length === 0}
-                className="bg-beeYellow text-beeBrownBackground self-end px-2 py-0.5 rounded-md my-0 disabled:text-beeBrownLight disabled:opacity-50"
+                disabled={lists.length === 0}
+                className="bg-beeYellow text-beeBrownBackground self-end px-2 py-0.5 rounded-md my-0 disabled:text-beeBrownLight disabled:opacity-50 disabled:bg-beeBrownHeader"
               >
                 Save
               </button>
