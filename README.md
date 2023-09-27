@@ -26,7 +26,8 @@ Mobee es una plataforma que permite a los usuarios llevar un registro de sus pel
 
 3. Necesitarás tener Docker instalado en tu máquina. Puedes descargarlo desde [aquí](https://www.docker.com/products/docker-desktop).
 
-```
+## Instalación
+
 
 1. Clona el repositorio en tu máquina local utilizando `git clone`.
 
