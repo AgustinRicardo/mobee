@@ -48,7 +48,7 @@ export default function ReviewCard({
 
   return (
     <>
-      <div className="flex flex-row items-start py-4 gap-4 group">
+      <div className="flex flex-row items-start gap-4 group">
         {pathname.includes("/home") || pathname.includes("/my_profile") ? (
           <FilmImageCard imageWidth="w-20" apiId={filmOnDB?.tmdb_id!} />
         ) : null}
@@ -56,7 +56,7 @@ export default function ReviewCard({
           {!pathname.includes("/film_details") && (
             <div className="film-title flex flex-row items-center gap-3">
               <span
-                className="font-lora text-lg font-semibold"
+                className="font-lora text-lg font-semibold hover:cursor-pointer"
                 onClick={() => {
                   router.push(`/film_details/${String(filmOnDB?.tmdb_id!)}`);
                 }}

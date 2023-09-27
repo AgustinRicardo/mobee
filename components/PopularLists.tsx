@@ -3,12 +3,14 @@
 import { useEffect, useState } from "react";
 import ListCard from "./ListCard";
 import { List } from "@/lib/interfaces";
+import ListSkeleton from "./ListSkeleton";
 interface Props {
   userId: string;
 }
 
 export default function PopularLists({ userId }: Props) {
   const [popularList, setPopularList] = useState<List[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     fetch("/api/popularLists", {
@@ -18,13 +20,23 @@ export default function PopularLists({ userId }: Props) {
       .then((data) => {
         if (data?.lists) {
           setPopularList(data.lists);
+          setIsLoading(false);
         }
       });
   }, []);
 
   return (
     <>
-      {popularList.length ? (
+      {isLoading ? (
+        <div className="grid grid-cols-3 gap-5 py-6">
+          <ListSkeleton />
+          <ListSkeleton />
+          <ListSkeleton />
+          <ListSkeleton />
+          <ListSkeleton />
+          <ListSkeleton />
+        </div>
+      ) : popularList.length ? (
         <div className="grid grid-cols-3 gap-5 py-6">
           {popularList.map((list) => {
             return (

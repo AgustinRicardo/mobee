@@ -6,14 +6,17 @@ import { useRouter } from "next/navigation";
 interface Props {
   apiId: number;
   imageWidth: string;
+  disableClick?: boolean;
 }
 
-export default function FilmImageCard({ apiId, imageWidth }: Props) {
+export default function FilmImageCard({
+  apiId,
+  imageWidth,
+  disableClick,
+}: Props) {
   const [filmPath, setFilmPath] = useState("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const router = useRouter();
-
-  const imageStyle = `${imageWidth} rounded-sm border-beeBrownLight border-2 `;
 
   useEffect(() => {
     const url = `https://api.themoviedb.org/3/movie/${apiId}?language=en-US`;
@@ -40,12 +43,16 @@ export default function FilmImageCard({ apiId, imageWidth }: Props) {
       {!isLoading ? (
         filmPath ? (
           <img
-            className={imageStyle}
+            className={`${imageWidth} rounded-sm border-beeBrownLight border-2 hover:cursor-pointer`}
             src={filmPath && `https://image.tmdb.org/t/p/original/${filmPath}`}
             alt="backdrop"
-            onClick={() => {
-              router.push(`/film_details/${String(apiId)}`);
-            }}
+            onClick={
+              disableClick
+                ? () => {}
+                : () => {
+                    router.push(`/film_details/${String(apiId)}`);
+                  }
+            }
           />
         ) : (
           <></>

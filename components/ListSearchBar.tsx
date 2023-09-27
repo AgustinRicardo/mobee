@@ -29,7 +29,7 @@ export default function ListSearchBar() {
         <div className="relative">
           <div className="flex flex-row items-center">
             <input
-              className="rounded-sm bg-beeBeig text-beeBrownBackground w-[30ch] px-2 py-1"
+              className="rounded-sm bg-beeBeig text-beeBrownBackground w-[30ch] px-2 py-1 placeholder:text-beeBrownBackground placeholder:text-opacity-80"
               type="text"
               placeholder="Search"
               id="listSearch"

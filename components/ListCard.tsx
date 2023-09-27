@@ -52,6 +52,8 @@ export default function ListCard({
           onClick={() => {
             if (list) {
               router.push(`/list_details/${list.id}`);
+            } else {
+              router.push("/my_profile/watchlist");
             }
           }}
         >

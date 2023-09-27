@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 "use client";
 
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import WatchedIcon from "./icons/WatchedIcon";
 import ToWatchIcon from "./icons/ToWatchIcon";
 import AddToListIcon from "./icons/AddToListIcon";
@@ -39,6 +39,7 @@ export default function FilmPoster({
   const [posterPath, setPosterPath] = useState<string>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { toast } = useToast();
+  const pathname = usePathname();
 
   useEffect(() => {
     fetch(
@@ -74,7 +75,11 @@ export default function FilmPoster({
   return (
     <>
       {isLoading ? (
-        <Skeleton />
+        pathname.includes("/film_details") ? (
+          <Skeleton className="w-24 h-36" />
+        ) : (
+          <Skeleton className="w-48 h-64" />
+        )
       ) : (
         posterPath && (
           <div className={`group`}>
@@ -93,7 +98,9 @@ export default function FilmPoster({
                             title: "Film removed from your watched films",
                           });
                         } else {
-                          toast({ title: "Film added to your watched films" });
+                          toast({
+                            title: "Film added to your watched films",
+                          });
                         }
                         setIsWatched(!isWatched);
                       }}
@@ -120,7 +127,9 @@ export default function FilmPoster({
                           body: JSON.stringify({ apiId, userId, toWatch }),
                         });
                         if (toWatch) {
-                          toast({ title: "Film removed from your watchlist" });
+                          toast({
+                            title: "Film removed from your watchlist",
+                          });
                         } else {
                           toast({ title: "Film added to your watchlist" });
                         }

@@ -3,6 +3,7 @@ import { Review } from "@/lib/interfaces";
 import { useEffect, useState } from "react";
 import ReviewCard from "./ReviewCard";
 import { useRouter } from "next/navigation";
+import ReviewSkeleton from "./ReviewSkeleton";
 
 interface Props {
   apiId: number;
@@ -11,12 +12,14 @@ interface Props {
 export default function ReviewList({ apiId }: Props) {
   const [reviews, setReviews] = useState<Review[]>([]);
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     fetch(`/api/film/reviews?apiId=${apiId}`)
       .then((res) => res.json())
       .then(({ reviews }) => {
         setReviews(reviews);
+        setIsLoading(false);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -38,14 +41,28 @@ export default function ReviewList({ apiId }: Props) {
           )}
         </div>
         <hr className="border-beeYellow" />
-        {reviews.length ? (
-          reviews.map((review) => {
-            return (
-              <ReviewCard key={review.id} review={review} user={review.user} />
-            );
-          })
+        {isLoading ? (
+          <div className="py-4 flex flex-col gap-4">
+            <ReviewSkeleton hideMovie />
+            <ReviewSkeleton hideMovie />
+            <ReviewSkeleton hideMovie />
+          </div>
+        ) : reviews.length ? (
+          <div className="py-4 flex flex-col gap-4">
+            {reviews.map((review) => {
+              return (
+                <ReviewCard
+                  key={review.id}
+                  review={review}
+                  user={review.user}
+                />
+              );
+            })}
+          </div>
         ) : (
-          <span className="py-4">No recent reviews</span>
+          <div className="py-4 flex flex-col items-center">
+            <span>No recent reviews</span>
+          </div>
         )}
       </section>
     </>
