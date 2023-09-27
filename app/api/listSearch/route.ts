@@ -5,7 +5,6 @@ export const dynamic = "force-dynamic";
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const searchQuery = searchParams.get("searchQuery");
-  console.log(searchQuery);
   try {
     if (searchQuery) {
       const results = await prismaClient.list.findMany({
