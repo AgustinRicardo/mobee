@@ -74,10 +74,10 @@ export function DialogAddToList({ apiId, userId, children }: Props) {
             className="flex flex-col justify-start w-full gap-6 h-52"
             onSubmit={handleSubmit}
           >
-            <ScrollArea className="rounded-sm h-full">
-              <ul className="flex flex-col bg-beeBrownHeader">
-                {lists &&
-                  lists.map((list: List) => {
+            {lists ? (
+              <ScrollArea className="rounded-sm h-full">
+                <ul className="flex flex-col bg-beeBrownHeader">
+                  {lists.map((list: List) => {
                     return (
                       <li
                         onClick={() => {
@@ -94,12 +94,18 @@ export function DialogAddToList({ apiId, userId, children }: Props) {
                       </li>
                     );
                   })}
-              </ul>
-            </ScrollArea>
+                </ul>
+              </ScrollArea>
+            ) : (
+              <span className="flex justify-center">
+                There are no lists created yet. Create one first.
+              </span>
+            )}
             <DialogClose asChild>
               <button
                 type="submit"
-                className="bg-beeYellow text-beeBrownBackground self-end px-2 py-0.5 rounded-md my-0"
+                disabled={lists === undefined}
+                className="bg-beeYellow text-beeBrownBackground self-end px-2 py-0.5 rounded-md my-0 disabled:text-beeBrownLight disabled:opacity-50"
               >
                 Save
               </button>

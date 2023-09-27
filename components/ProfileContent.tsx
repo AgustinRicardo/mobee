@@ -165,6 +165,8 @@ export default function ProfileContent({ user }: Props) {
                               profilePathname: data.publicUrl,
                               userId: user.id,
                             }),
+                          }).then(() => {
+                            location.reload();
                           });
                         }
                       }}
