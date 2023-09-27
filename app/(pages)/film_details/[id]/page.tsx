@@ -28,7 +28,6 @@ export default async function Page({ params }: { params: { id: string } }) {
   };
 
   const film: Film = await getFilmAndCrewDetails();
-  console.log("hello", film.backdrop_path);
   return (
     <>
       {film.poster_path !== null ? (

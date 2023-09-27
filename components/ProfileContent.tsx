@@ -136,7 +136,6 @@ export default function ProfileContent({ user }: Props) {
                             user.profile_picture_path?.includes("default") &&
                             user.profile_picture_path !== null
                           ) {
-                            console.log("hola");
                             const { error: e1 } = await supabase.storage
                               .from("profile-images")
                               .remove([user.profile_picture_path]);
