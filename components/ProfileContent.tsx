@@ -33,7 +33,7 @@ export default function ProfileContent({ user }: Props) {
       .then(({ watchlist, reviews, lists, watchedFilms, photoPath }) => {
         setWatchlist(watchlist);
         setReviews(reviews);
-        setLists(lists);
+        //setLists(lists);
         setWatchFilms(watchedFilms);
         setPhotoPath(photoPath);
         setIsLoading(false);
@@ -234,15 +234,15 @@ export default function ProfileContent({ user }: Props) {
             ) : null}
           </div>
           <hr className="border-beeYellow" />
-          <div className="grid grid-cols-3 gap-4 py-8">
-            {isLoading ? (
-              <>
-                <ListSkeleton />
-                <ListSkeleton />
-                <ListSkeleton />
-              </>
-            ) : lists?.length ? (
-              lists.map((list) => {
+          {isLoading ? (
+            <div className="grid grid-cols-3 gap-4 py-8">
+              <ListSkeleton />
+              <ListSkeleton />
+              <ListSkeleton />
+            </div>
+          ) : lists?.length ? (
+            <div className="grid grid-cols-3 gap-4 py-8">
+              {lists.map((list) => {
                 return (
                   <ListCard
                     key={list.id}
@@ -254,13 +254,13 @@ export default function ProfileContent({ user }: Props) {
                     apiIds={list.films.map((item) => item.film.tmdb_id)}
                   />
                 );
-              })
-            ) : (
-              <div className="flex flex-col items-center py-4">
-                <span>No list hsa been created</span>
-              </div>
-            )}
-          </div>
+              })}
+            </div>
+          ) : (
+            <div className="flex flex-col items-center py-8">
+              <span>No list has been created</span>
+            </div>
+          )}
         </section>
         <section className="reviews-section">
           <div className="flex flex-row pb-1">
@@ -291,7 +291,7 @@ export default function ProfileContent({ user }: Props) {
                 );
               })
             ) : (
-              <div className="flex flex-col items-center py-4">
+              <div className="flex flex-col items-center py-8">
                 <span>No film has been reviewed</span>
               </div>
             )}

@@ -74,7 +74,7 @@ export function DialogAddToList({ apiId, userId, children }: Props) {
             className="flex flex-col justify-start w-full gap-6 h-52"
             onSubmit={handleSubmit}
           >
-            {lists ? (
+            {lists?.length ? (
               <ScrollArea className="rounded-sm h-full w-[29rem]">
                 <ul className="flex flex-col bg-beeBrownHeader overflow-hidden">
                   {lists.map((list: List) => {
