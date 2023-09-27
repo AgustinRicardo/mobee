@@ -142,7 +142,7 @@ export default function ListCard({
                     setCount(count + 1);
                   }
                 }}
-                className={`hidden group-hover:inline ml-2 w-5 h-5 hover:cursor-pointer hover:scale-110 ${
+                className={`hidden group-hover:inline ml-auto w-5 h-5 hover:cursor-pointer hover:scale-110 ${
                   savedList ? "text-beeYellow" : "text-beeBrownLight"
                 } `}
               />
