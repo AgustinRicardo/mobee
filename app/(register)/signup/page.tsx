@@ -56,6 +56,10 @@ export default function SignUp() {
       } catch (e) {
         throw e;
       }
+      toast({
+        title: "Confirm your email",
+        description: "To confirm your address, please check your email",
+      });
       router.replace("/login");
     }
   };
