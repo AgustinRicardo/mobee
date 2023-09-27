@@ -24,7 +24,7 @@ export function DialogAddToList({ apiId, userId, children }: Props) {
       })
       .then((data) => {
         if (data.lists) {
-          setLists(data.lists);
+          //setLists(data.lists);
         }
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -97,14 +97,14 @@ export function DialogAddToList({ apiId, userId, children }: Props) {
                 </ul>
               </ScrollArea>
             ) : (
-              <span className="flex justify-center">
-                There are no lists created yet. Create one first.
-              </span>
+              <div className="flex flex-col justify-center items-center h-full">
+                <span>There are no lists created yet. Create one first.</span>
+              </div>
             )}
             <DialogClose asChild>
               <button
                 type="submit"
-                disabled={lists === undefined}
+                disabled={lists?.length === 0}
                 className="bg-beeYellow text-beeBrownBackground self-end px-2 py-0.5 rounded-md my-0 disabled:text-beeBrownLight disabled:opacity-50"
               >
                 Save
