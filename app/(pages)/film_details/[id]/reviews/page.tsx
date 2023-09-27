@@ -100,7 +100,12 @@ export default function FilmReviewsPage({
                 })}
             </div>
             {maxPage !== 1 ? (
-              <Pagination setPage={setPage} page={page} maxPage={maxPage} />
+              <Pagination
+                setPage={setPage}
+                page={page}
+                maxPage={maxPage}
+                setIsLoading={setIsLoading}
+              />
             ) : null}
           </>
         )}

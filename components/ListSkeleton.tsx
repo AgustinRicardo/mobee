@@ -9,10 +9,10 @@ export default function ListSkeleton({ hideInfo }: Props) {
     <>
       <div className="flex flex-col gap-2">
         <div className="flex flex-row gap-1">
-          <Skeleton className="w-20 h-28" />
-          <Skeleton className="w-20 h-28" />
-          <Skeleton className="w-20 h-28" />
-          <Skeleton className="w-20 h-28" />
+          <Skeleton className="w-24 h-32" />
+          <Skeleton className="w-24 h-32" />
+          <Skeleton className="w-24 h-32" />
+          <Skeleton className="w-24 h-32" />
         </div>
         {!hideInfo && (
           <>

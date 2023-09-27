@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Skeleton } from "@mui/material";
+
 import { useRouter } from "next/navigation";
+import { Skeleton } from "./ui/skeleton";
 
 interface Props {
   apiId: number;
@@ -58,7 +59,7 @@ export default function FilmImageCard({
           <></>
         )
       ) : (
-        <Skeleton className="h-[138px] w-24" />
+        <Skeleton className="h-32 w-24" />
       )}
     </>
   );

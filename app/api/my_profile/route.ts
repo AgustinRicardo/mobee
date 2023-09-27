@@ -12,6 +12,7 @@ export async function GET(request: NextRequest) {
         include: { film: true },
         where: {
           user_id: userId,
+          to_watch: true,
         },
         take: 4,
       });

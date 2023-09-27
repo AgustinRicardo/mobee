@@ -2,6 +2,7 @@
 import { FilmOnDB } from "@/lib/interfaces";
 import { useEffect, useState } from "react";
 import FilmPoster from "./FilmPoster";
+import Pagination from "./Pagination";
 
 interface Props {
   userId: string;
@@ -23,14 +24,27 @@ export default function MyUserFilmsContent({ userId }: Props) {
 
   return (
     <>
-      <h1>Your watched films</h1>
-      <div className="grid grid-cols-5">
-        {watchedFilms &&
-          watchedFilms.map((film) => {
-            return (
-              <FilmPoster key={film.id} apiId={film.tmdb_id} userId={userId} />
-            );
-          })}
+      <div className="wrapper py-4">
+        <h1 className="text-beeYellow font-openSans font-medium text-base tracking-wide uppercase">
+          Your watched films
+        </h1>
+        <hr className="border-beeYellow" />
+      </div>
+      <div className="flex flex-col">
+        <div className="grid grid-cols-5 gap-4">
+          {watchedFilms &&
+            watchedFilms.map((film) => {
+              return (
+                <FilmPoster
+                  key={film.id}
+                  apiId={film.tmdb_id}
+                  userId={userId}
+                  className="rounded-sm border-2 border-beeBrownLight"
+                />
+              );
+            })}
+        </div>
+        <Pagination page={page} maxPage={maxPage} setPage={setPage} />
       </div>
     </>
   );

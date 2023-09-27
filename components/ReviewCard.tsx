@@ -68,7 +68,7 @@ export default function ReviewCard({
               </span>
               {canDelete && (
                 <DeleteIcon
-                  className="w-5 h-5 text-beeBrownLight group-hover:block hidden ml-auto hover:cursor-pointer flex-shrink-0"
+                  className="w-5 h-5 text-beeBrownLight group-hover:block hidden ml-auto hover:cursor-pointer flex-shrink-0 hover:scale-105"
                   onClick={(e) => {
                     e.stopPropagation();
                     toast({
@@ -106,7 +106,7 @@ export default function ReviewCard({
                   userId={user?.id!}
                 >
                   <span>
-                    <EditIcon className="w-5 h-5 text-beeBrownLight group-hover:block hidden ml-auto hover:cursor-pointer flex-shrink-0" />
+                    <EditIcon className="w-5 h-5 text-beeBrownLight group-hover:block hidden ml-auto hover:cursor-pointer flex-shrink-0 hover:scale-105" />
                   </span>
                 </DialogReview>
               )}

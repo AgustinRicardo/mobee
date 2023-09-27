@@ -46,7 +46,7 @@ export default function ListCard({
 
   return (
     <>
-      <div className="flex flex-col group">
+      <div className="flex flex-col group w-fit">
         <div
           className={`film-posters flex flex-row items-center ${imageGap} hover:cursor-pointer  hover:border-beeBeig border-2 border-transparent rounded-sm w-fit`}
           onClick={() => {
@@ -67,6 +67,7 @@ export default function ListCard({
             );
           })}
         </div>
+
         {list ? (
           <div className="flex flex-row items-center">
             <div className="flex flex-col gap-1">
@@ -142,14 +143,14 @@ export default function ListCard({
                   }
                 }}
                 className={`hidden group-hover:inline ml-2 w-5 h-5 hover:cursor-pointer hover:scale-110 ${
-                  savedList ? "text-beeYellow" : "text-beeBrownHeader"
+                  savedList ? "text-beeYellow" : "text-beeBrownLight"
                 } `}
               />
             )}
 
             {canDelete && (
               <DeleteIcon
-                className="w-5 h-5 text-beeBrownLight group-hover:block hidden ml-auto hover:cursor-pointer"
+                className="w-5 h-5 text-beeBrownLight group-hover:block hidden ml-auto hover:cursor-pointer hover:scale-105"
                 onClick={(e) => {
                   e.stopPropagation();
                   toast({

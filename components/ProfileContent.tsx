@@ -206,7 +206,7 @@ export default function ProfileContent({ user }: Props) {
                 <Skeleton className="w-28 h-40" />
                 <Skeleton className="w-28 h-40" />
               </div>
-            ) : watchlist ? (
+            ) : watchlist?.length ? (
               <div className="self-center">
                 <ListCard
                   imageGap="gap-3"
@@ -239,7 +239,7 @@ export default function ProfileContent({ user }: Props) {
                 <ListSkeleton />
                 <ListSkeleton />
               </>
-            ) : lists ? (
+            ) : lists?.length ? (
               lists.map((list) => {
                 return (
                   <ListCard
@@ -276,7 +276,7 @@ export default function ProfileContent({ user }: Props) {
                 <ReviewSkeleton />
                 <ReviewSkeleton />
               </>
-            ) : reviews ? (
+            ) : reviews?.length ? (
               reviews.map((review) => {
                 return (
                   <ReviewCard

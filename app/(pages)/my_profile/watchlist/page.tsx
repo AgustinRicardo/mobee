@@ -5,7 +5,12 @@ export default async function MyUserWatchlistPage() {
   const user = await getUser();
   return (
     <>
-      <h1>Your watchlist</h1>
+      <div className="wrapper py-4">
+        <h1 className="text-beeYellow font-openSans font-medium text-base tracking-wide uppercase">
+          Your watchlist
+        </h1>
+        <hr className="border-beeYellow" />
+      </div>
       {user && <WatchlistPageContent user={user} />}
     </>
   );
