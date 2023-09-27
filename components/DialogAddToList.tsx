@@ -51,7 +51,6 @@ export function DialogAddToList({ apiId, userId, children }: Props) {
         });
       } else {
         if (lists) {
-          console.log("hello");
           toast({
             title: `Film added to ${
               lists.find((list) => list.id === selectedList)?.title

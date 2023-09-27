@@ -61,7 +61,6 @@ export async function GET(request: NextRequest) {
 
 export async function PUT(request: NextRequest) {
   const { profilePathname, userId } = await request.json();
-  console.log(profilePathname, userId);
   try {
     if (userId) {
       await prismaClient.user.update({

@@ -38,7 +38,6 @@ export default function FilmList({
           setMaxPage(maxPage);
         });
     } else {
-      console.log(url);
       fetch(url, options)
         .then((res) => res.json())
         .then(({ results }) => {
@@ -47,7 +46,6 @@ export default function FilmList({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [url, page]);
-  console.log(filmList);
 
   return (
     <>

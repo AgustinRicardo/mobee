@@ -11,7 +11,6 @@ export async function GET(request: NextRequest) {
   if (page) {
     skip = (Number(page) - 1) * pageResults;
   }
-  console.log(skip);
   try {
     if (userId) {
       const totalCount = await prismaClient.filmWatchStatus.count({
@@ -25,7 +24,6 @@ export async function GET(request: NextRequest) {
         skip,
         take: pageResults,
       });
-      console.log(watchstatus[1].film);
       const films = watchstatus.map((status) => status.film);
       return NextResponse.json({ films, maxPage });
     }
