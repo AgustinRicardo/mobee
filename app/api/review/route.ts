@@ -10,6 +10,19 @@ export async function POST(request: NextRequest) {
     const film = await getOrAddFilmToDB(apiId);
 
     if (film) {
+      await prismaClient.filmWatchStatus.update({
+        where: {
+          user_id_film_id: {
+            user_id: userId,
+            film_id: film.id,
+          },
+        },
+        data: {
+          to_watch: false,
+          watched: true,
+        },
+      });
+
       const data = await prismaClient.review.create({
         data: {
           film_id: film.id,
