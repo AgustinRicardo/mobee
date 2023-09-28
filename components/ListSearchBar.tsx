@@ -6,8 +6,8 @@ import { useRouter } from "next/navigation";
 import SearchIcon from "./icons/SearchIcon";
 
 export default function ListSearchBar() {
-  const [searchQuery, setSearchQuery] = useState<string>();
-  const [lists, setLists] = useState<List[]>();
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [lists, setLists] = useState<List[]>([]);
   const router = useRouter();
 
   useEffect(() => {
@@ -45,8 +45,8 @@ export default function ListSearchBar() {
           </div>
 
           {lists && (
-            <div className="absolute bg-beeBrownLight w-full rounded-md overflow-hidden z-30">
-              <ScrollArea className="h-28">
+            <div className="absolute bg-beeBrownLight rounded-md overflow-hidden z-20">
+              <ScrollArea className="h-28 w-64 break-words">
                 <ul className="rounded-md flex flex-col">
                   {lists.map((list) => {
                     return (
