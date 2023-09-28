@@ -19,6 +19,7 @@ export default function FilmWatchStatusPanel({ userId, film }: Props) {
   const [toWatch, setToWatch] = useState<boolean>(false);
   const [filmId, setFilmId] = useState<string>("");
   const [averageRating, setAverageRating] = useState<number | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetch(
@@ -39,6 +40,7 @@ export default function FilmWatchStatusPanel({ userId, film }: Props) {
       .then((data) => {
         if (data.film.average_rating) {
           setAverageRating(data.film.average_rating);
+          setIsLoading(false);
         }
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -121,11 +123,19 @@ export default function FilmWatchStatusPanel({ userId, film }: Props) {
         </div>
         <hr className="border-beeBrownBackground" />
         <div className="flex flex-col">
-          <span className="pl-5"> Average Rating</span>
-          <div className="flex flex-col items-center">
-            {averageRating !== null ? (
+          <span className="pl-5">Average Rating</span>
+          <div className="flex flex-col items-center py-2">
+            {isLoading ? (
               <>
-                <div className="flex flex-row gap-1 py-1"></div>
+                <RatingPicker
+                  emptyIconColor="text-beeBrownBackground"
+                  readOnly={true}
+                  averageRating={0}
+                />
+                <div className="h-6 w-full"></div>
+              </>
+            ) : averageRating !== null ? (
+              <>
                 <RatingPicker
                   emptyIconColor="text-beeBrownBackground"
                   readOnly={true}
