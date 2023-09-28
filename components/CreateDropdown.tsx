@@ -80,6 +80,7 @@ export default function CreateDropdown({ userId }: Props) {
               setFilmToReview={setFilmToReview}
               film={filmToReview}
               userId={userId}
+              isEditing={false}
               defaultOpen={true}
             >
               <DropdownMenuItem

@@ -5,24 +5,39 @@ export const dynamic = "force-dynamic";
 
 export async function POST(request: NextRequest) {
   const { userId, apiId, date, review, ratingValue } = await request.json();
-
   try {
     const film = await getOrAddFilmToDB(apiId);
-
     if (film) {
-      await prismaClient.filmWatchStatus.update({
+      const filmWatchStatus = await prismaClient.filmWatchStatus.findUnique({
         where: {
           user_id_film_id: {
             user_id: userId,
             film_id: film.id,
           },
         },
-        data: {
-          to_watch: false,
-          watched: true,
-        },
       });
-
+      if(filmWatchStatus){
+        const update = await prismaClient.filmWatchStatus.update({
+          where: {
+            user_id_film_id: {
+              user_id: userId,
+              film_id: film.id,
+            },
+          },
+          data: {
+            to_watch: false,
+            watched: true,
+          },
+        });
+      } else {
+        await prismaClient.filmWatchStatus.create({
+          data: {
+            film_id: film.id,
+            user_id: userId,
+            watched: true,
+          },
+        });
+      }
       const data = await prismaClient.review.create({
         data: {
           film_id: film.id,
