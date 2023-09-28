@@ -44,9 +44,9 @@ export default function ListSearchBar() {
             <SearchIcon />
           </div>
 
-          {lists && (
-            <div className="absolute bg-beeBrownLight rounded-md overflow-hidden z-20">
-              <ScrollArea className="h-28 w-64 break-words">
+          {lists.length !== 0 && (
+            <div className="absolute bg-beeBrownLight rounded-md overflow-hidden z-20 w-full">
+              <ScrollArea className="h-28 break-words">
                 <ul className="rounded-md flex flex-col">
                   {lists.map((list) => {
                     return (
