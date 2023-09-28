@@ -132,7 +132,12 @@ export default function ReviewCard({
             />
             {pathname.includes("/my_profile") && review?.watched_at ? (
               <span className="opacity-50">
-                Watched at {review?.watched_at.getDate()}
+                Watched at{" "}
+                {new Date(review?.watched_at).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })}
               </span>
             ) : null}
           </div>
