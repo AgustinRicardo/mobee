@@ -134,7 +134,7 @@ export default function FilmWatchStatusPanel({ userId, film }: Props) {
                 />
                 <div className="h-6 w-full"></div>
               </>
-            ) : averageRating !== null ? (
+            ) : averageRating !== 0 ? (
               <>
                 <RatingPicker
                   emptyIconColor="text-beeBrownBackground"
