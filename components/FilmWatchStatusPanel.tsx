@@ -18,7 +18,7 @@ export default function FilmWatchStatusPanel({ userId, film }: Props) {
   const [isWatched, setIsWatched] = useState<boolean>(false);
   const [toWatch, setToWatch] = useState<boolean>(false);
   const [filmId, setFilmId] = useState<string>("");
-  const [averageRating, setAverageRating] = useState<number | null>(null);
+  const [averageRating, setAverageRating] = useState<number>();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -37,9 +37,10 @@ export default function FilmWatchStatusPanel({ userId, film }: Props) {
 
     fetch("/api/film?" + new URLSearchParams({ apiId: String(film.id) }))
       .then((res) => res.json())
-      .then((data) => {
-        if (data.film.average_rating) {
-          setAverageRating(data.film.average_rating);
+      .then(({ film }) => {
+        if (film) {
+          setAverageRating(film.average_rating);
+
           setIsLoading(false);
         }
       });
