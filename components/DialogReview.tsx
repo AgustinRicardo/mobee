@@ -21,6 +21,7 @@ import RatingPicker from "./RatingPicker";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { Toaster } from "./ui/toaster";
 import { useToast } from "./ui/use-toast";
+import { CheckboxIndicator } from "@radix-ui/react-checkbox";
 
 interface Props {
   film: Film;
@@ -49,7 +50,7 @@ export function DialogReview({
     isEditing ? reviewFromDb?.rating! : null
   );
   const [date, setDate] = useState<Date | undefined>(
-    isEditing ? reviewFromDb?.watched_at! : undefined
+    isEditing ? new Date(reviewFromDb?.watched_at!) : undefined
   );
   const [review, setReview] = useState<string>(
     isEditing ? reviewFromDb?.review_description! : ""
@@ -107,9 +108,9 @@ export function DialogReview({
       <Dialog
         onOpenChange={() => {
           setCheckDateWatched(
-            isEditing && reviewFromDb?.watched_at! ? true : false
+            isEditing && reviewFromDb?.watched_at! !== null ? true : false
           );
-          setDate(isEditing ? reviewFromDb?.watched_at! : undefined);
+          setDate(isEditing ? new Date(reviewFromDb?.watched_at!) : undefined);
           setRatingValue(isEditing ? reviewFromDb?.rating! : null);
           setReview(isEditing ? reviewFromDb?.review_description! : "");
           if (setFilmToReview) {
@@ -142,8 +143,9 @@ export function DialogReview({
               <form onSubmit={handleSubmit}>
                 <div className="flex flex-row gap-1 items-center h-10">
                   <Checkbox
+                    checked={checkedDateWatched}
                     id="watchedOn"
-                    className="bg-beeBeig data-[state=checked]:text-beeBrownBackground"
+                    className="bg-beeBeig data-[state=checked]:bg-beeBrownHeader"
                     onCheckedChange={() => {
                       setCheckDateWatched(!checkedDateWatched);
                     }}
