@@ -33,7 +33,7 @@ export default function ProfileContent({ user }: Props) {
       .then(({ watchlist, reviews, lists, watchedFilms, photoPath }) => {
         setWatchlist(watchlist);
         setReviews(reviews);
-        //setLists(lists);
+        setLists(lists);
         setWatchFilms(watchedFilms);
         setPhotoPath(photoPath);
         setIsLoading(false);
