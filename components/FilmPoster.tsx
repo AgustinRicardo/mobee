@@ -77,6 +77,8 @@ export default function FilmPoster({
       {isLoading ? (
         pathname.includes("/film_details") ? (
           <Skeleton className="w-24 h-36" />
+        ) : pathname.includes("/list_details") ? (
+          <Skeleton className="w-28 h-44" />
         ) : (
           <Skeleton className="w-48 h-64" />
         )
