@@ -13,8 +13,8 @@ export async function GET(request: NextRequest) {
         },
         where: {
           OR: [
-            { title: { contains: searchQuery } },
-            { description: { contains: searchQuery } },
+            { title: { contains: searchQuery, mode: "insensitive" } },
+            { description: { contains: searchQuery, mode: "insensitive" } },
           ],
         },
         take: 20,

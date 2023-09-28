@@ -227,7 +227,12 @@ export default function ProfileContent({ user }: Props) {
           <div className="flex flex-row pb-1">
             <span className="text-beeYellow font-openSans">LISTS</span>
             {lists ? (
-              <button className="inline ml-auto text-beeYellow hover:bg-beeYellow hover:text-beeBrownBackground hover:rounded-sm px-1 py-0.5">
+              <button
+                onClick={() => {
+                  router.push("/my_profile/lists");
+                }}
+                className="inline ml-auto text-beeYellow hover:bg-beeYellow hover:text-beeBrownBackground hover:rounded-sm px-1 py-0.5"
+              >
                 More
               </button>
             ) : null}
@@ -265,7 +270,12 @@ export default function ProfileContent({ user }: Props) {
           <div className="flex flex-row pb-1">
             <span className="text-beeYellow ">RECENT ACTIVITY</span>
             {reviews ? (
-              <button className="inline ml-auto text-beeYellow hover:bg-beeYellow hover:text-beeBrownBackground hover:rounded-sm px-1 py-0.5">
+              <button
+                onClick={() => {
+                  router.push("/my_profile/reviews");
+                }}
+                className="inline ml-auto text-beeYellow hover:bg-beeYellow hover:text-beeBrownBackground hover:rounded-sm px-1 py-0.5"
+              >
                 More
               </button>
             ) : null}

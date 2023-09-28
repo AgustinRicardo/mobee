@@ -45,8 +45,8 @@ export default function ListSearchBar() {
           </div>
 
           {lists && (
-            <div className="absolute bg-beeBrownLight w-full rounded-md overflow-hidden">
-              <ScrollArea>
+            <div className="absolute bg-beeBrownLight w-full rounded-md overflow-hidden z-30">
+              <ScrollArea className="h-28">
                 <ul className="rounded-md flex flex-col">
                   {lists.map((list) => {
                     return (
